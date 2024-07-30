@@ -1,3 +1,7 @@
+# This code is adapted from NLPDemystified.
+# Replace the code below in https://colab.research.google.com/github/futuremojo/nlp-demystified/blob/main/notebooks/nlpdemystified_word_vectors.ipynb
+# where the Principal Components Analysis (PCA) is implemented.
+
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
