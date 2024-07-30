@@ -1,3 +1,9 @@
+# Data arrangement of the input file has to be in 4 columns: 
+# 1. Subject_Verb_Pairs 2. s 3. v 4. O(sy_vy) where 
+# s = Subjects, 
+# v = Verbs, 
+# O(sy_vy) = Occurrences of the pairs.
+
 import pandas as pd
 
 # Read the data from the file
