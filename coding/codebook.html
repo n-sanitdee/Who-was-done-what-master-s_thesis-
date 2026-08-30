@@ -66,7 +66,15 @@ td:first-child{white-space:nowrap}
 .flag .h{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--flag);margin-bottom:.3rem}
 .flag p{font-size:.95rem}
 footer{margin-top:3.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink-3);line-height:1.8}
-@media print{body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.ex{break-inside:avoid}section{break-inside:avoid-page}}
+.start{display:block;background:var(--accent);color:var(--paper);border-radius:8px;padding:1rem 1.15rem;
+margin-top:2.4rem;text-decoration:none;transition:.15s}
+.start:hover,.start:focus-visible{opacity:.92;outline:none}
+.start b{font-family:'Archivo',system-ui,sans-serif;font-size:1.05rem;display:block}
+.start span{font-family:'Source Serif 4',Georgia,serif;font-size:.93rem;opacity:.9;display:block;margin-top:.15rem}
+.topline{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);margin-top:.9rem}
+.topline a{color:var(--accent)}
+@media print{.start,.topline{display:none}
+body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.ex{break-inside:avoid}section{break-inside:avoid-page}}
 </style>
 </head>
 <body>
@@ -75,6 +83,8 @@ footer{margin-top:3.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);fon
 <div class="eyebrow">Annotation manual · v1.0</div>
 <h1>By-Agent Codebook</h1>
 <p class="lede">You are coding phrases pulled automatically out of English-language news reporting. Each row gives a passive subject–verb pair and the by-phrase that follows it. There are 167 rows and four judgments per row.</p>
+
+<p class="topline">Already read this? <a href="coder.html">Skip to the coding tool &rarr;</a></p>
 
 <div class="note">
   <div class="h">Before you start</div>
@@ -211,6 +221,11 @@ footer{margin-top:3.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);fon
   <p>Put the reason in the notes column. If the same kind of difficulty comes up more than three or four times, stop and raise it rather than working through it — that usually means this manual is missing a rule, and it is better fixed once than decided differently seventeen times.</p>
   <p>Do not look up the original news articles. Code from what is on the sheet. Some rows will feel thin because the parser cut them short; that is expected, and <span class="tag">unclear</span> is the right answer when it leaves you unable to judge.</p>
 </section>
+
+<a class="start" href="coder.html">
+  <b>Open the coding tool &rarr;</b>
+  <span>167 items, one at a time. Enter your name, and your progress saves as you go.</span>
+</a>
 
 <footer>167 rows · four judgments each · save as CSV and return the file unchanged apart from your codings<br>Do not reorder the rows — the id column is what aligns your sheet with the comparison.</footer>
 </div>
