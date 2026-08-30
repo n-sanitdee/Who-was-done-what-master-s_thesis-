@@ -193,7 +193,8 @@ function boot(name){
   };
   cur=0;render();
 }
-function rec(i){var id=ITEMS[i].id;return data[id]||(data[id]={})}
+function rec(i){var id=ITEMS[i].id;return data[id]||(data[id]={})}   // for writes
+function peek(i){return data[ITEMS[i].id]||{}}                        // for reads
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
 function opts(host,name,set){
   document.getElementById(host).innerHTML=set.map(function(o,n){
@@ -206,7 +207,7 @@ function gloss(sv,ag){
   return "the "+s+" was "+v+" "+ag.replace(/_/g," ");
 }
 function render(){
-  var it=ITEMS[cur],r=rec(cur);
+  var it=ITEMS[cur],r=peek(cur);
   document.getElementById("idx").textContent="Item "+(cur+1)+" of "+ITEMS.length;
   document.getElementById("pair").innerHTML=it.sv+' &nbsp;·&nbsp; <span class="ag">'+it.ag+'</span>';
   document.getElementById("gloss").textContent=gloss(it.sv,it.ag);
