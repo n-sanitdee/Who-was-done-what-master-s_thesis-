@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>By-Agent Coding</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{--paper:#FAFBFA;--card:#FFFFFF;--sunk:#F0F2F0;--ink:#191C1A;--ink-2:#4C534E;--ink-3:#7C837E;
+--rule:#DFE3E0;--rule-2:#C4CAC6;--accent:#2B5A4C;--accent-soft:#E6EFEB;--flag:#8A5A2B;--flag-soft:#F6EDE3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141715;--card:#1B1F1D;--sunk:#232825;
+--ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;--rule:#2C322F;--rule-2:#3C433F;--accent:#7FB9A4;--accent-soft:#1A2622;--flag:#D2A468;--flag-soft:#2A2118}}
+:root[data-theme="dark"]{--paper:#141715;--card:#1B1F1D;--sunk:#232825;--ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;
+--rule:#2C322F;--rule-2:#3C433F;--accent:#7FB9A4;--accent-soft:#1A2622;--flag:#D2A468;--flag-soft:#2A2118}
+*{box-sizing:border-box;margin:0;padding:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:1.6rem 1.1rem 5rem}
+a{color:var(--accent)}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
+h1{font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
+h1 small{display:block;font-weight:400;font-size:.8rem;color:var(--ink-3);margin-top:.15rem}
+.tools{display:flex;gap:.4rem;flex-wrap:wrap}
+button.t{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;
+padding:.4rem .7rem;border:1px solid var(--rule-2);background:var(--card);color:var(--ink-2);border-radius:5px;cursor:pointer;transition:.15s}
+button.t:hover,button.t:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+button.t.go{background:var(--accent);border-color:var(--accent);color:var(--card);font-weight:700}
+.bar{height:6px;background:var(--sunk);border-radius:99px;overflow:hidden;border:1px solid var(--rule)}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--ink-3);margin:.4rem 0 1.2rem}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.25rem 1.35rem}
+.idx{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.pair{font-family:'JetBrains Mono',monospace;margin:.7rem 0 .2rem;font-size:1.18rem;font-weight:500;line-height:1.45;word-break:break-word}
+.pair .ag{color:var(--accent)}
+.gloss{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2);font-size:1rem;margin-bottom:1.1rem}
+fieldset{border:none;margin-top:1.05rem}
+legend{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.45rem;display:flex;gap:.5rem;align-items:center;width:100%}
+legend button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:.62rem;cursor:pointer;text-decoration:underline;padding:0}
+.opts{display:flex;gap:.4rem;flex-wrap:wrap}
+.opts label{position:relative}
+.opts input{position:absolute;opacity:0;width:0;height:0}
+.opts span{display:inline-block;padding:.42rem .7rem;border:1px solid var(--rule-2);border-radius:6px;cursor:pointer;
+font-size:.86rem;background:var(--card);transition:.13s;user-select:none}
+.opts span kbd{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-3);margin-right:.35rem}
+.opts input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.opts input:checked+span kbd{color:var(--card);opacity:.75}
+.opts input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.help{display:none;background:var(--sunk);border:1px solid var(--rule);border-radius:6px;padding:.6rem .75rem;margin-top:.5rem;font-family:'Source Serif 4',Georgia,serif;font-size:.9rem;color:var(--ink-2);line-height:1.5}
+.help.on{display:block}
+.help b{color:var(--ink)}
+textarea{width:100%;margin-top:.4rem;padding:.55rem .7rem;border:1px solid var(--rule-2);border-radius:6px;
+background:var(--card);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:.92rem;resize:vertical;min-height:2.6rem}
+textarea:focus{outline:none;border-color:var(--accent)}
+.nav{display:flex;justify-content:space-between;gap:.5rem;margin-top:1.3rem}
+.nav button{font-family:'Archivo',sans-serif;font-size:.88rem;font-weight:600;padding:.6rem 1.15rem;border-radius:7px;
+border:1px solid var(--rule-2);background:var(--card);color:var(--ink);cursor:pointer;transition:.15s}
+.nav button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.nav button:disabled{opacity:.4;cursor:not-allowed}
+.nav button.next{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.nav button.next:hover{opacity:.9;color:var(--card)}
+.done{background:var(--flag-soft);border:1px solid var(--flag);border-radius:10px;padding:1.2rem;margin-top:1rem;display:none}
+.done.on{display:block}
+.done h2{font-size:1.05rem;margin-bottom:.4rem;color:var(--flag)}
+.done p{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2);font-size:.95rem;max-width:56ch}
+.grid{display:none;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:4px;margin-top:1rem}
+.grid.on{display:grid}
+.grid button{aspect-ratio:1;border:1px solid var(--rule);background:var(--sunk);border-radius:4px;cursor:pointer;
+font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-3);padding:0}
+.grid button.d{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.grid button.x{background:var(--flag-soft);border-color:var(--flag);color:var(--flag)}
+.grid button.cur{outline:2px solid var(--ink);outline-offset:1px}
+.tip{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink-3);margin-top:1rem;line-height:1.7}
+</style></head><body><div class="wrap">
+
+<header>
+  <h1>By-agent coding<small>Read the <a href="codebook.html" target="_blank" rel="noopener">codebook</a> before you start. Progress saves in this browser.</small></h1>
+  <div class="tools">
+    <button class="t" id="bGrid">Overview</button>
+    <button class="t" id="bLoad">Resume from file</button>
+    <button class="t go" id="bSave">Download CSV</button>
+  </div>
+</header>
+
+<div class="bar"><i id="pf"></i></div>
+<div class="meta"><span id="mCount">0 of 167 coded</span><span id="mLeft"></span></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="card" id="card">
+  <div class="idx" id="idx"></div>
+  <div class="pair" id="pair"></div>
+  <div class="gloss" id="gloss"></div>
+
+  <fieldset><legend>1 · include <button type="button" data-h="hInc">what counts?</button></legend>
+    <div class="opts" id="oInc"></div>
+    <div class="help" id="hInc">Code <b>no</b> when the by-phrase names a condition, setting, measure or reason rather than something that brought the action about — <b>by geography</b>, <b>by propaganda</b>, <b>by the minimum number of days</b>. Then leave the rest blank.</div>
+  </fieldset>
+
+  <fieldset id="fAn"><legend>2 · animacy <button type="button" data-h="hAn">rules</button></legend>
+    <div class="opts" id="oAn"></div>
+    <div class="help" id="hAn">Go by the <b>head noun</b>. A country is <b>human</b> — a state acts through people. A nationality attached to an object does not make it human: in <b>by Russian shells</b> the head is <em>shells</em>, so nonhuman. Vehicles, substances and events named as causes are nonhuman.</div>
+  </fieldset>
+
+  <fieldset id="fVa"><legend>3 · valence <button type="button" data-h="hVa">rules</button></legend>
+    <div class="opts" id="oVa"></div>
+    <div class="help" id="hVa">Judge the effect on the <b>subject</b>, not whether the event seems good or bad in general. Violent and restrictive are separated by <b>physical harm</b>: <em>seize</em> and <em>detain</em> constrain, <em>shell</em> and <em>kill</em> injure. Code the reading in this row, not the verb's commonest sense elsewhere.</div>
+  </fieldset>
+
+  <fieldset id="fCa"><legend>4 · category <button type="button" data-h="hCa">list</button></legend>
+    <div class="opts" id="oCa"></div>
+    <div class="help" id="hCa">Prefer the <b>more specific</b> code. <b>by Russian forces</b> is an armed body, so military_authority, not country_city — reserve country_city for phrases naming the state itself, as in <b>by Russia</b>.</div>
+  </fieldset>
+
+  <fieldset><legend>notes — optional, but valuable when a row was hard</legend>
+    <textarea id="tNote" placeholder="What made this one difficult?"></textarea>
+  </fieldset>
+
+  <div class="nav">
+    <button id="bPrev">&larr; Back</button>
+    <button id="bNext" class="next">Next &rarr;</button>
+  </div>
+</div>
+
+<div class="done" id="done">
+  <h2>All 167 coded</h2>
+  <p>Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows — the id column is what aligns your codings with the comparison.</p>
+</div>
+
+<p class="tip">Keyboard: number keys pick an option in the highlighted group · Enter or &rarr; next · &larr; back · marked rows show green in Overview, excluded rows amber.<br>
+Nothing is uploaded anywhere. Your codings stay in this browser until you download the file yourself.</p>
+
+<input type="file" id="fileIn" accept=".csv" hidden>
+</div>
+<script>
+var ITEMS=[{"id":"84e4b464","sv":"house_struck","ag":"by_Russian_shells"},{"id":"a6e0aa03","sv":"percent_held","ag":"by_Gazprom_owned_energy"},{"id":"87a81c19","sv":"people_killed","ag":"by_missile"},{"id":"f232b10f","sv":"evacuation_thwarted","ag":"by_Russian_military"},{"id":"d56be500","sv":"airspace_violated","ag":"by_object_by_systems"},{"id":"0ffe42c1","sv":"building_struck","ag":"by_missile"},{"id":"edfbda07","sv":"principle_respected","ag":"by_international_actors_Russian_Federation"},{"id":"b3a54197","sv":"statement_regarded","ag":"by_Ukrainian_government"},{"id":"d241eba1","sv":"school_destroyed","ag":"by_Russian_bombs"},{"id":"39b39440","sv":"images_verified","ag":"by_Associated_Press"},{"id":"7999e7d3","sv":"territories_controlled","ag":"by_backed_separatists"},{"id":"ed593af6","sv":"Biden_interrupted","ag":"by_applause_members_parties"},{"id":"702c7a91","sv":"attacks_staged","ag":"by_Russia"},{"id":"1b283130","sv":"advance_slowed","ag":"by_resistance"},{"id":"15e0c84d","sv":"targets_struck","ag":"by_unconfirmed_weaponry"},{"id":"1ea68ac2","sv":"prisoners_returned","ag":"by_rebels"},{"id":"d03603ea","sv":"Use_banned","ag":"by_many_countries"},{"id":"315c17dd","sv":"thousands_killed","ag":"by_Nazis"},{"id":"92984988","sv":"Cup_won","ag":"by_Russia"},{"id":"89868457","sv":"front_opened","ag":"by_Southern_Military_District"},{"id":"c77263d1","sv":"Symbols_sized","ag":"by_minimum_number_days"},{"id":"392edb1d","sv":"package_passed","ag":"by_Congress"},{"id":"c068c768","sv":"forces_hindered","ag":"by_supply_issues"},{"id":"6c150d00","sv":"allegations_denied","ag":"by_South_African_president_Cyril_Ramaphosa"},{"id":"9437044d","sv":"deaths_confirmed","ag":"by_government"},{"id":"694c3f0f","sv":"efforts_frustrated","ag":"by_staunch_Ukrainian_resistance"},{"id":"0b80fd0d","sv":"strike_attacked","ag":"by_Russian_drones"},{"id":"6e77bb8f","sv":"move_denounced","ag":"by_leaders_Ukraine"},{"id":"00f849ab","sv":"plant_seized","ag":"by_Russian_forces"},{"id":"a55f3d42","sv":"craft_destroyed","ag":"by_Ukrainian_drone"},{"id":"79e1ce79","sv":"task_made","ag":"by_confusion_such_Kyiv"},{"id":"24b117c6","sv":"attack_claimed","ag":"by_hacker_cooperative"},{"id":"8a4645fa","sv":"attacks_repelled","ag":"by_selfless_actions_Russian_military_personnel"},{"id":"33ee53af","sv":"village_hit","ag":"by_Russian_shells_residential"},{"id":"09d3dde1","sv":"bridges_destroyed","ag":"by_Ukrainian_forces_Russian_troops"},{"id":"25a8c6c9","sv":"tower_hit","ag":"by_projectile"},{"id":"47df5a99","sv":"Allies_concerned","ag":"by_potential_loss_temporary_parts_territory"},{"id":"62e9fbea","sv":"withdrawal_confirmed","ag":"by_Ukraine"},{"id":"c2c2fcf5","sv":"Medvedev_described","ag":"by_Ukrainian_media"},{"id":"5ca15241","sv":"number_captured","ag":"by_Russia"},{"id":"bd7565a0","sv":"partners_frustrated","ag":"by_inconsistencies_US_decades"},{"id":"a9abd030","sv":"countries_affected","ag":"by_Russian_gas_supply_cuts"},{"id":"33f3d728","sv":"attack_captured","ag":"by_Baykar_Bayraktar_TB2_drone"},{"id":"a5670f62","sv":"ties_colored","ag":"by_centuries_imperial_baggage"},{"id":"3aeb9862","sv":"campaigns_countered","ag":"by_competent_Ukraine_messaging_social_media_campaigns_broader_outreach_global_community"},{"id":"fdab9497","sv":"fighters_held","ag":"by_Ukrainian_forces"},{"id":"4d33631c","sv":"plan_upended","ag":"by_series_bruising_battles_territorial"},{"id":"45c3b192","sv":"surgeon_captured","ag":"by_Russian_soldiers"},{"id":"1add94ba","sv":"Reports_reported","ag":"by_Ukrainska_Pravda"},{"id":"0582ed9e","sv":"claims_dismissed","ag":"by_international_community"},{"id":"c75b58d8","sv":"gains_aided","ag":"by_aggressive_air_support_front_lines"},{"id":"0fe1b00e","sv":"leaders_replaced","ag":"by_people_ties_Russian_security_services_Russian_businesses"},{"id":"54fd58fd","sv":"settlements_hit","ag":"by_attacks"},{"id":"7f586c1d","sv":"story_haunted","ag":"by_Meghan_Markle"},{"id":"6b354c7b","sv":"agreement_brought","ag":"by_representative_Russian_Federation"},{"id":"dfa8fd54","sv":"Masha_played","ag":"by_nonprofessional_actors_considerable"},{"id":"229d8152","sv":"shift_marked","ag":"by_increase_role_economy"},{"id":"6a99e1e6","sv":"building_struck","ag":"by_drone_Russia"},{"id":"63647b5d","sv":"claim_used","ag":"by_President_Vladimir_V._Putin"},{"id":"65a1c4f7","sv":"proposal_backed","ag":"by_German_public"},{"id":"24fdd1fc","sv":"efforts_complemented","ag":"by_private_sector_firms_Kyiv_additional_defensible_Ukrainian"},{"id":"310b7765","sv":"Russia_led","ag":"by_presidents"},{"id":"d0fecb5f","sv":"invasion_preceded","ag":"by_territorial_proclaimed_republics_Luhansk"},{"id":"a683fb2f","sv":"Ukrainians_killed","ag":"by_Russian_forces"},{"id":"8c625a8a","sv":"Putin_interviewed","ag":"by_Rossiya_Segodnya_International_Media_Group_Director_General_Dmitry_Kiselev"},{"id":"b0c86027","sv":"those_released","ag":"by_Ukraine"},{"id":"a8a9faf5","sv":"documents_provided","ag":"by_whistleblower_employee_continued_involvement_Russia_invasion_Ukraine"},{"id":"b00f9df4","sv":"plans_announced","ag":"by_Shoigu"},{"id":"d6800230","sv":"members_released","ag":"by_rebels"},{"id":"43feb940","sv":"town_occupied","ag":"by_Russian_forces"},{"id":"ed11f47d","sv":"Donetsk_plagued","ag":"by_fighting"},{"id":"7a752bd3","sv":"Urey_captured","ag":"by_Russian_forces"},{"id":"25da6b77","sv":"Flight_shot","ag":"by_Revolutionary_Guards"},{"id":"d2c57a9e","sv":"silence_punctured","ag":"by_sirens"},{"id":"dc99679b","sv":"detention_practiced","ag":"by_sides"},{"id":"db240230","sv":"contest_won","ag":"by_Kalush_Orchestra_folk_rap_Ukraine"},{"id":"d673c1a2","sv":"refinery_attacked","ag":"by_drone"},{"id":"d3eb3661","sv":"Others_sheltered","ag":"by_friends"},{"id":"04e9d886","sv":"difficulty_accentuated","ag":"by_geography"},{"id":"1281535f","sv":"stunt_carried","ag":"by_pair_Russian_comedians"},{"id":"fa17a89d","sv":"Center_run","ag":"by_Special_Forces"},{"id":"07334575","sv":"conclusions_voiced","ag":"by_Conflict_Studies_Research_Centre"},{"id":"f3ee76ac","sv":"visit_confirmed","ag":"by_Washington"},{"id":"dcffa875","sv":"advances_limited","ag":"by_Ukrainian_defences"},{"id":"23780e24","sv":"tanks_demolished","ag":"by_small_Ukrainian_defensive_units_weapons_such_Stingers"},{"id":"18604777","sv":"base_plagued","ag":"by_corruption"},{"id":"a7fbde95","sv":"axis_deployed","ag":"by_Western_Military_District_eastern"},{"id":"e1174aff","sv":"ship_destroyed","ag":"by_Ukrainian_rocket_attack"},{"id":"28fd6747","sv":"holiday_observed","ag":"by_many_Ukrainians"},{"id":"8d573e3e","sv":"invasion_met","ag":"by_fierce_Ukrainian_resistance"},{"id":"fbf72930","sv":"people_killed","ag":"by_Russian_missile_attack_southern_Ukrainian_city_Odesa"},{"id":"fb0d483e","sv":"presence_allowed","ag":"by_agreement_Ukraine"},{"id":"dad1cc2a","sv":"comments_distorted","ag":"by_Western_media"},{"id":"b4d29962","sv":"process_complicated","ag":"by_active_fighting"},{"id":"5ca2aabb","sv":"Ukrainians_held","ag":"by_Russia"},{"id":"5d022715","sv":"towns_hit","ag":"by_Ukraine"},{"id":"f53f7ee5","sv":"citizen_detained","ag":"by_pro_-_Russian_separatists_forces"},{"id":"9d9e016a","sv":"ban_reported","ag":"by_Wall_Street_Journal"},{"id":"cf7b70f2","sv":"Guterres_received","ag":"by_President_Vladimir_Putin"},{"id":"2bfcfa8a","sv":"areas_controlled","ag":"by_installed_leaders"},{"id":"f9a1d5ba","sv":"formula_discussed","ag":"by_allies"},{"id":"c77ee666","sv":"development_monitored","ag":"by_operational_command"},{"id":"13dc2b26","sv":"demand_seen","ag":"by_West"},{"id":"96bf0228","sv":"servicemen_held","ag":"by_Russia"},{"id":"0743fb62","sv":"tanker_damaged","ag":"by_maritime_drone"},{"id":"e636dba4","sv":"Yanukovych_removed","ag":"by_parliament"},{"id":"ca391e38","sv":"city_battered","ag":"by_weeks_Russian_bombardment"},{"id":"62f4bce2","sv":"man_taken","ag":"by_wheeled_stretcher"},{"id":"c2a31c66","sv":"base_destroyed","ag":"by_Ukrainian_artillery"},{"id":"671a7d20","sv":"alliance_cemented","ag":"by_conflict"},{"id":"95858ca2","sv":"values_discarded","ag":"by_Russia"},{"id":"a5b19ce0","sv":"Amvrosiivka_occupied","ag":"by_Russian_paratroopers_by_armoured_vehicles_artillery"},{"id":"f36c4659","sv":"Ukraine_led","ag":"by_presidents"},{"id":"809129bd","sv":"Cyberwarfare_used","ag":"by_Russia"},{"id":"875fb6b4","sv":"person_killed","ag":"by_Ukrainian_shelling"},{"id":"1578a15f","sv":"corridor_thwarted","ag":"by_Russian_forces"},{"id":"2c7f330a","sv":"medic_killed","ag":"by_second_missile"},{"id":"0e065732","sv":"one_welcomed","ag":"by_most_Ukrainians"},{"id":"39a80add","sv":"Explosions_caused","ag":"by_long_range_missiles_Ukraine_by_United_Kingdom"},{"id":"894c7954","sv":"force_defeated","ag":"by_light_first_century_one"},{"id":"589117ba","sv":"boats_seized","ag":"by_Russian_warships"},{"id":"e8eff6d6","sv":"Mykolaiv_shelled","ag":"by_Russian_forces"},{"id":"3086e621","sv":"University_hit","ag":"by_weapons"},{"id":"c289313f","sv":"poll_taken","ag":"by_Ukrainian_branch_biggest_market_research_organization"},{"id":"a41655ae","sv":"boy_crucified","ag":"by_Ukrainian_nationalists"},{"id":"706a16b6","sv":"enemy_struck","ag":"by_aviation_missile"},{"id":"21045525","sv":"lawyer_told","ag":"by_penal_investigative_committee"},{"id":"e5393e9e","sv":"borders_guarded","ag":"by_groups_people_police_traffic"},{"id":"3fda893d","sv":"candidates_barred","ag":"by_electoral_commission"},{"id":"5c322d30","sv":"one_hurt","ag":"by_enemy_terror"},{"id":"62fa2391","sv":"power_oppressed","ag":"by_bad_dudes"},{"id":"5dfc204d","sv":"world_galvanized","ag":"by_small_victories_conflict"},{"id":"276e442a","sv":"memorial_damaged","ag":"by_strike"},{"id":"f3895047","sv":"decision_made","ag":"by_Putin_small_war_hawks_inner_circle_national_security_adviser_Nikolai_Patrushev_defense_minister_Sergei"},{"id":"597f7c4c","sv":"Russians_thwarted","ag":"by_combination_factors_geography_modern_smartphones_foam_mat"},{"id":"656cfd04","sv":"Ukraine_ruled","ag":"by_Nazi_government"},{"id":"f6dc1b65","sv":"support_approved","ag":"by_German_parliamentary_budget_committee"},{"id":"2badfbda","sv":"project_supported","ag":"by_Carnegie_Corporation_New_York"},{"id":"e8c3bc44","sv":"bangs_followed","ag":"by_sounds_breaking_car"},{"id":"55642cd1","sv":"bridges_used","ag":"by_civilian_traffic"},{"id":"3a74287d","sv":"operations_launched","ag":"by_security_service"},{"id":"80e78fbe","sv":"number_reclaimed","ag":"by_Ukrainian_forces"},{"id":"bf9ba5b4","sv":"portion_blurred","ag":"by_CNN"},{"id":"3e92b9e0","sv":"claim_corroborated","ag":"by_Ukrainian_parliament_Operational_Command"},{"id":"7edb9afd","sv":"conflict_marked","ag":"by_artillery_duels_special_forces_trench"},{"id":"798156bd","sv":"city_devastated","ag":"by_Russian_shelling"},{"id":"4f59f15b","sv":"question_labelled","ag":"by_Kremlin_spokesman_Dmitry_Peskov"},{"id":"156cccab","sv":"increase_considered","ag":"by_Ukraine"},{"id":"997a52ef","sv":"deaths_caused","ag":"by_explosive_weapons_wide_area_effects"},{"id":"edc02c24","sv":"war_refashioned","ag":"by_propaganda"},{"id":"14a51abc","sv":"Yushchenko_poisoned","ag":"by_TCDD_dioxin"},{"id":"ebd26b8e","sv":"region_run","ag":"by_backed_separatists_Luhansk_Republic"},{"id":"57f6d999","sv":"referendums_recognised","ag":"by_Ukraine_other_UN_member"},{"id":"1fb4203b","sv":"building_hit","ag":"by_apparent_rocket_strike"},{"id":"44cccdf7","sv":"Petrova_escorted","ag":"by_police"},{"id":"e334b21c","sv":"explosion_caused","ag":"by_bomb"},{"id":"491f1b2c","sv":"Moldova_attacked","ag":"by_Russia"},{"id":"bf354701","sv":"region_occupied","ag":"by_Russian_troops"},{"id":"592f2653","sv":"conflict_labelled","ag":"by_some"},{"id":"c32da5fd","sv":"poll_taken","ag":"by_International_Republican_Institute"},{"id":"01748131","sv":"medal_produced","ag":"by_Russian_Federation"},{"id":"dd719aa3","sv":"supply_held","ag":"by_Russian_military"},{"id":"daf00788","sv":"Mykolaiv_hit","ag":"by_strikes"},{"id":"5133cd3f","sv":"areas_controlled","ag":"by_backed_separatists"},{"id":"f9a8411c","sv":"funerals_reported","ag":"by_local_authorities"},{"id":"43f2c301","sv":"line_cut","ag":"by_fire"},{"id":"98b44ffc","sv":"Shapps_warned","ag":"by_British_intelligence"}];
+var SETS={
+ inc:[["yes","yes"],["no","no — circumstance"]],
+ an:[["human","human"],["nonhuman","nonhuman"],["unclear","unclear"]],
+ va:[["violent","violent"],["restrictive","restrictive"],["negative","negative"],["neutral","neutral"],["positive","positive"],["unclear","unclear"]],
+ ca:[["weapon","weapon"],["military_authority","military / authority"],["nonmilitary_party","non-military party"],["country_city","country / city"],
+     ["law_governance","law / governance"],["death_danger","death / danger"],["important_figure","important figure"],["civilian","civilian"],
+     ["location","location"],["media_tech","media / tech"],["money_business","money / business"],["commute","commute"],
+     ["nominalisation","nominalisation"],["neutral_entity","neutral entity"],["unclear","unclear"]]
+};
+var KEY="byagent-coding-v1",data={},cur=0;
+try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){data={}}
+function rec(i){var id=ITEMS[i].id;return data[id]||(data[id]={})}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
+function opts(host,name,set){
+  document.getElementById(host).innerHTML=set.map(function(o,n){
+    return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"><span><kbd>'+(n+1)+'</kbd>'+o[1]+'</span></label>';
+  }).join("");
+}
+opts("oInc","inc",SETS.inc);opts("oAn","an",SETS.an);opts("oVa","va",SETS.va);opts("oCa","ca",SETS.ca);
+function gloss(sv,ag){
+  var p=sv.split("_"),v=p.pop(),s=p.join(" ");
+  return "the "+s+" was "+v+" "+ag.replace(/_/g," ");
+}
+function render(){
+  var it=ITEMS[cur],r=rec(cur);
+  document.getElementById("idx").textContent="Item "+(cur+1)+" of "+ITEMS.length;
+  document.getElementById("pair").innerHTML=it.sv+' &nbsp;·&nbsp; <span class="ag">'+it.ag+'</span>';
+  document.getElementById("gloss").textContent=gloss(it.sv,it.ag);
+  ["inc","an","va","ca"].forEach(function(g){
+    document.querySelectorAll('input[name="'+g+'"]').forEach(function(x){x.checked=(r[g]===x.value)});
+  });
+  document.getElementById("tNote").value=r.note||"";
+  var ex=(r.inc==="no");
+  ["fAn","fVa","fCa"].forEach(function(f){document.getElementById(f).style.display=ex?"none":"block"});
+  document.getElementById("bPrev").disabled=(cur===0);
+  document.getElementById("bNext").textContent=(cur===ITEMS.length-1)?"Finish":"Next →";
+  var n=ITEMS.filter(function(x){var d=data[x.id];return d&&(d.inc==="no"||(d.inc&&d.an&&d.va&&d.ca))}).length;
+  document.getElementById("pf").style.width=(n/ITEMS.length*100)+"%";
+  document.getElementById("mCount").textContent=n+" of "+ITEMS.length+" coded";
+  document.getElementById("mLeft").textContent=(ITEMS.length-n)+" left";
+  document.getElementById("done").classList.toggle("on",n===ITEMS.length);
+  if(document.getElementById("grid").classList.contains("on"))drawGrid();
+}
+document.querySelectorAll('.opts').forEach(function(box){
+  box.addEventListener("change",function(e){
+    var g=e.target.name;rec(cur)[g]=e.target.value;save();render();
+  });
+});
+document.getElementById("tNote").addEventListener("input",function(e){rec(cur).note=e.target.value;save()});
+document.querySelectorAll("legend button").forEach(function(b){
+  b.addEventListener("click",function(){document.getElementById(b.dataset.h).classList.toggle("on")});
+});
+function go(d){cur=Math.min(ITEMS.length-1,Math.max(0,cur+d));render();window.scrollTo({top:0,behavior:"smooth"})}
+document.getElementById("bPrev").onclick=function(){go(-1)};
+document.getElementById("bNext").onclick=function(){go(1)};
+document.addEventListener("keydown",function(e){
+  if(e.target.tagName==="TEXTAREA")return;
+  if(e.key==="ArrowRight"||e.key==="Enter"){go(1);e.preventDefault();return}
+  if(e.key==="ArrowLeft"){go(-1);e.preventDefault();return}
+  if(!/^[0-9]$/.test(e.key))return;
+  var n=parseInt(e.key,10)||10,r=rec(cur),g;
+  if(!r.inc)g="inc";else if(r.inc==="no")g=null;else if(!r.an)g="an";else if(!r.va)g="va";else g="ca";
+  if(!g)return;
+  var list=document.querySelectorAll('input[name="'+g+'"]');
+  if(n<=list.length){list[n-1].checked=true;r[g]=list[n-1].value;save();render()}
+});
+function drawGrid(){
+  document.getElementById("grid").innerHTML=ITEMS.map(function(x,i){
+    var d=data[x.id]||{},c="";
+    if(d.inc==="no")c="x";else if(d.inc&&d.an&&d.va&&d.ca)c="d";
+    return '<button class="'+c+(i===cur?" cur":"")+'" data-i="'+i+'" title="'+x.sv+'">'+(i+1)+'</button>';
+  }).join("");
+  document.querySelectorAll("#grid button").forEach(function(b){
+    b.onclick=function(){cur=+b.dataset.i;render();window.scrollTo({top:0,behavior:"smooth"})};
+  });
+}
+document.getElementById("bGrid").onclick=function(){
+  var g=document.getElementById("grid");g.classList.toggle("on");if(g.classList.contains("on"))drawGrid();
+};
+function csv(){
+  var head=["item_id","subject_verb","by_agent","include","animacy","valence","category","notes"];
+  var q=function(s){s=(s==null?"":String(s));return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+  return head.join(",")+"\n"+ITEMS.map(function(x){
+    var d=data[x.id]||{};
+    return [x.id,x.sv,x.ag,d.inc,d.an,d.va,d.ca,d.note].map(q).join(",");
+  }).join("\n");
+}
+document.getElementById("bSave").onclick=function(){
+  var b=new Blob([csv()],{type:"text/csv;charset=utf-8"}),u=URL.createObjectURL(b),a=document.createElement("a");
+  a.href=u;a.download="coding_returned.csv";a.click();setTimeout(function(){URL.revokeObjectURL(u)},800);
+};
+document.getElementById("bLoad").onclick=function(){document.getElementById("fileIn").click()};
+document.getElementById("fileIn").addEventListener("change",function(e){
+  var f=e.target.files[0];if(!f)return;var rd=new FileReader();
+  rd.onload=function(){
+    var lines=rd.result.split(/\r?\n/).slice(1),n=0;
+    lines.forEach(function(l){
+      if(!l.trim())return;
+      var c=l.match(/("([^"]|"")*"|[^,]*)(,|$)/g).map(function(s){
+        s=s.replace(/,$/,"");return s.replace(/^"|"$/g,"").replace(/""/g,'"');
+      });
+      if(c[0]){data[c[0]]={inc:c[3]||"",an:c[4]||"",va:c[5]||"",ca:c[6]||"",note:c[7]||""};n++}
+    });
+    save();render();alert("Restored "+n+" rows.");
+  };
+  rd.readAsText(f);
+});
+render();
+</script></body></html>

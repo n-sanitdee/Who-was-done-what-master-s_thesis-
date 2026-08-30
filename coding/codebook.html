@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>By-Agent Codebook</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#FAFBFA; --card:#FFFFFF; --sunk:#F0F2F0;
+  --ink:#191C1A; --ink-2:#4C534E; --ink-3:#7C837E;
+  --rule:#DFE3E0; --rule-2:#C4CAC6;
+  --accent:#2B5A4C; --accent-soft:#E6EFEB;
+  --flag:#8A5A2B; --flag-soft:#F6EDE3;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141715; --card:#1B1F1D; --sunk:#232825;
+    --ink:#E6EAE7; --ink-2:#A6AEA9; --ink-3:#79817C;
+    --rule:#2C322F; --rule-2:#3C433F;
+    --accent:#7FB9A4; --accent-soft:#1A2622;
+    --flag:#D2A468; --flag-soft:#2A2118;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141715; --card:#1B1F1D; --sunk:#232825;
+  --ink:#E6EAE7; --ink-2:#A6AEA9; --ink-3:#79817C;
+  --rule:#2C322F; --rule-2:#3C433F;
+  --accent:#7FB9A4; --accent-soft:#1A2622;
+  --flag:#D2A468; --flag-soft:#2A2118;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:3rem 1.4rem 6rem}
+h1,h2,h3,.ui{font-family:'Archivo',system-ui,sans-serif}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+h1{font-size:clamp(2rem,5vw,2.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
+.lede{font-size:1.13rem;color:var(--ink-2);margin-top:.9rem;max-width:62ch}
+hr.rule{border:none;border-top:1px solid var(--rule);margin:2.6rem 0}
+section{margin-top:2.6rem}
+h2{font-size:1.4rem;font-weight:600;letter-spacing:-.01em;display:flex;align-items:baseline;gap:.6rem;text-wrap:balance}
+h2 .step{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;color:var(--card);background:var(--accent);border-radius:99px;width:1.6rem;height:1.6rem;display:inline-grid;place-items:center;flex:none;letter-spacing:0}
+h3{font-size:1rem;font-weight:600;margin-top:1.4rem}
+p{max-width:64ch}p+p{margin-top:.65rem}
+section>p:first-of-type{margin-top:.6rem}
+ul{padding-left:1.1rem;margin-top:.6rem;display:flex;flex-direction:column;gap:.35rem;max-width:64ch}
+li::marker{color:var(--ink-3)}
+code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--sunk);border:1px solid var(--rule);border-radius:3px;padding:.05em .32em;word-break:break-word}
+strong{font-weight:600}
+.tbl{overflow-x:auto;margin-top:.9rem;border:1px solid var(--rule);border-radius:6px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:440px}
+th,td{text-align:left;padding:.6rem .85rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:500;background:var(--sunk)}
+tr:last-child td{border-bottom:none}
+td:first-child{white-space:nowrap}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.76rem;background:var(--sunk);border:1px solid var(--rule-2);border-radius:3px;padding:.1em .4em;color:var(--ink)}
+.ex{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--rule-2);border-radius:0 6px 6px 0;padding:.8rem 1rem;margin-top:.75rem}
+.ex .pair{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--ink);display:block;margin-bottom:.35rem;word-break:break-word}
+.ex .why{font-size:.93rem;color:var(--ink-2);max-width:60ch}
+.ex .why b{color:var(--ink);font-weight:600}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:.85rem 1rem;margin-top:1rem}
+.note .h{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.note p{font-size:.95rem}
+.flag{background:var(--flag-soft);border-left:3px solid var(--flag);border-radius:0 6px 6px 0;padding:.85rem 1rem;margin-top:1rem}
+.flag .h{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--flag);margin-bottom:.3rem}
+.flag p{font-size:.95rem}
+footer{margin-top:3.5rem;padding-top:1.2rem;border-top:1px solid var(--rule);font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink-3);line-height:1.8}
+@media print{body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.ex{break-inside:avoid}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="eyebrow">Annotation manual · v1.0</div>
+<h1>By-Agent Codebook</h1>
+<p class="lede">You are coding phrases pulled automatically out of English-language news reporting. Each row gives a passive subject–verb pair and the by-phrase that follows it. There are 167 rows and four judgments per row.</p>
+
+<div class="note">
+  <div class="h">Before you start</div>
+  <p>Judge each row on its own terms. Do not try to be consistent with any pattern you think you are seeing across the sheet, and do not try to work out what the study is about — a coder who is guessing at the answer is no longer an independent check, which is the whole reason you are doing this.</p>
+</div>
+
+<hr class="rule">
+
+<section>
+  <h2><span class="step">0</span>How to read a row</h2>
+  <p>The phrases were extracted by a parser, so they are joined with underscores and stripped of some surrounding words. Read them as fragments, not as sentences.</p>
+  <div class="ex">
+    <span class="pair">town_occupied &nbsp;·&nbsp; by_Russian_forces</span>
+    <span class="why">Reads as <em>the town was occupied by Russian forces</em>. The subject is <b>town</b>, the verb is <b>occupied</b>, and the by-phrase names <b>Russian forces</b>.</span>
+  </div>
+  <p>When a by-phrase has several words, the thing being named is normally the <strong>head noun</strong> — the noun the other words describe. In <code>by_Russian_shells</code> the head is <em>shells</em>; <em>Russian</em> only tells you whose. In <code>by_second_missile</code> the head is <em>missile</em>.</p>
+  <p>Fill four columns: <span class="tag">include</span> <span class="tag">animacy</span> <span class="tag">valence</span> <span class="tag">category</span>. There is also a <span class="tag">notes</span> column — use it whenever a row gave you trouble. Those notes are more useful than a confident guess.</p>
+</section>
+
+<section>
+  <h2><span class="step">1</span>include</h2>
+  <p>Some by-phrases name the <em>circumstances</em> under which something happened rather than anything that brought it about. Those fall outside this exercise.</p>
+  <div class="tbl"><table>
+    <tr><th>Code</th><th>Criterion</th></tr>
+    <tr><td><span class="tag">yes</span></td><td>The by-phrase names something that brought the action about</td></tr>
+    <tr><td><span class="tag">no</span></td><td>The by-phrase names a condition, a setting, a measure or a reason</td></tr>
+  </table></div>
+  <div class="ex">
+    <span class="pair">difficulty_accentuated &nbsp;·&nbsp; by_geography</span>
+    <span class="why"><b>no</b> — geography did not do anything. It is the condition under which the difficulty exists.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">Symbols_sized &nbsp;·&nbsp; by_minimum_number_days</span>
+    <span class="why"><b>no</b> — this names the measure the sizing was based on, not an actor.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">operations_launched &nbsp;·&nbsp; by_security_service</span>
+    <span class="why"><b>yes</b> — a body that launched something.</span>
+  </div>
+  <p>If you code <span class="tag">no</span>, leave the other three columns blank and move on. Deciding this is part of the task — do not assume a row belongs simply because it is on the sheet.</p>
+</section>
+
+<section>
+  <h2><span class="step">2</span>animacy</h2>
+  <p>Is the thing named in the by-phrase a person or a body of people, or is it not?</p>
+  <div class="tbl"><table>
+    <tr><th>Code</th><th>Criterion</th><th>Typical cases</th></tr>
+    <tr><td><span class="tag">human</span></td><td>An individual, a group of people, an institution, or a state — anything that acts through people</td><td>forces, police, parliament, a named person, a country</td></tr>
+    <tr><td><span class="tag">nonhuman</span></td><td>An object, substance, vehicle, or an event treated as the cause</td><td>missile, drone, shells, a chemical, an explosion</td></tr>
+    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td><td>—</td></tr>
+  </table></div>
+  <h3>Two rules that settle most of the difficult ones</h3>
+  <p><strong>A country counts as human.</strong> A state acts through people, so <code>by_Russia</code> and <code>by_Ukraine</code> are <span class="tag">human</span>.</p>
+  <p><strong>A nationality word attached to an object does not make it human.</strong> Go by the head noun.</p>
+  <div class="ex">
+    <span class="pair">house_struck &nbsp;·&nbsp; by_Russian_shells</span>
+    <span class="why"><b>nonhuman</b> — the head is <em>shells</em>. <em>Russian</em> says whose they were, not who acted.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">boats_seized &nbsp;·&nbsp; by_Russian_warships</span>
+    <span class="why"><b>nonhuman</b> — a warship is a vessel. Code what the phrase names, not what you infer must have been behind it.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">Yushchenko_poisoned &nbsp;·&nbsp; by_TCDD_dioxin</span>
+    <span class="why"><b>nonhuman</b> — a substance.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">city_battered &nbsp;·&nbsp; by_weeks_Russian_bombardment</span>
+    <span class="why"><b>nonhuman</b> — the head is <em>bombardment</em>, an event named as the cause.</span>
+  </div>
+</section>
+
+<section>
+  <h2><span class="step">3</span>valence</h2>
+  <p>What does the verb do to the thing in subject position? Judge the effect on <strong>that</strong> referent, not whether the event seems good or bad in general.</p>
+  <div class="tbl"><table>
+    <tr><th>Code</th><th>Criterion</th><th>Examples of verbs</th></tr>
+    <tr><td><span class="tag">violent</span></td><td>Physical harm or destruction</td><td>killed, destroyed, struck, shelled, demolished, wounded</td></tr>
+    <tr><td><span class="tag">restrictive</span></td><td>Limitation or control, without direct physical harm</td><td>occupied, seized, detained, held, thwarted, controlled</td></tr>
+    <tr><td><span class="tag">negative</span></td><td>Adverse, but neither violent nor restrictive</td><td>frustrated, blamed, denounced, countered</td></tr>
+    <tr><td><span class="tag">neutral</span></td><td>No evaluative loading in this context</td><td>reported, met, taken, provided, described</td></tr>
+    <tr><td><span class="tag">positive</span></td><td>Favourable to the subject</td><td>welcomed, reclaimed, allowed, recognised, released</td></tr>
+    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td><td>—</td></tr>
+  </table></div>
+  <div class="flag">
+    <div class="h">The line that matters most</div>
+    <p><strong>Violent and restrictive are separated by physical harm.</strong> <em>Seize</em>, <em>detain</em> and <em>occupy</em> constrain something; <em>shell</em> and <em>kill</em> injure or destroy it. If a verb could go either way, code the reading it has in <em>this</em> row, not the sense the word carries most often elsewhere.</p>
+  </div>
+  <div class="ex">
+    <span class="pair">medic_killed &nbsp;·&nbsp; by_second_missile</span>
+    <span class="why"><b>violent</b> — direct physical harm to the medic.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">Petrova_escorted &nbsp;·&nbsp; by_police</span>
+    <span class="why"><b>restrictive</b> — control over where someone goes, with no physical harm stated.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">support_approved &nbsp;·&nbsp; by_German_parliamentary_budget_committee</span>
+    <span class="why"><b>positive</b> — approval is favourable to the support.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">development_monitored &nbsp;·&nbsp; by_operational_command</span>
+    <span class="why"><b>neutral</b> — monitoring carries no evaluative loading here. Do not upgrade it to restrictive on a suspicion that monitoring is controlling; code what the verb states.</span>
+  </div>
+</section>
+
+<section>
+  <h2><span class="step">4</span>category</h2>
+  <p>What kind of thing is named in the by-phrase? One code per row, from this list.</p>
+  <div class="tbl"><table>
+    <tr><th>Code</th><th>Covers</th></tr>
+    <tr><td><span class="tag">weapon</span></td><td>Arms, munitions, ordnance, and the acts of using them</td></tr>
+    <tr><td><span class="tag">military_authority</span></td><td>Armed forces, police, intelligence, official security bodies</td></tr>
+    <tr><td><span class="tag">nonmilitary_party</span></td><td>Irregular combatants, separatists, activists, hackers</td></tr>
+    <tr><td><span class="tag">country_city</span></td><td>States, cities, regions named as such</td></tr>
+    <tr><td><span class="tag">law_governance</span></td><td>Governments, parliaments, courts, committees, treaties</td></tr>
+    <tr><td><span class="tag">death_danger</span></td><td>Attacks, fighting, explosions, fire, loss</td></tr>
+    <tr><td><span class="tag">important_figure</span></td><td>Named individuals and office-holders</td></tr>
+    <tr><td><span class="tag">civilian</span></td><td>Ordinary people, the public, communities</td></tr>
+    <tr><td><span class="tag">location</span></td><td>Places and premises not covered by country_city</td></tr>
+    <tr><td><span class="tag">media_tech</span></td><td>News outlets, broadcasters, platforms, technology</td></tr>
+    <tr><td><span class="tag">money_business</span></td><td>Firms, funds, commercial bodies, financial instruments</td></tr>
+    <tr><td><span class="tag">commute</span></td><td>Transport and traffic</td></tr>
+    <tr><td><span class="tag">nominalisation</span></td><td>Abstract nouns built from verbs or adjectives</td></tr>
+    <tr><td><span class="tag">neutral_entity</span></td><td>Anything that fits nowhere above</td></tr>
+    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td></tr>
+  </table></div>
+  <p>Some rows will sit between two categories — <code>by_Russian_forces</code> is both a state and an armed body. Prefer the <strong>more specific</strong> code: here, <span class="tag">military_authority</span>. Reserve <span class="tag">country_city</span> for phrases where the state itself is what is named, as in <code>by_Russia</code>.</p>
+</section>
+
+<section>
+  <h2><span class="step">5</span>When you are unsure</h2>
+  <p><strong>Use <span class="tag">unclear</span> freely.</strong> A row you could not decide is information. A row you guessed at looks identical to a row you were certain about, and quietly corrupts the comparison this exercise exists to produce.</p>
+  <p>Put the reason in the notes column. If the same kind of difficulty comes up more than three or four times, stop and raise it rather than working through it — that usually means this manual is missing a rule, and it is better fixed once than decided differently seventeen times.</p>
+  <p>Do not look up the original news articles. Code from what is on the sheet. Some rows will feel thin because the parser cut them short; that is expected, and <span class="tag">unclear</span> is the right answer when it leaves you unable to judge.</p>
+</section>
+
+<footer>167 rows · four judgments each · save as CSV and return the file unchanged apart from your codings<br>Do not reorder the rows — the id column is what aligns your sheet with the comparison.</footer>
+</div>
+</body>
+</html>
