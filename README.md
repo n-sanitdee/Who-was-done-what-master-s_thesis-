@@ -3,7 +3,18 @@
 Extraction and analysis code for a parser-based study of passive voice constructions in
 media discourse on the Russo-Ukrainian War.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22168990.svg)](https://doi.org/10.5281/zenodo.22168990)
+
 ## Citation
+
+**This code**, archived at v1.0.0:
+
+Sanitdee, Natchanun. 2026. *Who Was Done What? — Extraction and Analysis Code* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.22168990
+
+The DOI above resolves to this exact release. The concept DOI
+https://doi.org/10.5281/zenodo.22168989 always resolves to the newest version.
+
+**The thesis the code was written for:**
 
 Sanitdee, Natchanun. 2024. *Who Was Done What? A Parser-Based Study of Passive Voice
 Constructions in Media Discourse on the Russo-Ukrainian War.* Master's thesis, University
