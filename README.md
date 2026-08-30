@@ -61,6 +61,19 @@ numerals, or containing direct speech.
 | `group_word_emb.py` | semantic map (Word2Vec + PCA), used as a coding aid |
 | `topic_modelling.py` | BERTopic over the passive sub-corpora |
 
+## Reliability and the full cross-tabulation
+
+| Script | Purpose |
+|---|---|
+| `make_coding_sheet.py` | builds a shuffled, unlabelled sheet for a second coder, plus the codebook |
+| `compute_kappa.py` | Cohen's kappa per variable, bootstrap CI, per-category agreement, disagreement list |
+| `crosstab_animacy_valence.py` | verb class by agent animacy over all coded agents, with a significance test |
+
+Workflow: run `by_agents.py`, then `make_coding_sheet.py` on its output; code
+`coding_key.csv` yourself and give `coding_sheet.csv` plus `codebook.md` to a second
+coder; run `compute_kappa.py` on the two files; adjudicate disagreements; run
+`crosstab_animacy_valence.py` on the settled codings.
+
 ## Known gaps
 
 - **The association score is not computed here.** `observed_freq.py` emits the contingency
