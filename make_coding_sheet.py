@@ -72,8 +72,22 @@ def main():
 
     df = pd.read_csv(args.infile, sep="\t")
     cols = list(df.columns)
-    pair = cols[0]
-    agent = next((c for c in cols if "agent" in c.lower() or "by" in c.lower()), cols[-1])
+    low = {c.lower(): c for c in cols}
+
+    def pick(*names, default=None):
+        for n in names:
+            if n in low:
+                return low[n]
+        for c in cols:                       # substring fallback
+            if any(n in c.lower() for n in names):
+                return c
+        return default
+
+    pair = pick("subject_verb", "subject-verb", "pair", "subject_verb_pairs", default=cols[0])
+    agent = pick("by_agent", "by-agent", "agent", default=cols[-1])
+    if pair == agent:
+        raise SystemExit(f"could not tell the pair column from the agent column in {cols}")
+    print(f"using pair column '{pair}' and agent column '{agent}'")
 
     work = df[[pair, agent]].copy()
     work.columns = ["subject_verb", "by_agent"]
