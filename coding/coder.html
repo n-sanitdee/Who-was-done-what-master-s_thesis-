@@ -67,8 +67,36 @@ font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-3);paddin
 .grid button.d{background:var(--accent);border-color:var(--accent);color:var(--card)}
 .grid button.x{background:var(--flag-soft);border-color:var(--flag);color:var(--flag)}
 .grid button.cur{outline:2px solid var(--ink);outline-offset:1px}
+.gate{position:fixed;inset:0;background:var(--paper);display:grid;place-items:center;padding:1.5rem;z-index:50}
+.gate.off{display:none}
+.gate .in{max-width:420px;width:100%}
+.gate h2{font-size:1.5rem;font-weight:700;letter-spacing:-.015em;line-height:1.15}
+.gate p{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2);margin-top:.6rem;font-size:.98rem}
+.gate form{display:flex;gap:.5rem;margin-top:1.1rem;flex-wrap:wrap}
+.gate input{flex:1;min-width:190px;padding:.62rem .8rem;border:1px solid var(--rule-2);border-radius:7px;
+background:var(--card);color:var(--ink);font-family:'Archivo',sans-serif;font-size:1rem}
+.gate input:focus{outline:none;border-color:var(--accent)}
+.gate button{padding:.62rem 1.2rem;border-radius:7px;border:1px solid var(--accent);background:var(--accent);
+color:var(--card);font-family:'Archivo',sans-serif;font-weight:600;font-size:.95rem;cursor:pointer}
+.gate button:disabled{opacity:.45;cursor:not-allowed}
+.gate .prev{margin-top:1rem;font-size:.86rem;color:var(--ink-3);font-family:'Source Serif 4',Georgia,serif}
+.gate .prev button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:inherit;
+text-decoration:underline;cursor:pointer;padding:0}
+#whoLine b{color:var(--accent)}
+#whoLine .ch{background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:inherit;
+text-decoration:underline;cursor:pointer;padding:0}
 .tip{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink-3);margin-top:1rem;line-height:1.7}
-</style></head><body><div class="wrap">
+</style></head><body><div class="gate" id="gate"><div class="in">
+  <h2>Before you start</h2>
+  <p>Enter your name so your codings are kept separate from anyone else's and saved under your own file. Come back with the same name and your progress will be waiting.</p>
+  <form id="gateForm" autocomplete="off">
+    <input id="gateName" placeholder="Your name" aria-label="Your name" maxlength="24" required>
+    <button type="submit" id="gateGo" disabled>Start</button>
+  </form>
+  <div class="prev" id="gatePrev"></div>
+</div></div>
+
+<div class="wrap">
 
 <header>
   <h1>By-agent coding<small id="whoLine">Read the <a href="codebook.html" target="_blank" rel="noopener">codebook</a> before you start. Progress saves in this browser.</small></h1>
@@ -140,9 +168,31 @@ var SETS={
      ["location","location"],["media_tech","media / tech"],["money_business","money / business"],["commute","commute"],
      ["nominalisation","nominalisation"],["neutral_entity","neutral entity"],["unclear","unclear"]]
 };
-var WHO=(new URLSearchParams(location.search).get("id")||"coder").replace(/[^a-z0-9_-]/gi,"").slice(0,24)||"coder";
-var KEY="byagent-coding-v1-"+WHO,data={},cur=0;
-try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){data={}}
+var PREFIX="byagent-coding-v1-";
+var WHO="",KEY="",data={},cur=0;
+function slug(s){return String(s||"").trim().replace(/\s+/g,"-").replace(/[^a-z0-9_-]/gi,"").slice(0,24)}
+function known(){
+  var out=[];
+  try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+    if(k&&k.indexOf(PREFIX)===0)out.push(k.slice(PREFIX.length))}}catch(e){}
+  return out;
+}
+function boot(name){
+  WHO=slug(name)||"coder";KEY=PREFIX+WHO;
+  try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){data={}}
+  try{localStorage.setItem("byagent-last",WHO)}catch(e){}
+  document.getElementById("gate").classList.add("off");
+  document.getElementById("whoLine").innerHTML=
+    'Coding as <b>'+WHO+'</b>. <button type="button" class="ch" id="chWho">not you?</button> '+
+    'Read the <a href="codebook.html" target="_blank" rel="noopener">codebook</a> before you start. Progress saves in this browser.';
+  document.getElementById("chWho").onclick=function(){
+    document.getElementById("gate").classList.remove("off");
+    document.getElementById("gateName").value="";
+    document.getElementById("gateGo").disabled=true;
+    document.getElementById("gateName").focus();
+  };
+  cur=0;render();
+}
 function rec(i){var id=ITEMS[i].id;return data[id]||(data[id]={})}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
 function opts(host,name,set){
@@ -239,6 +289,22 @@ document.getElementById("fileIn").addEventListener("change",function(e){
   };
   rd.readAsText(f);
 });
-try{document.getElementById("whoLine").insertAdjacentHTML("afterbegin","Coding as <b>"+WHO+"</b>. ");}catch(e){}
-render();
+(function(){
+  var nameIn=document.getElementById("gateName"),go=document.getElementById("gateGo");
+  nameIn.addEventListener("input",function(){go.disabled=!slug(nameIn.value)});
+  document.getElementById("gateForm").addEventListener("submit",function(e){
+    e.preventDefault();if(slug(nameIn.value))boot(nameIn.value);
+  });
+  var prev=known();
+  if(prev.length){
+    document.getElementById("gatePrev").innerHTML="Already started here: "+prev.map(function(n){
+      return '<button type="button" data-n="'+n+'">'+n+'</button>';
+    }).join(" · ");
+    document.querySelectorAll("#gatePrev button").forEach(function(b){
+      b.onclick=function(){boot(b.dataset.n)};
+    });
+  }
+  var q=new URLSearchParams(location.search).get("id");
+  if(q&&slug(q)){boot(q);}else{nameIn.focus();}
+})();
 </script></body></html>
