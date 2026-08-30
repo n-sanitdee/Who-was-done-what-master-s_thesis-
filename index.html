@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Was Done What?</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
+<style>
+:root{--paper:#FAFBFA;--card:#FFF;--ink:#191C1A;--ink-2:#4C534E;--ink-3:#7C837E;--rule:#DFE3E0;--accent:#2B5A4C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141715;--card:#1B1F1D;--ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;--rule:#2C322F;--accent:#7FB9A4}}
+:root[data-theme="dark"]{--paper:#141715;--card:#1B1F1D;--ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;--rule:#2C322F;--accent:#7FB9A4}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;line-height:1.6;
+display:grid;place-items:center;min-height:100vh;padding:2.5rem 1.2rem}
+.box{max-width:560px}
+h1{font-size:1.85rem;font-weight:700;letter-spacing:-.02em;line-height:1.14}
+.sub{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2);margin-top:.7rem;font-size:1.02rem}
+.cards{display:grid;gap:.7rem;margin-top:1.7rem}
+a.c{display:block;background:var(--card);border:1px solid var(--rule);border-radius:9px;padding:1rem 1.1rem;
+text-decoration:none;color:inherit;transition:.15s}
+a.c:hover,a.c:focus-visible{border-color:var(--accent);outline:none}
+a.c b{display:block;font-size:1rem;color:var(--accent)}
+a.c span{font-family:'Source Serif 4',Georgia,serif;font-size:.92rem;color:var(--ink-2)}
+.n{font-size:.85rem;color:var(--ink-3);margin-top:1.5rem;font-family:'Source Serif 4',Georgia,serif}
+.n a{color:var(--accent)}
+</style></head><body><div class="box">
+<h1>Who Was Done What?</h1>
+<p class="sub">Extraction and analysis code for a parser-based study of passive voice constructions in media discourse on the Russo-Ukrainian War.</p>
+<div class="cards">
+  <a class="c" href="coding/"><b>Second-coder materials →</b><span>Codebook and browser coding tool for annotating the by-agent phrases.</span></a>
+  <a class="c" href="https://github.com/n-sanitdee/Who-was-done-what-master-s_thesis-"><b>Repository →</b><span>Extraction scripts, association scoring, derived data.</span></a>
+  <a class="c" href="https://doi.org/10.5281/zenodo.22168990"><b>Archived release →</b><span>v1.0.0 on Zenodo, citable by DOI.</span></a>
+</div>
+<p class="n">Thesis: <a href="https://doi.org/10.5281/zenodo.14031334">10.5281/zenodo.14031334</a> · University of Helsinki, 2024</p>
+</div></body></html>
