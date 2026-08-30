@@ -25,7 +25,20 @@ subject–verb pair and the by-phrase naming the agent, e.g.
 Code three columns. Judge each phrase on its own; do not try to be consistent with
 any hypothesis about the data, and ask about unclear cases rather than guessing.
 
-## 1. animacy — is the named agent human or non-human?
+## 1. include — is this a participant at all?
+
+Some by-phrases name the circumstance under which something happened rather than
+anything that did it. Those are outside the scope of this exercise.
+
+| Code | Criterion | Examples |
+|---|---|---|
+| `yes` | The by-phrase names something that performed the action | by Russian forces, by a missile |
+| `no` | The by-phrase names a condition, setting or reason | by geography, by propaganda, by the minimum number of days |
+
+Code `no` and leave the remaining columns blank. Deciding this is part of the task —
+do not assume a row belongs just because it is on the sheet.
+
+## 2. animacy — is the named agent human or non-human?
 
 | Code | Criterion | Examples |
 |---|---|---|
@@ -37,7 +50,7 @@ A state name is `human`: *occupied by Russia* attributes the act to an actor tha
 acts through people. A weapon is `nonhuman` even when a nationality modifies it —
 in *by Russian shells* the agent is *shells*.
 
-## 2. valence — what does the verb do to the passive subject?
+## 3. valence — what does the verb do to the passive subject?
 
 | Code | Criterion | Examples |
 |---|---|---|
@@ -52,7 +65,7 @@ The line between `violent` and `restrictive` is physical harm. *Seize* and *deta
 constrain; *shell* and *kill* injure. Code the reading in this sentence, not the
 verb's most common sense elsewhere.
 
-## 3. category — what kind of entity is the agent?
+## 4. category — what kind of entity is the agent?
 
 `weapon`, `military_authority`, `nonmilitary_party`, `country_city`,
 `law_governance`, `death_danger`, `important_figure`, `civilian`, `location`,
@@ -102,12 +115,12 @@ def main():
     work = work.sample(frac=1, random_state=args.seed).reset_index(drop=True)
 
     sheet = work[["item_id", "subject_verb", "by_agent"]].copy()
-    for c in ("animacy", "valence", "category", "notes"):
+    for c in ("include", "animacy", "valence", "category", "notes"):
         sheet[c] = ""
     sheet.to_csv("coding_sheet.csv", index=False, quoting=csv.QUOTE_MINIMAL)
 
     key = work[["item_id", "subject_verb", "by_agent"]].copy()
-    for c in ("animacy", "valence", "category"):
+    for c in ("include", "animacy", "valence", "category"):
         key[c] = ""
     key.to_csv("coding_key.csv", index=False)
 

@@ -13,7 +13,7 @@ from collections import Counter
 
 import pandas as pd
 
-VARIABLES = ["animacy", "valence", "category"]
+VARIABLES = ["include", "animacy", "valence", "category"]
 
 # Landis & Koch (1977). Content analysis conventionally wants >= .80 for firm
 # conclusions and >= .67 for tentative ones (Krippendorff).
@@ -70,6 +70,14 @@ def main():
             continue
         pairs = [(str(d1.at[i, var]).strip().lower(), str(d2.at[i, var]).strip().lower())
                  for i in shared]
+        # rows either coder excluded carry no downstream codings; kappa on
+        # `include` is computed over everything, the rest only over rows both kept
+        if var != "include":
+            keep = [str(d1.at[i, "include"]).strip().lower() != "no" and
+                    str(d2.at[i, "include"]).strip().lower() != "no"
+                    for i in shared] if "include" in d1.columns and "include" in d2.columns \
+                   else [True] * len(shared)
+            pairs = [pr for pr, k in zip(pairs, keep) if k]
         pairs = [(a, b) for a, b in pairs if a and b and a != "nan" and b != "nan"]
         if not pairs:
             print(f"— {var}: no coded values\n")

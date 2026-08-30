@@ -71,7 +71,7 @@ font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-3);paddin
 </style></head><body><div class="wrap">
 
 <header>
-  <h1>By-agent coding<small>Read the <a href="codebook.html" target="_blank" rel="noopener">codebook</a> before you start. Progress saves in this browser.</small></h1>
+  <h1>By-agent coding<small id="whoLine">Read the <a href="codebook.html" target="_blank" rel="noopener">codebook</a> before you start. Progress saves in this browser.</small></h1>
   <div class="tools">
     <button class="t" id="bGrid">Overview</button>
     <button class="t" id="bLoad">Resume from file</button>
@@ -140,7 +140,8 @@ var SETS={
      ["location","location"],["media_tech","media / tech"],["money_business","money / business"],["commute","commute"],
      ["nominalisation","nominalisation"],["neutral_entity","neutral entity"],["unclear","unclear"]]
 };
-var KEY="byagent-coding-v1",data={},cur=0;
+var WHO=(new URLSearchParams(location.search).get("id")||"coder").replace(/[^a-z0-9_-]/gi,"").slice(0,24)||"coder";
+var KEY="byagent-coding-v1-"+WHO,data={},cur=0;
 try{data=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){data={}}
 function rec(i){var id=ITEMS[i].id;return data[id]||(data[id]={})}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
@@ -220,7 +221,7 @@ function csv(){
 }
 document.getElementById("bSave").onclick=function(){
   var b=new Blob([csv()],{type:"text/csv;charset=utf-8"}),u=URL.createObjectURL(b),a=document.createElement("a");
-  a.href=u;a.download="coding_returned.csv";a.click();setTimeout(function(){URL.revokeObjectURL(u)},800);
+  a.href=u;a.download="coding_"+WHO+".csv";a.click();setTimeout(function(){URL.revokeObjectURL(u)},800);
 };
 document.getElementById("bLoad").onclick=function(){document.getElementById("fileIn").click()};
 document.getElementById("fileIn").addEventListener("change",function(e){
@@ -238,5 +239,6 @@ document.getElementById("fileIn").addEventListener("change",function(e){
   };
   rd.readAsText(f);
 });
+try{document.getElementById("whoLine").insertAdjacentHTML("afterbegin","Coding as <b>"+WHO+"</b>. ");}catch(e){}
 render();
 </script></body></html>

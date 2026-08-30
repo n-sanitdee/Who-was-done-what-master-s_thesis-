@@ -55,6 +55,10 @@ def main():
     args = ap.parse_args()
 
     df = pd.read_csv(args.coded)
+    if "include" in df.columns:
+        n0 = len(df)
+        df = df[df["include"].astype(str).str.strip().str.lower() != "no"]
+        print(f"\nexcluded as circumstantial: {n0 - len(df)}")
     df["animacy"] = df["animacy"].astype(str).str.strip().str.lower()
     df["valence"] = df["valence"].astype(str).str.strip().str.lower()
     df = df[df.animacy.isin(["human", "nonhuman"]) &
