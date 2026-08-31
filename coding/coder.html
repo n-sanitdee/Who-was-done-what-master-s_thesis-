@@ -49,6 +49,8 @@ background:var(--sunk);display:flex;justify-content:space-between;align-items:ce
 .rq dt{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink);background:var(--sunk);
 border:1px solid var(--rule);border-radius:3px;padding:.03em .3em;white-space:nowrap}
 .rq dd{color:var(--ink-2);font-size:.77rem}
+.rq .grp{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.11em;
+text-transform:uppercase;color:var(--accent);margin:.5rem 0 .2rem}
 .rq .tipline{margin-top:.35rem;color:var(--ink-3);font-size:.75rem;font-family:'Source Serif 4',Georgia,serif}
 .rq .tipline b{color:var(--ink-2)}
 .card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.25rem 1.35rem}
@@ -224,19 +226,22 @@ text-decoration:underline;cursor:pointer;padding:0}
       <div class="tipline">Go by the <b>head noun</b>. A country is human. <i>by_Russian_shells</i> → <b>shells</b>, nonhuman.</div></div>
 
     <div class="rq"><h4>3 · category</h4><div class="q">What can the by-phrase be categorised as?</div>
-      <dl><dt>weapon</dt><dd>arms, munitions, ordnance</dd>
-          <dt>military_authority</dt><dd>forces, police, intelligence</dd>
+      <div class="grp">if human</div>
+      <dl><dt>military_authority</dt><dd>forces, police, intelligence</dd>
           <dt>nonmilitary_party</dt><dd>separatists, activists, hackers</dd>
           <dt>country_city</dt><dd>states, cities, regions</dd>
           <dt>law_governance</dt><dd>governments, courts, committees</dd>
-          <dt>death_danger</dt><dd>attacks, fighting, fire, loss</dd>
           <dt>important_figure</dt><dd>named individuals, office-holders</dd>
           <dt>civilian</dt><dd>ordinary people, the public</dd>
+          <dt>money_business</dt><dd>firms, funds, financial bodies</dd></dl>
+      <div class="grp">if nonhuman</div>
+      <dl><dt>weapon</dt><dd>arms, munitions, ordnance</dd>
+          <dt>death_danger</dt><dd>attacks, fighting, fire, loss</dd>
           <dt>location</dt><dd>places, premises</dd>
-          <dt>media_tech</dt><dd>outlets, platforms, technology</dd>
-          <dt>money_business</dt><dd>firms, funds, financial bodies</dd>
           <dt>commute</dt><dd>transport, traffic</dd>
-          <dt>nominalisation</dt><dd>abstract nouns from verbs</dd>
+          <dt>nominalisation</dt><dd>abstract nouns from verbs</dd></dl>
+      <div class="grp">either side</div>
+      <dl><dt>media_tech</dt><dd>outlets, platforms, technology</dd>
           <dt>neutral_entity</dt><dd>fits nowhere above</dd>
           <dt>unclear</dt><dd>cannot decide</dd></dl>
       <div class="tipline">Prefer the <b>more specific</b> code: <i>by_Russian_forces</i> is military_authority, not country_city.</div></div>

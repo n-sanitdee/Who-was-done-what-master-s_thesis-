@@ -92,7 +92,19 @@ color:var(--ink-3);text-align:right;padding-top:.2rem}
 .anat .code .val{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--accent);color:var(--paper);
 border-radius:3px;padding:.08em .42em;margin-right:.45rem}
 .anat .code em{font-family:'Source Serif 4',Georgia,serif;font-style:normal;color:var(--ink-2)}
-@media print{.start,.topline{display:none}
+.treewrap{margin:1.1rem 0 .3rem;overflow-x:auto}
+.tree{color:var(--ink);max-width:100%;height:auto;display:block;min-width:620px;margin:0 auto}
+.tree .dg-hd{color:var(--ink-3)}
+.tree .dg-mute{color:var(--ink-3)}
+.tree .dg-stop{color:var(--ink-3)}
+.tree .dg-root{color:var(--accent)}
+.tree .dg-verb{color:var(--flag)}
+.tree .dg-sep{color:var(--rule-2)}
+figure{margin:0}
+figcaption{font-family:'Source Serif 4',Georgia,serif;font-size:.88rem;color:var(--ink-2);
+margin-top:.5rem;max-width:64ch}
+@media print{.tree{min-width:0}
+.start,.topline{display:none}
 .anat{break-inside:avoid}
 .start,.topline{display:none}
 body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.ex{break-inside:avoid}section{break-inside:avoid-page}}
@@ -113,6 +125,81 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
 </div>
 
 <hr class="rule">
+
+<section>
+  <h2><span class="step">0</span>The scheme</h2>
+  <p>Four judgments per row. Three of them are about the <strong>by-phrase</strong>; one is about the <strong>verb</strong>. The tree shows how they fit together.</p>
+  <figure>
+<div class="treewrap">
+<svg viewBox="0 0 720 586" role="img" class="tree" xmlns="http://www.w3.org/2000/svg" aria-label="Decision tree for coding a by-agent phrase. An include gate separates circumstances, which stop there, from actors. Actors are coded for animacy, and animacy narrows which category codes apply; three categories sit on either side. Verb valence is judged on a separate track, from the verb rather than the by-phrase.">
+<defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0.5 L8 4 L0 7.5 z" fill="currentColor"/></marker></defs>
+<text x="66" y="11" font-size="9.5" letter-spacing="1.1" fill="currentColor" class="dg-hd">1 · INCLUDE</text>
+<text x="176" y="11" font-size="9.5" letter-spacing="1.1" fill="currentColor" class="dg-hd">2 · ANIMACY</text>
+<text x="430" y="11" font-size="9.5" letter-spacing="1.1" fill="currentColor" class="dg-hd">3 · CATEGORY</text>
+<text x="4.0" y="117.8" font-size="11.5" font-weight="700" text-anchor="start" fill="currentColor" class="dg-root">by-phrase</text>
+<path d="M60.0 113.8 H60.5 V26.0 H61.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<path d="M60.0 113.8 H60.5 V201.5 H61.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="66.0" y="30.0" font-size="11.5" font-weight="500" text-anchor="start" fill="currentColor" class="dg-mute">circumstance</text>
+<text x="152.0" y="29.5" font-size="11" fill="currentColor" class="dg-mute" font-family="ui-monospace,SFMono-Regular,monospace">include: no</text>
+<text x="238" y="30.0" font-size="10.5" fill="currentColor" class="dg-stop">stop — leave the rest blank</text>
+<text x="66.0" y="205.5" font-size="11.5" font-weight="500" text-anchor="start" fill="currentColor" class="">actor</text>
+<text x="66.0" y="220.0" font-size="11" fill="currentColor" class="dg-mute" font-family="ui-monospace,SFMono-Regular,monospace">include: yes</text>
+<path d="M154.0 201.5 H162.5 V129.0 H171.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<path d="M154.0 201.5 H162.5 V274.0 H171.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="176.0" y="133.0" font-size="11.5" font-weight="500" text-anchor="start" fill="currentColor" class="">human</text>
+<text x="176.0" y="278.0" font-size="11.5" font-weight="500" text-anchor="start" fill="currentColor" class="">nonhuman</text>
+<path d="M220.0 129.0 H322.0 V66.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="69.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">military_authority</text>
+<path d="M220.0 129.0 H322.0 V87.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="90.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">nonmilitary_party</text>
+<path d="M220.0 129.0 H322.0 V108.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="111.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">country_city</text>
+<path d="M220.0 129.0 H322.0 V129.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="132.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">law_governance</text>
+<path d="M220.0 129.0 H322.0 V150.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="153.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">important_figure</text>
+<path d="M220.0 129.0 H322.0 V171.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="174.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">civilian</text>
+<path d="M220.0 129.0 H322.0 V192.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="195.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">money_business</text>
+<path d="M238.0 274.0 H331.0 V232.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="235.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">weapon</text>
+<path d="M238.0 274.0 H331.0 V253.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="256.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">death_danger</text>
+<path d="M238.0 274.0 H331.0 V274.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="277.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">location</text>
+<path d="M238.0 274.0 H331.0 V295.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="298.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">commute</text>
+<path d="M238.0 274.0 H331.0 V316.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="" marker-end='url(#ar)'/>
+<text x="430.0" y="319.5" font-size="11" fill="currentColor" class="" font-family="ui-monospace,SFMono-Regular,monospace">nominalisation</text>
+<path d="M416.0 355.0 V407.0" stroke="currentColor" stroke-width="1.1" fill="none" stroke-dasharray="3 3" class="dg-mute"/>
+<line x1="416.0" y1="360.0" x2="424.0" y2="360.0" stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" class="dg-mute"/>
+<text x="430.0" y="363.5" font-size="11" fill="currentColor" class="dg-mute" font-family="ui-monospace,SFMono-Regular,monospace">media_tech</text>
+<line x1="416.0" y1="381.0" x2="424.0" y2="381.0" stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" class="dg-mute"/>
+<text x="430.0" y="384.5" font-size="11" fill="currentColor" class="dg-mute" font-family="ui-monospace,SFMono-Regular,monospace">neutral_entity</text>
+<line x1="416.0" y1="402.0" x2="424.0" y2="402.0" stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" class="dg-mute"/>
+<text x="430.0" y="405.5" font-size="11" fill="currentColor" class="dg-mute" font-family="ui-monospace,SFMono-Regular,monospace">unclear</text>
+<text x="416.0" y="347.0" font-size="10" fill="currentColor" class="dg-mute" text-anchor="start">either side</text>
+<line x1="0" y1="432.0" x2="720" y2="432.0" stroke="currentColor" stroke-width="1" class="dg-sep" stroke-dasharray="2 4"/>
+<text x="430" y="450.0" font-size="9.5" letter-spacing="1.1" fill="currentColor" class="dg-hd">4 · VALENCE</text>
+<text x="4.0" y="512.0" font-size="11.5" font-weight="700" text-anchor="start" fill="currentColor" class="dg-verb">verb</text>
+<path d="M46.0 508.0 H235.0 V466.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="dg-verb" marker-end='url(#ar)'/>
+<text x="430.0" y="469.5" font-size="11" fill="currentColor" class="dg-verb" font-family="ui-monospace,SFMono-Regular,monospace">violent</text>
+<path d="M46.0 508.0 H235.0 V487.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="dg-verb" marker-end='url(#ar)'/>
+<text x="430.0" y="490.5" font-size="11" fill="currentColor" class="dg-verb" font-family="ui-monospace,SFMono-Regular,monospace">restrictive</text>
+<path d="M46.0 508.0 H235.0 V508.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="dg-verb" marker-end='url(#ar)'/>
+<text x="430.0" y="511.5" font-size="11" fill="currentColor" class="dg-verb" font-family="ui-monospace,SFMono-Regular,monospace">negative</text>
+<path d="M46.0 508.0 H235.0 V529.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="dg-verb" marker-end='url(#ar)'/>
+<text x="430.0" y="532.5" font-size="11" fill="currentColor" class="dg-verb" font-family="ui-monospace,SFMono-Regular,monospace">neutral</text>
+<path d="M46.0 508.0 H235.0 V550.0 H424.0" fill="none" stroke="currentColor" stroke-width="1.1" class="dg-verb" marker-end='url(#ar)'/>
+<text x="430.0" y="553.5" font-size="11" fill="currentColor" class="dg-verb" font-family="ui-monospace,SFMono-Regular,monospace">positive</text>
+<text x="4" y="528.0" font-size="10" fill="currentColor" class="dg-mute">judged on the verb,</text>
+<text x="4" y="541.0" font-size="10" fill="currentColor" class="dg-mute">not the by-phrase</text>
+</svg>
+</div>
+<figcaption><b>The scheme at a glance.</b> The first decision is a gate: a by-phrase naming a circumstance stops there. Everything else is coded for animacy, and animacy narrows which category codes are in play — three sit on either side. Valence is the odd one out: it branches from the <em>verb</em>, not the by-phrase, which is why it is judged last.</figcaption>
+</figure>
+</section>
 
 <section>
   <h2><span class="step">0</span>Anatomy of a row</h2>
