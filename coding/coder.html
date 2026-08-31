@@ -30,8 +30,7 @@ button.t.go{background:var(--accent);border-color:var(--accent);color:var(--card
 @media(min-width:1000px){.cols{grid-template-columns:minmax(0,1fr) 340px}}
 .main{min-width:0}
 .ref{border:1px solid var(--rule);border-radius:9px;background:var(--card);overflow:hidden}
-@media(min-width:1000px){.ref{position:sticky;top:1rem;max-height:calc(100vh - 2rem);display:flex;flex-direction:column;min-height:0}
-.ref>summary{flex:none}}
+@media(min-width:1000px){.ref{position:sticky;top:1rem}}
 .ref>summary{list-style:none;cursor:pointer;padding:.6rem .85rem;font-family:'JetBrains Mono',monospace;
 font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule);
 background:var(--sunk);display:flex;justify-content:space-between;align-items:center}
@@ -39,8 +38,12 @@ background:var(--sunk);display:flex;justify-content:space-between;align-items:ce
 .ref>summary::after{content:"▾";font-size:.8rem}
 .ref[open]>summary::after{content:"▴"}
 @media(min-width:1000px){.ref>summary{cursor:default}.ref>summary::after{display:none}}
-.refbody{padding:.8rem .85rem 1rem;overflow-y:auto;overscroll-behavior:contain;min-height:0;flex:1 1 auto;font-size:.8rem;line-height:1.5}
-@media(max-width:999px){.refbody{max-height:60vh}}
+/* height is bounded on .refbody itself, not via flex on <details> — flex
+   layout on a details element is not reliably honoured, which left this
+   with no bounded height and therefore nothing to scroll */
+.refbody{padding:.8rem .85rem 1rem;overflow-y:auto;overscroll-behavior:contain;
+font-size:.8rem;line-height:1.5;max-height:60vh}
+@media(min-width:1000px){.refbody{max-height:calc(100vh - 5.5rem)}}
 .rq{margin-top:.95rem}
 .rq:first-child{margin-top:0}
 .rq h4{font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.1rem}
