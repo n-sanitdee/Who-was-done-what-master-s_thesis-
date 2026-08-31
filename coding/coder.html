@@ -26,12 +26,36 @@ button.t.go{background:var(--accent);border-color:var(--accent);color:var(--card
 .bar{height:6px;background:var(--sunk);border-radius:99px;overflow:hidden;border:1px solid var(--rule)}
 .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
 .meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--ink-3);margin:.4rem 0 1.2rem}
+.cols{display:grid;gap:1.1rem;align-items:start}
+@media(min-width:1000px){.cols{grid-template-columns:minmax(0,1fr) 310px}}
+.main{min-width:0}
+.ref{border:1px solid var(--rule);border-radius:9px;background:var(--card);overflow:hidden}
+@media(min-width:1000px){.ref{position:sticky;top:1rem;max-height:calc(100vh - 2rem);display:flex;flex-direction:column}}
+.ref>summary{list-style:none;cursor:pointer;padding:.6rem .85rem;font-family:'JetBrains Mono',monospace;
+font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--rule);
+background:var(--sunk);display:flex;justify-content:space-between;align-items:center}
+.ref>summary::-webkit-details-marker{display:none}
+.ref>summary::after{content:"▾";font-size:.8rem}
+.ref[open]>summary::after{content:"▴"}
+@media(min-width:1000px){.ref>summary{cursor:default}.ref>summary::after{display:none}}
+.refbody{padding:.8rem .85rem 1rem;overflow-y:auto;font-size:.8rem;line-height:1.5}
+.rq{margin-top:.95rem}
+.rq:first-child{margin-top:0}
+.rq h4{font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.1rem}
+.rq .q{font-family:'Source Serif 4',Georgia,serif;font-size:.79rem;color:var(--ink-2);margin-bottom:.4rem;font-style:italic}
+.rq dl{display:grid;grid-template-columns:auto 1fr;gap:.16rem .5rem;align-items:baseline}
+.rq dt{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink);background:var(--sunk);
+border:1px solid var(--rule);border-radius:3px;padding:.03em .3em;white-space:nowrap}
+.rq dd{color:var(--ink-2);font-size:.77rem}
+.rq .tipline{margin-top:.35rem;color:var(--ink-3);font-size:.75rem;font-family:'Source Serif 4',Georgia,serif}
+.rq .tipline b{color:var(--ink-2)}
 .card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.25rem 1.35rem}
 .idx{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 .pair{font-family:'JetBrains Mono',monospace;margin:.7rem 0 .2rem;font-size:1.18rem;font-weight:500;line-height:1.45;word-break:break-word}
 .pair .ag{color:var(--accent)}
 .gloss{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2);font-size:1rem;margin-bottom:1.1rem}
 fieldset{border:none;margin-top:1.05rem}
+.ql{font-family:'Source Serif 4',Georgia,serif;font-size:.82rem;text-transform:none;letter-spacing:0;color:var(--ink-2);font-style:italic}
 legend{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.45rem;display:flex;gap:.5rem;align-items:center;width:100%}
 legend button{background:none;border:none;color:var(--accent);font-family:inherit;font-size:.62rem;cursor:pointer;text-decoration:underline;padding:0}
 .opts{display:flex;gap:.4rem;flex-wrap:wrap}
@@ -60,6 +84,17 @@ border:1px solid var(--rule-2);background:var(--card);color:var(--ink);cursor:po
 .done.on{display:block}
 .done h2{font-size:1.05rem;margin-bottom:.4rem;color:var(--flag)}
 .done p{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2);font-size:.95rem;max-width:56ch}
+.ans{display:grid;gap:.5rem;margin-top:.9rem}
+.ans .row{border:1px solid var(--rule);border-radius:7px;padding:.6rem .75rem;background:var(--card)}
+.ans .row.ok{border-left:3px solid var(--accent)}
+.ans .row.no{border-left:3px solid var(--flag)}
+.ans .hd{font-family:'JetBrains Mono',monospace;font-size:.78rem;margin-bottom:.35rem;word-break:break-word}
+.ans .cmp{display:grid;grid-template-columns:auto 1fr;gap:.15rem .55rem;font-size:.79rem;align-items:baseline}
+.ans .cmp .k{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:.07em}
+.ans .cmp .mine{font-family:'JetBrains Mono',monospace;font-size:.72rem}
+.ans .cmp .mine.bad{color:var(--flag);text-decoration:line-through}
+.ans .cmp .right{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);font-weight:500}
+.ans .why{font-family:'Source Serif 4',Georgia,serif;font-size:.79rem;color:var(--ink-2);margin-top:.35rem}
 .grid{display:none;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:4px;margin-top:1rem}
 .grid.on{display:grid}
 .grid button{aspect-ratio:1;border:1px solid var(--rule);background:var(--sunk);border-radius:4px;cursor:pointer;
@@ -131,28 +166,27 @@ text-decoration:underline;cursor:pointer;padding:0}
 
 <div class="grid" id="grid"></div>
 
+<div class="cols">
+<div class="main">
+
 <div class="card" id="card">
   <div class="idx" id="idx"></div>
   <div class="pair" id="pair"></div>
   <div class="gloss" id="gloss"></div>
 
-  <fieldset><legend>1 · include — circumstance, or actor? <button type="button" data-h="hInc">rules</button></legend>
+  <fieldset><legend>1 · include <span class="ql">is the by-phrase head noun an actor?</span></legend>
     <div class="opts" id="oInc"></div>
-    <div class="help" id="hInc">Does the by-phrase name an <b>agent or actor</b> — something that brought the action about — or only a <b>condition or circumstance</b>? Test: could you say it <em>did</em> something? <b>by security service</b> acted, so yes. <b>by geography</b>, <b>by propaganda</b>, <b>by the minimum number of days</b> only describe when, why or how much, so no — then leave the rest blank.</div>
   </fieldset>
 
-  <fieldset id="fAn"><legend>2 · animacy — of the by-phrase <button type="button" data-h="hAn">rules</button></legend>
+  <fieldset id="fAn"><legend>2 · animacy <span class="ql">is the by-phrase human or non-human?</span></legend>
     <div class="opts" id="oAn"></div>
-    <div class="help" id="hAn">Go by the <b>head noun</b> of the by-phrase. Parser output is often over-long — <code>by_Gazprom_owned_energy</code> is really just <em>Gazprom</em>; ignore trailing description. A country is <b>human</b> — a state acts through people. A nationality attached to an object does not make it human: in <b>by Russian shells</b> the head is <em>shells</em>, so nonhuman. Vehicles, substances and events named as causes are nonhuman.</div>
   </fieldset>
 
-  <fieldset id="fCa"><legend>3 · category — of the by-phrase <button type="button" data-h="hCa">rules</button></legend>
+  <fieldset id="fCa"><legend>3 · category <span class="ql">what can the by-phrase be categorised as?</span></legend>
     <div class="opts" id="oCa"></div>
-    <div class="help" id="hCa">What kind of thing does the by-phrase name? Prefer the <b>more specific</b> code. <b>by Russian forces</b> is an armed body, so military_authority, not country_city — reserve country_city for phrases naming the state itself, as in <b>by Russia</b>.</div>
   </fieldset>
-  <fieldset id="fVa"><legend>4 · valence — of the verb <button type="button" data-h="hVa">rules</button></legend>
+  <fieldset id="fVa"><legend>4 · valence <span class="ql">how does the verb affect the subject?</span></legend>
     <div class="opts" id="oVa"></div>
-    <div class="help" id="hVa">This is the one judgment about the <b>verb</b>, not the by-phrase. Judge its effect on the <b>subject</b>, not whether the event seems good or bad in general. Violent and restrictive are separated by <b>physical harm</b>: <em>seize</em> and <em>detain</em> constrain, <em>shell</em> and <em>kill</em> injure. Code the reading in this row, not the verb's commonest sense elsewhere.</div>
   </fieldset>
 
   <fieldset><legend>notes — optional, but valuable when a row was hard</legend>
@@ -168,6 +202,56 @@ text-decoration:underline;cursor:pointer;padding:0}
 <div class="done" id="done">
   <h2>All 167 coded</h2>
   <p>Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows — the id column is what aligns your codings with the comparison.</p>
+</div>
+
+</div>
+
+<details class="ref" id="ref" open>
+  <summary>Reference</summary>
+  <div class="refbody">
+    <div class="rq"><h4>1 · include</h4><div class="q">Is the by-phrase head noun an actor?</div>
+      <dl><dt>yes</dt><dd>it brought the action about</dd>
+          <dt>no</dt><dd>a condition, setting, measure or reason</dd></dl>
+      <div class="tipline">Test: could you say it <b>did</b> something? <i>by geography</i> could not.</div></div>
+
+    <div class="rq"><h4>2 · animacy</h4><div class="q">Is the by-phrase human or non-human?</div>
+      <dl><dt>human</dt><dd>person, group, institution, state</dd>
+          <dt>nonhuman</dt><dd>object, substance, vehicle, event-as-cause</dd>
+          <dt>unclear</dt><dd>cannot decide</dd></dl>
+      <div class="tipline">Go by the <b>head noun</b>. A country is human. <i>by_Russian_shells</i> → <b>shells</b>, nonhuman.</div></div>
+
+    <div class="rq"><h4>3 · category</h4><div class="q">What can the by-phrase be categorised as?</div>
+      <dl><dt>weapon</dt><dd>arms, munitions, ordnance</dd>
+          <dt>military_authority</dt><dd>forces, police, intelligence</dd>
+          <dt>nonmilitary_party</dt><dd>separatists, activists, hackers</dd>
+          <dt>country_city</dt><dd>states, cities, regions</dd>
+          <dt>law_governance</dt><dd>governments, courts, committees</dd>
+          <dt>death_danger</dt><dd>attacks, fighting, fire, loss</dd>
+          <dt>important_figure</dt><dd>named individuals, office-holders</dd>
+          <dt>civilian</dt><dd>ordinary people, the public</dd>
+          <dt>location</dt><dd>places, premises</dd>
+          <dt>media_tech</dt><dd>outlets, platforms, technology</dd>
+          <dt>money_business</dt><dd>firms, funds, financial bodies</dd>
+          <dt>commute</dt><dd>transport, traffic</dd>
+          <dt>nominalisation</dt><dd>abstract nouns from verbs</dd>
+          <dt>neutral_entity</dt><dd>fits nowhere above</dd>
+          <dt>unclear</dt><dd>cannot decide</dd></dl>
+      <div class="tipline">Prefer the <b>more specific</b> code: <i>by_Russian_forces</i> is military_authority, not country_city.</div></div>
+
+    <div class="rq"><h4>4 · valence</h4><div class="q">How does the verb affect the subject?</div>
+      <dl><dt>violent</dt><dd>physical harm or destruction</dd>
+          <dt>restrictive</dt><dd>limits or controls, no physical harm</dd>
+          <dt>negative</dt><dd>adverse, but neither of those</dd>
+          <dt>neutral</dt><dd>no evaluative loading</dd>
+          <dt>positive</dt><dd>favourable to the subject</dd>
+          <dt>unclear</dt><dd>cannot decide</dd></dl>
+      <div class="tipline">The line is <b>physical harm</b>: <i>seize</i> and <i>detain</i> constrain; <i>shell</i> and <i>kill</i> injure.</div></div>
+
+    <div class="rq"><h4>Messy phrases</h4>
+      <div class="tipline">Parser output often runs long. <i>by_Gazprom_owned_energy</i> is really just <b>Gazprom</b> — the rest leaked in from the description that followed. Find the head noun and code that.</div></div>
+  </div>
+</details>
+
 </div>
 
 <p class="tip">Keyboard: number keys pick an option in the highlighted group · Enter or &rarr; next · &larr; back · marked rows show green in Overview, excluded rows amber.<br>
@@ -187,7 +271,19 @@ var SETS={
      ["nominalisation","nominalisation"],["neutral_entity","neutral entity"],["unclear","unclear"]]
 };
 var ITEMS=ALL, DEMO=false;
-var DEMO_SVS=["town_occupied","house_struck","difficulty_accentuated","percent_held","Petrova_escorted"];
+var ANSWERS={
+ "town_occupied":{inc:"yes",an:"human",ca:"military_authority",va:"restrictive",
+   why:"Forces are people, so human. Prefer military_authority over country_city \u2014 it names the army, not the state. <i>Occupied</i> controls the town without damaging it, so restrictive rather than violent."},
+ "house_struck":{inc:"yes",an:"nonhuman",ca:"weapon",va:"violent",
+   why:"The head noun is <b>shells</b>; <i>Russian</i> only says whose. Shells are ordnance, and <i>struck</i> is physical harm to the house."},
+ "difficulty_accentuated":{inc:"no",an:"",ca:"",va:"",
+   why:"Geography did not do anything \u2014 it is the condition the difficulty exists under. Code no and leave the rest blank."},
+ "percent_held":{inc:"yes",an:"human",ca:"money_business",va:"neutral",
+   why:"The agent is just <b>Gazprom</b>; <i>owned energy</i> leaked in from the appositive that followed. A company acts through people, so human, and money_business fits. <i>Held</i> here means owns \u2014 no harm, no constraint on the reserves \u2014 so neutral."},
+ "support_approved":{inc:"yes",an:"human",ca:"law_governance",va:"positive",
+   why:"A parliamentary committee is an institution, so human, and law_governance is the specific fit. Approval is favourable to the support, so positive."}
+};
+var DEMO_SVS=["town_occupied","house_struck","difficulty_accentuated","percent_held","support_approved"];
 function demoItems(){
   var pick=DEMO_SVS.map(function(sv){
     for(var i=0;i<ALL.length;i++) if(ALL[i].sv===sv) return ALL[i];
@@ -257,11 +353,12 @@ function render(){
   document.getElementById("pf").style.width=(n/ITEMS.length*100)+"%";
   document.getElementById("mCount").textContent=n+" of "+ITEMS.length+" coded";
   document.getElementById("mLeft").textContent=(ITEMS.length-n)+" left";
-  document.getElementById("done").classList.toggle("on",n===ITEMS.length);
-  try{document.querySelector("#done h2").textContent=DEMO?"Practice complete":("All "+ITEMS.length+" coded");
+  if(!(DEMO&&document.getElementById("toReal")))document.getElementById("done").classList.toggle("on",n===ITEMS.length);
+  try{if(!document.getElementById("toReal"))document.querySelector("#done h2").textContent=DEMO?"Practice complete":("All "+ITEMS.length+" coded");
       document.querySelector("#done p").innerHTML=DEMO
         ? 'That is the whole workflow. Click <b>Start for real</b> above when you are ready \u2014 the practice codings are not kept.'
-        : 'Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows \u2014 the id column is what aligns your codings with the comparison.';}catch(e){}
+        : 'Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows \u2014 the id column is what aligns your codings with the comparison.';
+      if(DEMO&&!document.getElementById("toReal"))document.querySelector("#done p").innerHTML='Press <b>Finish</b> on the last item to see the model answers.';}catch(e){}
   if(document.getElementById("grid").classList.contains("on"))drawGrid();
 }
 document.querySelectorAll('.opts').forEach(function(box){
@@ -270,12 +367,12 @@ document.querySelectorAll('.opts').forEach(function(box){
   });
 });
 document.getElementById("tNote").addEventListener("input",function(e){rec(cur).note=e.target.value;save()});
-document.querySelectorAll("legend button").forEach(function(b){
-  b.addEventListener("click",function(){document.getElementById(b.dataset.h).classList.toggle("on")});
-});
 function go(d){cur=Math.min(ITEMS.length-1,Math.max(0,cur+d));render();window.scrollTo({top:0,behavior:"smooth"})}
 document.getElementById("bPrev").onclick=function(){go(-1)};
-document.getElementById("bNext").onclick=function(){go(1)};
+document.getElementById("bNext").onclick=function(){
+  if(cur===ITEMS.length-1){ if(DEMO){showAnswers();} else {go(0);} return; }
+  go(1);
+};
 document.addEventListener("keydown",function(e){
   if(e.target.tagName==="TEXTAREA")return;
   if(e.key==="ArrowRight"||e.key==="Enter"){go(1);e.preventDefault();return}
@@ -287,6 +384,40 @@ document.addEventListener("keydown",function(e){
   var list=document.querySelectorAll('input[name="'+g+'"]');
   if(n<=list.length){list[n-1].checked=true;r[g]=list[n-1].value;save();render()}
 });
+var LBL={inc:"include",an:"animacy",ca:"category",va:"valence"};
+function showAnswers(){
+  var out=ITEMS.map(function(it){
+    var mine=data[it.id]||{}, key=ANSWERS[it.sv]||{};
+    var flds=(key.inc==="no")?["inc"]:["inc","an","ca","va"];
+    var allok=flds.every(function(f){return (mine[f]||"")===(key[f]||"")});
+    var rows=flds.map(function(f){
+      var m=mine[f]||"\u2014", k=key[f]||"\u2014", ok=(mine[f]||"")===(key[f]||"");
+      return '<span class="k">'+LBL[f]+'</span><span>'+
+        '<span class="mine'+(ok?'':' bad')+'">'+m+'</span>'+
+        (ok?'':' <span class="right">'+k+'</span>')+'</span>';
+    }).join("");
+    return '<div class="row '+(allok?"ok":"no")+'"><div class="hd">'+it.sv+' &nbsp;·&nbsp; '+it.ag+'</div>'+
+           '<div class="cmp">'+rows+'</div><div class="why">'+(key.why||"")+'</div></div>';
+  }).join("");
+  var n=ITEMS.filter(function(it){
+    var m=data[it.id]||{},k=ANSWERS[it.sv]||{};
+    var f=(k.inc==="no")?["inc"]:["inc","an","ca","va"];
+    return f.every(function(x){return (m[x]||"")===(k[x]||"")});
+  }).length;
+  var d=document.getElementById("done");
+  d.innerHTML='<h2>Practice complete \u2014 '+n+' of '+ITEMS.length+' fully matched</h2>'+
+    '<p>Model answers below. Disagreeing is not failure \u2014 several of these are genuinely arguable, and noticing where you differ is the point.</p>'+
+    '<div class="ans">'+out+'</div>'+
+    '<button class="t go" id="toReal" style="margin-top:1rem">Start the real 167 &rarr;</button>';
+  d.classList.add("on");
+  document.getElementById("toReal").onclick=function(){
+    document.getElementById("gate").classList.remove("off");
+    document.getElementById("demoBar").classList.remove("on");
+    var ni=document.getElementById("gateName");ni.value="";
+    document.getElementById("gateGo").disabled=true;ni.focus();
+  };
+  d.scrollIntoView({behavior:"smooth"});
+}
 function drawGrid(){
   document.getElementById("grid").innerHTML=ITEMS.map(function(x,i){
     var d=data[x.id]||{},c="";
