@@ -215,7 +215,7 @@ border:1px solid var(--rule);border-radius:9px;padding:.9rem 1rem;margin-bottom:
 .rootcol::after{content:"";position:absolute;right:0;top:50%;width:14px;border-top:1px solid var(--rule-2)}
 .gatecol{padding:0 14px;position:relative}
 .gatecol::after{content:"";position:absolute;right:0;top:50%;width:14px;border-top:1px solid var(--rule-2)}
-.slots.gate{flex-direction:column;align-items:flex-start;gap:.3rem}
+.slots.stack{flex-direction:column;align-items:flex-start;gap:.3rem}
 .branches{position:relative;padding-left:20px}
 .branches::before{content:"";position:absolute;left:0;top:1.05rem;bottom:2.4rem;border-left:1px solid var(--rule-2)}
 .branches.single::before{display:none}
@@ -306,7 +306,7 @@ text-decoration:underline;cursor:pointer;padding:0}
   <div class="tui">
     <div class="rootcol"><span class="rootlab ph">by-phrase</span></div>
     <div class="gatecol">
-      <div class="slots gate" id="sInc"></div>
+      <div class="slots stack" id="sInc"></div>
       <div class="glab">1 · include
         <span class="qwrap"><button type="button" class="qm" aria-label="rules for include">?</button>
         <span class="rule">Does the by-phrase name something that <b>brought the action about</b>, or only a condition, setting, measure or reason? <i>by geography</i> did not do anything.</span></span>
