@@ -146,7 +146,7 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
   </div>
 
   <h3>The phrases are often messy</h3>
-  <p>The parser joins words with underscores and sometimes sweeps in material that does not belong to the by-phrase at all. In one row the agent reads <code>by_Gazprom_owned_energy</code>; the original sentence was <em>"…gas reserves are held by Gazprom, a state-owned energy giant"</em>. The agent is just <strong>Gazprom</strong> — the rest leaked in from the description that followed.</p>
+  <p>The parser joins words with underscores and sometimes sweeps in material that does not belong to the by-phrase at all. One row's agent reads <code>by_Putin_small_war_hawks_inner_circle_national_security_adviser_Nikolai_Patrushev…</code> — the agent is <strong>Putin</strong>, and everything after is the sentence carrying on.</p>
   <p>Around a fifth of the rows have this problem, and a few are much worse. <strong>Find the head noun and code that.</strong> Ignore trailing material that reads like a description, a second clause, or a list. If you genuinely cannot tell what is being named, that is what <span class="tag">unclear</span> is for.</p>
 </section>
 
