@@ -73,14 +73,35 @@ margin-top:2.4rem;text-decoration:none;transition:.15s}
 .start span{font-family:'Source Serif 4',Georgia,serif;font-size:.93rem;opacity:.9;display:block;margin-top:.15rem}
 .topline{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);margin-top:.9rem}
 .topline a{color:var(--accent)}
+.anat{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem;margin-top:.9rem}
+.anat .raw{font-family:'JetBrains Mono',monospace;font-size:1rem;text-align:center;padding:.5rem 0 .9rem;
+border-bottom:1px dashed var(--rule-2);word-break:break-word}
+.anat .raw i{font-style:normal;padding:.1em .3em;border-radius:3px}
+.anat .s{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.anat .v{background:var(--flag-soft);color:var(--flag);font-weight:500}
+.anat .a{background:var(--sunk);border:1px solid var(--rule-2)}
+.anat .parts{display:grid;gap:.55rem;margin-top:.9rem}
+.anat .part{display:grid;grid-template-columns:5.4rem 1fr;gap:.7rem;align-items:baseline;font-size:.93rem}
+.anat .part .lb{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+color:var(--ink-3);text-align:right;padding-top:.2rem}
+.anat .part .bd{font-family:'Source Serif 4',Georgia,serif;color:var(--ink-2)}
+.anat .part .bd b{color:var(--ink);font-weight:600}
+.anat .codes{margin-top:1rem;border-top:1px solid var(--rule);padding-top:.85rem;display:grid;gap:.4rem}
+.anat .code{display:grid;grid-template-columns:5.4rem 1fr;gap:.7rem;align-items:baseline;font-size:.92rem}
+.anat .code .k{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--ink-3);text-align:right;text-transform:uppercase;letter-spacing:.08em}
+.anat .code .val{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--accent);color:var(--paper);
+border-radius:3px;padding:.08em .42em;margin-right:.45rem}
+.anat .code em{font-family:'Source Serif 4',Georgia,serif;font-style:normal;color:var(--ink-2)}
 @media print{.start,.topline{display:none}
+.anat{break-inside:avoid}
+.start,.topline{display:none}
 body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.ex{break-inside:avoid}section{break-inside:avoid-page}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<div class="eyebrow">Annotation manual · v1.0</div>
+<div class="eyebrow">Annotation manual · v1.1</div>
 <h1>By-Agent Codebook</h1>
 <p class="lede">You are coding phrases pulled automatically out of English-language news reporting. Each row gives a passive subject–verb pair and the by-phrase that follows it. There are 167 rows and four judgments per row.</p>
 
@@ -94,41 +115,66 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
 <hr class="rule">
 
 <section>
-  <h2><span class="step">0</span>How to read a row</h2>
-  <p>The phrases were extracted by a parser, so they are joined with underscores and stripped of some surrounding words. Read them as fragments, not as sentences.</p>
-  <div class="ex">
-    <span class="pair">town_occupied &nbsp;·&nbsp; by_Russian_forces</span>
-    <span class="why">Reads as <em>the town was occupied by Russian forces</em>. The subject is <b>town</b>, the verb is <b>occupied</b>, and the by-phrase names <b>Russian forces</b>.</span>
+  <h2><span class="step">0</span>Anatomy of a row</h2>
+  <p>Every row has three parts. Three of your four judgments are about the <strong>by-phrase</strong>; one is about the <strong>verb</strong>. Knowing which is which makes the rest of this manual straightforward.</p>
+
+  <div class="anat">
+    <div class="raw"><i class="s">house</i>_<i class="v">struck</i> &nbsp;·&nbsp; <i class="a">by_Russian_shells</i></div>
+    <div class="parts">
+      <div class="part"><span class="lb">subject</span><span class="bd"><b>house</b> — the thing the action happened to. You never code this directly, but valence is judged by its effect on it.</span></div>
+      <div class="part"><span class="lb">verb</span><span class="bd"><b>struck</b> — the action. <em>Valence</em> is judged here, and only here.</span></div>
+      <div class="part"><span class="lb">by-phrase</span><span class="bd"><b>by Russian shells</b>, head noun <b>shells</b> — what the text names as bringing the action about. <em>Include</em>, <em>animacy</em> and <em>category</em> are all judged here.</span></div>
+    </div>
+    <div class="codes">
+      <div class="code"><span class="k">include</span><span><span class="val">yes</span><em>shells are named as bringing it about, not as a circumstance</em></span></div>
+      <div class="code"><span class="k">animacy</span><span><span class="val">nonhuman</span><em>the head is <b>shells</b>; <b>Russian</b> only says whose</em></span></div>
+      <div class="code"><span class="k">category</span><span><span class="val">weapon</span><em>shells are ordnance</em></span></div>
+      <div class="code"><span class="k">valence</span><span><span class="val">violent</span><em><b>struck</b> is physical harm to the house</em></span></div>
+    </div>
   </div>
-  <p>When a by-phrase has several words, the thing being named is normally the <strong>head noun</strong> — the noun the other words describe. In <code>by_Russian_shells</code> the head is <em>shells</em>; <em>Russian</em> only tells you whose. In <code>by_second_missile</code> the head is <em>missile</em>.</p>
-  <p>Fill four columns: <span class="tag">include</span> <span class="tag">animacy</span> <span class="tag">valence</span> <span class="tag">category</span>. There is also a <span class="tag">notes</span> column — use it whenever a row gave you trouble. Those notes are more useful than a confident guess.</p>
+
+  <p>A second one, where the by-phrase names people rather than a thing:</p>
+
+  <div class="anat">
+    <div class="raw"><i class="s">town</i>_<i class="v">occupied</i> &nbsp;·&nbsp; <i class="a">by_Russian_forces</i></div>
+    <div class="codes">
+      <div class="code"><span class="k">include</span><span><span class="val">yes</span><em>forces did the occupying</em></span></div>
+      <div class="code"><span class="k">animacy</span><span><span class="val">human</span><em>an armed body is people</em></span></div>
+      <div class="code"><span class="k">category</span><span><span class="val">military_authority</span><em>prefer this over country_city — it names the army, not the state</em></span></div>
+      <div class="code"><span class="k">valence</span><span><span class="val">restrictive</span><em><b>occupied</b> controls the town without damaging it</em></span></div>
+    </div>
+  </div>
+
+  <h3>The phrases are often messy</h3>
+  <p>The parser joins words with underscores and sometimes sweeps in material that does not belong to the by-phrase at all. In one row the agent reads <code>by_Gazprom_owned_energy</code>; the original sentence was <em>"…gas reserves are held by Gazprom, a state-owned energy giant"</em>. The agent is just <strong>Gazprom</strong> — the rest leaked in from the description that followed.</p>
+  <p>Around a fifth of the rows have this problem, and a few are much worse. <strong>Find the head noun and code that.</strong> Ignore trailing material that reads like a description, a second clause, or a list. If you genuinely cannot tell what is being named, that is what <span class="tag">unclear</span> is for.</p>
 </section>
 
 <section>
-  <h2><span class="step">1</span>include</h2>
-  <p>Some by-phrases name the <em>circumstances</em> under which something happened rather than anything that brought it about. Those fall outside this exercise.</p>
+  <h2><span class="step">1</span>include — circumstance, or actor?</h2>
+  <p>The first decision is whether the by-phrase names <strong>something that brought the action about</strong>, or merely <strong>the conditions under which it happened</strong>. Only the first belongs in this study.</p>
   <div class="tbl"><table>
-    <tr><th>Code</th><th>Criterion</th></tr>
-    <tr><td><span class="tag">yes</span></td><td>The by-phrase names something that brought the action about</td></tr>
-    <tr><td><span class="tag">no</span></td><td>The by-phrase names a condition, a setting, a measure or a reason</td></tr>
+    <tr><th>Code</th><th>The by-phrase names…</th><th>Test</th></tr>
+    <tr><td><span class="tag">yes</span></td><td>an <b>agent or actor</b> — a person, body, object or force that brought the action about</td><td>Could you say it <em>did</em> something?</td></tr>
+    <tr><td><span class="tag">no</span></td><td>a <b>condition or circumstance</b> — a setting, measure, reason or background state</td><td>Does it only describe <em>when, where, why</em> or <em>how much</em>?</td></tr>
   </table></div>
   <div class="ex">
+    <span class="pair">operations_launched &nbsp;·&nbsp; by_security_service</span>
+    <span class="why"><b>yes</b> — a body that launched something. It acted.</span>
+  </div>
+  <div class="ex">
     <span class="pair">difficulty_accentuated &nbsp;·&nbsp; by_geography</span>
-    <span class="why"><b>no</b> — geography did not do anything. It is the condition under which the difficulty exists.</span>
+    <span class="why"><b>no</b> — geography did not do anything. It is the condition the difficulty exists under.</span>
   </div>
   <div class="ex">
     <span class="pair">Symbols_sized &nbsp;·&nbsp; by_minimum_number_days</span>
-    <span class="why"><b>no</b> — this names the measure the sizing was based on, not an actor.</span>
+    <span class="why"><b>no</b> — this is the measure the sizing was based on, not an actor.</span>
   </div>
-  <div class="ex">
-    <span class="pair">operations_launched &nbsp;·&nbsp; by_security_service</span>
-    <span class="why"><b>yes</b> — a body that launched something.</span>
-  </div>
-  <p>If you code <span class="tag">no</span>, leave the other three columns blank and move on. Deciding this is part of the task — do not assume a row belongs simply because it is on the sheet.</p>
+  <p>Code <span class="tag">no</span> and the remaining three columns are left blank. Deciding this is part of the task — do not assume a row belongs simply because it is on the sheet.</p>
 </section>
 
 <section>
-  <h2><span class="step">2</span>animacy</h2>
+  <h2><span class="step">2</span>animacy — of the by-phrase</h2>
   <p>Is the thing named in the by-phrase a person or a body of people, or is it not?</p>
   <div class="tbl"><table>
     <tr><th>Code</th><th>Criterion</th><th>Typical cases</th></tr>
@@ -136,13 +182,9 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
     <tr><td><span class="tag">nonhuman</span></td><td>An object, substance, vehicle, or an event treated as the cause</td><td>missile, drone, shells, a chemical, an explosion</td></tr>
     <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td><td>—</td></tr>
   </table></div>
-  <h3>Two rules that settle most of the difficult ones</h3>
+  <h3>Two rules that settle most difficult cases</h3>
   <p><strong>A country counts as human.</strong> A state acts through people, so <code>by_Russia</code> and <code>by_Ukraine</code> are <span class="tag">human</span>.</p>
-  <p><strong>A nationality word attached to an object does not make it human.</strong> Go by the head noun.</p>
-  <div class="ex">
-    <span class="pair">house_struck &nbsp;·&nbsp; by_Russian_shells</span>
-    <span class="why"><b>nonhuman</b> — the head is <em>shells</em>. <em>Russian</em> says whose they were, not who acted.</span>
-  </div>
+  <p><strong>A nationality attached to an object does not make it human.</strong> Go by the head noun.</p>
   <div class="ex">
     <span class="pair">boats_seized &nbsp;·&nbsp; by_Russian_warships</span>
     <span class="why"><b>nonhuman</b> — a warship is a vessel. Code what the phrase names, not what you infer must have been behind it.</span>
@@ -158,41 +200,7 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
 </section>
 
 <section>
-  <h2><span class="step">3</span>valence</h2>
-  <p>What does the verb do to the thing in subject position? Judge the effect on <strong>that</strong> referent, not whether the event seems good or bad in general.</p>
-  <div class="tbl"><table>
-    <tr><th>Code</th><th>Criterion</th><th>Examples of verbs</th></tr>
-    <tr><td><span class="tag">violent</span></td><td>Physical harm or destruction</td><td>killed, destroyed, struck, shelled, demolished, wounded</td></tr>
-    <tr><td><span class="tag">restrictive</span></td><td>Limitation or control, without direct physical harm</td><td>occupied, seized, detained, held, thwarted, controlled</td></tr>
-    <tr><td><span class="tag">negative</span></td><td>Adverse, but neither violent nor restrictive</td><td>frustrated, blamed, denounced, countered</td></tr>
-    <tr><td><span class="tag">neutral</span></td><td>No evaluative loading in this context</td><td>reported, met, taken, provided, described</td></tr>
-    <tr><td><span class="tag">positive</span></td><td>Favourable to the subject</td><td>welcomed, reclaimed, allowed, recognised, released</td></tr>
-    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td><td>—</td></tr>
-  </table></div>
-  <div class="flag">
-    <div class="h">The line that matters most</div>
-    <p><strong>Violent and restrictive are separated by physical harm.</strong> <em>Seize</em>, <em>detain</em> and <em>occupy</em> constrain something; <em>shell</em> and <em>kill</em> injure or destroy it. If a verb could go either way, code the reading it has in <em>this</em> row, not the sense the word carries most often elsewhere.</p>
-  </div>
-  <div class="ex">
-    <span class="pair">medic_killed &nbsp;·&nbsp; by_second_missile</span>
-    <span class="why"><b>violent</b> — direct physical harm to the medic.</span>
-  </div>
-  <div class="ex">
-    <span class="pair">Petrova_escorted &nbsp;·&nbsp; by_police</span>
-    <span class="why"><b>restrictive</b> — control over where someone goes, with no physical harm stated.</span>
-  </div>
-  <div class="ex">
-    <span class="pair">support_approved &nbsp;·&nbsp; by_German_parliamentary_budget_committee</span>
-    <span class="why"><b>positive</b> — approval is favourable to the support.</span>
-  </div>
-  <div class="ex">
-    <span class="pair">development_monitored &nbsp;·&nbsp; by_operational_command</span>
-    <span class="why"><b>neutral</b> — monitoring carries no evaluative loading here. Do not upgrade it to restrictive on a suspicion that monitoring is controlling; code what the verb states.</span>
-  </div>
-</section>
-
-<section>
-  <h2><span class="step">4</span>category</h2>
+  <h2><span class="step">3</span>category — of the by-phrase</h2>
   <p>What kind of thing is named in the by-phrase? One code per row, from this list.</p>
   <div class="tbl"><table>
     <tr><th>Code</th><th>Covers</th></tr>
@@ -212,14 +220,44 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
     <tr><td><span class="tag">neutral_entity</span></td><td>Anything that fits nowhere above</td></tr>
     <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td></tr>
   </table></div>
-  <p>Some rows will sit between two categories — <code>by_Russian_forces</code> is both a state and an armed body. Prefer the <strong>more specific</strong> code: here, <span class="tag">military_authority</span>. Reserve <span class="tag">country_city</span> for phrases where the state itself is what is named, as in <code>by_Russia</code>.</p>
+  <p>Some rows sit between two categories — <code>by_Russian_forces</code> is both a state and an armed body. Prefer the <strong>more specific</strong> code: here, <span class="tag">military_authority</span>. Reserve <span class="tag">country_city</span> for phrases where the state itself is what is named, as in <code>by_Russia</code>.</p>
+</section>
+
+<section>
+  <h2><span class="step">4</span>valence — of the verb</h2>
+  <p>This is the one judgment that is <strong>not</strong> about the by-phrase. Look at the verb, and ask what it does to the referent of the subject — not whether the event seems good or bad in general.</p>
+  <div class="tbl"><table>
+    <tr><th>Code</th><th>Effect on the subject</th><th>Verbs</th></tr>
+    <tr><td><span class="tag">violent</span></td><td>Physical harm or destruction</td><td>killed, destroyed, struck, shelled, demolished, wounded</td></tr>
+    <tr><td><span class="tag">restrictive</span></td><td>Limitation or control, without direct physical harm</td><td>occupied, seized, detained, held, thwarted, controlled</td></tr>
+    <tr><td><span class="tag">negative</span></td><td>Adverse, but neither violent nor restrictive</td><td>frustrated, blamed, denounced, countered</td></tr>
+    <tr><td><span class="tag">neutral</span></td><td>No evaluative loading in this context</td><td>reported, met, taken, provided, described</td></tr>
+    <tr><td><span class="tag">positive</span></td><td>Favourable to the subject</td><td>welcomed, reclaimed, allowed, recognised, released</td></tr>
+    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td><td>—</td></tr>
+  </table></div>
+  <div class="flag">
+    <div class="h">The line that matters most</div>
+    <p><strong>Violent and restrictive are separated by physical harm.</strong> <em>Seize</em>, <em>detain</em> and <em>occupy</em> constrain something; <em>shell</em> and <em>kill</em> injure or destroy it. If a verb could go either way, code the reading it has in <em>this</em> row, not the sense the word carries most often elsewhere.</p>
+  </div>
+  <div class="ex">
+    <span class="pair">Petrova_escorted &nbsp;·&nbsp; by_police</span>
+    <span class="why"><b>restrictive</b> — control over where someone goes, with no physical harm stated.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">development_monitored &nbsp;·&nbsp; by_operational_command</span>
+    <span class="why"><b>neutral</b> — monitoring carries no evaluative loading here. Do not upgrade it to restrictive on a suspicion that monitoring is controlling; code what the verb states.</span>
+  </div>
+  <div class="ex">
+    <span class="pair">support_approved &nbsp;·&nbsp; by_German_parliamentary_budget_committee</span>
+    <span class="why"><b>positive</b> — approval is favourable to the support.</span>
+  </div>
 </section>
 
 <section>
   <h2><span class="step">5</span>When you are unsure</h2>
   <p><strong>Use <span class="tag">unclear</span> freely.</strong> A row you could not decide is information. A row you guessed at looks identical to a row you were certain about, and quietly corrupts the comparison this exercise exists to produce.</p>
   <p>Put the reason in the notes column. If the same kind of difficulty comes up more than three or four times, stop and raise it rather than working through it — that usually means this manual is missing a rule, and it is better fixed once than decided differently seventeen times.</p>
-  <p>Do not look up the original news articles. Code from what is on the sheet. Some rows will feel thin because the parser cut them short; that is expected, and <span class="tag">unclear</span> is the right answer when it leaves you unable to judge.</p>
+  <p>Do not look up the original news articles. Code from what is on the screen. Some rows will feel thin because the parser cut them short or ran them long; that is expected, and <span class="tag">unclear</span> is the right answer when it leaves you unable to judge.</p>
 </section>
 
 <a class="start" href="coder.html">
@@ -227,7 +265,8 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
   <span>167 items, one at a time. Enter your name, and your progress saves as you go.</span>
 </a>
 
-<footer>167 rows · four judgments each · save as CSV and return the file unchanged apart from your codings<br>Do not reorder the rows — the id column is what aligns your sheet with the comparison.</footer>
+<footer>167 rows · four judgments each · three about the by-phrase, one about the verb<br>Do not reorder the rows — the id column is what aligns your sheet with the comparison.</footer>
 </div>
+
 </body>
 </html>

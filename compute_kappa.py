@@ -13,7 +13,7 @@ from collections import Counter
 
 import pandas as pd
 
-VARIABLES = ["include", "animacy", "valence", "category"]
+VARIABLES = ["include", "animacy", "category", "valence"]
 
 # Landis & Koch (1977). Content analysis conventionally wants >= .80 for firm
 # conclusions and >= .67 for tentative ones (Krippendorff).
