@@ -141,6 +141,56 @@ max-height:92vh;overflow:auto}
 color:var(--ink-2);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.65rem;
 letter-spacing:.08em;text-transform:uppercase;padding:.35rem .7rem;cursor:pointer}
 .lb .close:hover{border-color:var(--accent);color:var(--accent)}
+.chips{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:.9rem 0 1.1rem;
+padding:.65rem .75rem;background:var(--sunk);border:1px solid var(--rule);border-radius:8px}
+.chiplab,.chiphint{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;
+text-transform:uppercase;color:var(--ink-3)}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.86rem;padding:.34rem .6rem;border-radius:6px;
+cursor:grab;user-select:none;border:1px solid;word-break:break-word;line-height:1.3}
+.chip:active{cursor:grabbing}
+.chip.ph{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.chip.vb{background:var(--flag-soft);border-color:var(--flag);color:var(--flag)}
+.chip.dragging{opacity:.45}
+
+.scheme{display:grid;gap:1rem}
+@media(min-width:820px){.scheme{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}}
+.track{border:1px solid var(--rule);border-radius:9px;padding:.85rem .9rem 1rem}
+.track.tph{border-left:3px solid var(--accent)}
+.track.tvb{border-left:3px solid var(--flag);align-self:start}
+.track h3{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;
+text-transform:uppercase;margin-bottom:.7rem}
+.track.tph h3{color:var(--accent)} .track.tvb h3{color:var(--flag)}
+.grp+.grp{margin-top:.95rem;padding-top:.85rem;border-top:1px solid var(--rule)}
+.glab{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.08em;color:var(--ink-2);
+margin-bottom:.4rem;display:flex;align-items:center;gap:.4rem}
+.qm{width:1.05rem;height:1.05rem;border-radius:99px;border:1px solid var(--rule-2);background:var(--card);
+color:var(--ink-3);font-size:.6rem;cursor:pointer;line-height:1;padding:0}
+.qm:hover,.qm:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.rule{display:none;font-family:'Source Serif 4',Georgia,serif;font-size:.85rem;color:var(--ink-2);
+background:var(--sunk);border-radius:6px;padding:.5rem .65rem;margin-bottom:.5rem;line-height:1.5}
+.rule.on{display:block}
+.sub{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+color:var(--ink-3);margin:.5rem 0 .25rem}
+.slots{display:flex;gap:.32rem;flex-wrap:wrap}
+.slot{font-family:'JetBrains Mono',monospace;font-size:.76rem;padding:.34rem .55rem;border-radius:6px;
+border:1px dashed var(--rule-2);background:var(--card);color:var(--ink-2);cursor:pointer;transition:.12s}
+.slot:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
+.slot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.slot.sel{border-style:solid;font-weight:500}
+.tph .slot.sel{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.tvb .slot.sel{background:var(--flag);border-color:var(--flag);color:var(--paper)}
+.slot:disabled{opacity:.3;cursor:not-allowed}
+.slot.ok{border-style:solid;border-color:var(--accent);background:var(--accent-soft)}
+.tvb .slot.ok{border-color:var(--flag);background:var(--flag-soft)}
+.slot.no{opacity:.22}
+.slot.hot{transform:scale(1.06)}
+.tph .slot.hot{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+.tvb .slot.hot{background:var(--flag);border-color:var(--flag);color:var(--paper)}
+.grp.off{opacity:.4;pointer-events:none}
+.vbnote{font-family:'Source Serif 4',Georgia,serif;font-size:.8rem;color:var(--ink-3);margin-top:.7rem}
+.notewrap{margin-top:1.1rem}
+.notewrap label{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;
+text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:.3rem}
 .gate{position:fixed;inset:0;background:var(--paper);display:grid;place-items:center;padding:1.5rem;z-index:50}
 .gate.off{display:none}
 .gate .in{max-width:420px;width:100%}
@@ -193,32 +243,44 @@ text-decoration:underline;cursor:pointer;padding:0}
 
 <div class="grid" id="grid"></div>
 
-<div class="cols">
-<div class="main">
-
 <div class="card" id="card">
   <div class="idx" id="idx"></div>
   <div class="pair" id="pair"></div>
   <div class="gloss" id="gloss"></div>
 
-  <fieldset><legend>1 · include <span class="ql">is the by-phrase head noun an actor?</span></legend>
-    <div class="opts" id="oInc"></div>
-  </fieldset>
+  <div class="chips">
+    <span class="chiplab">drag these &rarr;</span>
+    <span class="chip ph" id="chipPh" draggable="true" data-kind="phrase"></span>
+    <span class="chip vb" id="chipVb" draggable="true" data-kind="verb"></span>
+    <span class="chiphint">or just click a slot</span>
+  </div>
 
-  <fieldset id="fAn"><legend>2 · animacy <span class="ql">is the by-phrase human or non-human?</span></legend>
-    <div class="opts" id="oAn"></div>
-  </fieldset>
+  <div class="scheme">
+    <section class="track tph">
+      <h3>the by-phrase</h3>
+      <div class="grp"><div class="glab">1 · include <button type="button" class="qm" data-r="rInc">?</button></div>
+        <div class="rule" id="rInc">Does it name something that <b>brought the action about</b>, or only a condition, setting, measure or reason? <i>by geography</i> did not do anything.</div>
+        <div class="slots" id="sInc"></div></div>
+      <div class="grp" id="gAn"><div class="glab">2 · animacy <button type="button" class="qm" data-r="rAn">?</button></div>
+        <div class="rule" id="rAn">Go by the <b>head noun</b>. A country is human. <i>by_Russian_shells</i> &rarr; <b>shells</b>, nonhuman. Parser output often runs long — ignore trailing description.</div>
+        <div class="slots" id="sAn"></div></div>
+      <div class="grp" id="gCa"><div class="glab">3 · category <button type="button" class="qm" data-r="rCa">?</button></div>
+        <div class="rule" id="rCa">Prefer the <b>more specific</b> code: <i>by_Russian_forces</i> is military_authority, not country_city.</div>
+        <div class="sub">if human</div><div class="slots" id="sCaH"></div>
+        <div class="sub">if nonhuman</div><div class="slots" id="sCaN"></div>
+        <div class="sub">either side</div><div class="slots" id="sCaE"></div></div>
+    </section>
+    <section class="track tvb">
+      <h3>the verb</h3>
+      <div class="grp" id="gVa"><div class="glab">4 · valence <button type="button" class="qm" data-r="rVa">?</button></div>
+        <div class="rule" id="rVa">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</div>
+        <div class="slots" id="sVa"></div></div>
+      <div class="vbnote">Only the verb chip drops here.</div>
+    </section>
+  </div>
 
-  <fieldset id="fCa"><legend>3 · category <span class="ql">what can the by-phrase be categorised as?</span></legend>
-    <div class="opts" id="oCa"></div>
-  </fieldset>
-  <fieldset id="fVa"><legend>4 · valence <span class="ql">how does the verb affect the subject?</span></legend>
-    <div class="opts" id="oVa"></div>
-  </fieldset>
-
-  <fieldset><legend>notes — optional, but valuable when a row was hard</legend>
-    <textarea id="tNote" placeholder="What made this one difficult?"></textarea>
-  </fieldset>
+  <div class="notewrap"><label for="tNote">notes — optional, valuable when a row was hard</label>
+  <textarea id="tNote" placeholder="What made this one difficult?"></textarea></div>
 
   <div class="nav">
     <button id="bPrev">&larr; Back</button>
@@ -227,121 +289,8 @@ text-decoration:underline;cursor:pointer;padding:0}
 </div>
 
 <div class="done" id="done">
-  <h2>All 167 coded</h2>
-  <p>Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows — the id column is what aligns your codings with the comparison.</p>
-</div>
-
-</div>
-
-<details class="ref" id="ref" open>
-  <summary>Reference</summary>
-  <div class="refbody">
-    <button type="button" class="schemebtn" id="schemeBtn" aria-label="Enlarge the coding scheme">
-      <svg viewBox="0 0 320 338" role="img" class="tree mini" xmlns="http://www.w3.org/2000/svg" aria-label="Compact coding scheme: an include gate separates circumstance, which stops, from actor; actor splits into human with seven category codes and nonhuman with five, three more applying either side; valence branches separately from the verb with five codes.">
-<defs><marker id="ar2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse"><path d="M0 1 L8 4 L0 7 z" fill="currentColor"/></marker></defs>
-<text x="2.0" y="64.8" font-size="8.6" font-weight="700" fill="currentColor" class="dg-root">by-phrase</text>
-<path d="M44.0 61.9 H45.0 V10.0 H46.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<path d="M44.0 61.9 H45.0 V113.8 H46.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="50.0" y="12.9" font-size="8.2" font-weight="400" fill="currentColor" class="dg-mute">circumstance</text>
-<text x="104.0" y="12.9" font-size="8.2" font-weight="400" fill="currentColor" class="dg-mute">— stop</text>
-<text x="50.0" y="116.7" font-size="8.6" font-weight="400" fill="currentColor" class="">actor</text>
-<path d="M76.0 113.8 H94.0 V69.5 H112.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<path d="M76.0 113.8 H94.0 V158.0 H112.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="116.0" y="72.4" font-size="8.2" font-weight="400" fill="currentColor" class="">human</text>
-<text x="116.0" y="160.9" font-size="8.2" font-weight="400" fill="currentColor" class="">nonhuman</text>
-<path d="M142.0 69.5 H165.0 V32.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="34.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">military_authority</text>
-<path d="M142.0 69.5 H165.0 V44.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="47.4" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">nonmilitary_party</text>
-<path d="M142.0 69.5 H165.0 V57.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="59.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">country_city</text>
-<path d="M142.0 69.5 H165.0 V69.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="72.4" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">law_governance</text>
-<path d="M142.0 69.5 H165.0 V82.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="84.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">important_figure</text>
-<path d="M142.0 69.5 H165.0 V94.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="97.4" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">civilian</text>
-<path d="M142.0 69.5 H165.0 V107.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="109.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">money_business</text>
-<path d="M154.0 158.0 H171.0 V133.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="135.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">weapon</text>
-<path d="M154.0 158.0 H171.0 V145.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="148.4" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">death_danger</text>
-<path d="M154.0 158.0 H171.0 V158.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="160.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">location</text>
-<path d="M154.0 158.0 H171.0 V170.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="173.4" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">commute</text>
-<path d="M154.0 158.0 H171.0 V183.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="" marker-end='url(#ar2)'/>
-<text x="192.0" y="185.9" font-size="7.8" font-weight="400" fill="currentColor" class="" font-family="ui-monospace,monospace">nominalisation</text>
-<path d="M182.0 205.0 V238.0" stroke="currentColor" stroke-width=".9" fill="none" stroke-dasharray="2 2" class="dg-mute"/>
-<line x1="182.0" y1="209.0" x2="188.0" y2="209.0" stroke="currentColor" stroke-width=".9" stroke-dasharray="2 2" class="dg-mute"/>
-<text x="192.0" y="211.9" font-size="7.8" font-weight="400" fill="currentColor" class="dg-mute" font-family="ui-monospace,monospace">media_tech</text>
-<line x1="182.0" y1="221.5" x2="188.0" y2="221.5" stroke="currentColor" stroke-width=".9" stroke-dasharray="2 2" class="dg-mute"/>
-<text x="192.0" y="224.4" font-size="7.8" font-weight="400" fill="currentColor" class="dg-mute" font-family="ui-monospace,monospace">neutral_entity</text>
-<line x1="182.0" y1="234.0" x2="188.0" y2="234.0" stroke="currentColor" stroke-width=".9" stroke-dasharray="2 2" class="dg-mute"/>
-<text x="192.0" y="236.9" font-size="7.8" font-weight="400" fill="currentColor" class="dg-mute" font-family="ui-monospace,monospace">unclear</text>
-<text x="182.0" y="201.9" font-size="7.5" font-weight="400" fill="currentColor" class="dg-mute">either side</text>
-<line x1="0" y1="252.0" x2="320" y2="252.0" stroke="currentColor" stroke-width=".8" class="dg-sep" stroke-dasharray="2 3"/>
-<text x="2.0" y="301.9" font-size="8.6" font-weight="700" fill="currentColor" class="dg-verb">verb</text>
-<path d="M30.0 299.0 H109.0 V274.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="dg-verb" marker-end='url(#ar2)'/>
-<text x="192.0" y="276.9" font-size="7.8" font-weight="400" fill="currentColor" class="dg-verb" font-family="ui-monospace,monospace">violent</text>
-<path d="M30.0 299.0 H109.0 V286.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="dg-verb" marker-end='url(#ar2)'/>
-<text x="192.0" y="289.4" font-size="7.8" font-weight="400" fill="currentColor" class="dg-verb" font-family="ui-monospace,monospace">restrictive</text>
-<path d="M30.0 299.0 H109.0 V299.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="dg-verb" marker-end='url(#ar2)'/>
-<text x="192.0" y="301.9" font-size="7.8" font-weight="400" fill="currentColor" class="dg-verb" font-family="ui-monospace,monospace">negative</text>
-<path d="M30.0 299.0 H109.0 V311.5 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="dg-verb" marker-end='url(#ar2)'/>
-<text x="192.0" y="314.4" font-size="7.8" font-weight="400" fill="currentColor" class="dg-verb" font-family="ui-monospace,monospace">neutral</text>
-<path d="M30.0 299.0 H109.0 V324.0 H188.0" fill="none" stroke="currentColor" stroke-width=".9" class="dg-verb" marker-end='url(#ar2)'/>
-<text x="192.0" y="326.9" font-size="7.8" font-weight="400" fill="currentColor" class="dg-verb" font-family="ui-monospace,monospace">positive</text>
-</svg>
-      <span class="cap"><span>the scheme</span><span>click to enlarge</span></span>
-    </button>
-    <div class="rq"><h4>1 · include</h4><div class="q">Is the by-phrase head noun an actor?</div>
-      <dl><dt>yes</dt><dd>it brought the action about</dd>
-          <dt>no</dt><dd>a condition, setting, measure or reason</dd></dl>
-      <div class="tipline">Test: could you say it <b>did</b> something? <i>by geography</i> could not.</div></div>
-
-    <div class="rq"><h4>2 · animacy</h4><div class="q">Is the by-phrase human or non-human?</div>
-      <dl><dt>human</dt><dd>person, group, institution, state</dd>
-          <dt>nonhuman</dt><dd>object, substance, vehicle, event-as-cause</dd>
-          <dt>unclear</dt><dd>cannot decide</dd></dl>
-      <div class="tipline">Go by the <b>head noun</b>. A country is human. <i>by_Russian_shells</i> → <b>shells</b>, nonhuman.</div></div>
-
-    <div class="rq"><h4>3 · category</h4><div class="q">What can the by-phrase be categorised as?</div>
-      <div class="grp">if human</div>
-      <dl><dt>military_authority</dt><dd>forces, police, intelligence</dd>
-          <dt>nonmilitary_party</dt><dd>separatists, activists, hackers</dd>
-          <dt>country_city</dt><dd>states, cities, regions</dd>
-          <dt>law_governance</dt><dd>governments, courts, committees</dd>
-          <dt>important_figure</dt><dd>named individuals, office-holders</dd>
-          <dt>civilian</dt><dd>ordinary people, the public</dd>
-          <dt>money_business</dt><dd>firms, funds, financial bodies</dd></dl>
-      <div class="grp">if nonhuman</div>
-      <dl><dt>weapon</dt><dd>arms, munitions, ordnance</dd>
-          <dt>death_danger</dt><dd>attacks, fighting, fire, loss</dd>
-          <dt>location</dt><dd>places, premises</dd>
-          <dt>commute</dt><dd>transport, traffic</dd>
-          <dt>nominalisation</dt><dd>abstract nouns from verbs</dd></dl>
-      <div class="grp">either side</div>
-      <dl><dt>media_tech</dt><dd>outlets, platforms, technology</dd>
-          <dt>neutral_entity</dt><dd>fits nowhere above</dd>
-          <dt>unclear</dt><dd>cannot decide</dd></dl>
-      <div class="tipline">Prefer the <b>more specific</b> code: <i>by_Russian_forces</i> is military_authority, not country_city.</div></div>
-
-    <div class="rq"><h4>4 · valence</h4><div class="q">How does the verb affect the subject?</div>
-      <dl><dt>violent</dt><dd>physical harm or destruction</dd>
-          <dt>restrictive</dt><dd>limits or controls, no physical harm</dd>
-          <dt>negative</dt><dd>adverse, but neither of those</dd>
-          <dt>neutral</dt><dd>no evaluative loading</dd>
-          <dt>positive</dt><dd>favourable to the subject</dd>
-          <dt>unclear</dt><dd>cannot decide</dd></dl>
-      <div class="tipline">The line is <b>physical harm</b>: <i>seize</i> and <i>detain</i> constrain; <i>shell</i> and <i>kill</i> injure.</div></div>
-
-    <div class="rq"><h4>Messy phrases</h4>
-      <div class="tipline">Parser output often runs long. One row's agent reads <i>by_Putin_small_war_hawks_inner_circle_national_security_adviser_Nikolai_Patrushev…</i> — the agent is <b>Putin</b>; the rest is the sentence continuing. Find the head noun and code that.</div></div>
-  </div>
-</details>
-
+  <h2>All coded</h2>
+  <p>Click <b>Download CSV</b> above and send the file back unchanged.</p>
 </div>
 
 <p class="tip">Keyboard: number keys pick an option in the highlighted group · Enter or &rarr; next · &larr; back · marked rows show green in Overview, excluded rows amber.<br>
@@ -503,52 +452,104 @@ function boot(name,demo){
     document.getElementById("gateGo").disabled=true;
     document.getElementById("gateName").focus();
   };
-  cur=0;render();
+  cur=0;buildSlots();wireChips();render();
 }
 function rec(i){var id=ITEMS[i].id;return data[id]||(data[id]={})}   // for writes
 function peek(i){return data[ITEMS[i].id]||{}}                        // for reads
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
-function opts(host,name,set){
-  document.getElementById(host).innerHTML=set.map(function(o,n){
-    return '<label><input type="radio" name="'+name+'" value="'+o[0]+'"><span><kbd>'+(n+1)+'</kbd>'+o[1]+'</span></label>';
+var CAT_H=["military_authority","nonmilitary_party","country_city","law_governance",
+           "important_figure","civilian","money_business"];
+var CAT_N=["weapon","death_danger","location","commute","nominalisation"];
+var CAT_E=["media_tech","neutral_entity","unclear"];
+var ACCEPT={inc:"phrase",an:"phrase",ca:"phrase",va:"verb"};
+
+function slots(host,g,vals){
+  document.getElementById(host).innerHTML=vals.map(function(v){
+    return '<button type="button" class="slot" data-g="'+g+'" data-v="'+v+'" '+
+           'data-accepts="'+ACCEPT[g]+'">'+v+'</button>';
   }).join("");
 }
-opts("oInc","inc",SETS.inc);opts("oAn","an",SETS.an);opts("oVa","va",SETS.va);opts("oCa","ca",SETS.ca);
+function buildSlots(){
+  slots("sInc","inc",["yes","no"]);
+  slots("sAn","an",["human","nonhuman","unclear"]);
+  slots("sCaH","ca",CAT_H); slots("sCaN","ca",CAT_N); slots("sCaE","ca",CAT_E);
+  slots("sVa","va",["violent","restrictive","negative","neutral","positive","unclear"]);
+  document.querySelectorAll(".slot").forEach(function(b){
+    b.addEventListener("click",function(){ if(!b.disabled) setVal(b.dataset.g,b.dataset.v); });
+    b.addEventListener("dragover",function(e){
+      if(DRAG&&DRAG===b.dataset.accepts&&!b.disabled){e.preventDefault();b.classList.add("hot");}
+    });
+    b.addEventListener("dragleave",function(){b.classList.remove("hot");});
+    b.addEventListener("drop",function(e){
+      b.classList.remove("hot");
+      if(DRAG&&DRAG===b.dataset.accepts&&!b.disabled){e.preventDefault();setVal(b.dataset.g,b.dataset.v);}
+    });
+  });
+}
+function setVal(g,v){
+  var r=rec(cur);
+  r[g]=(r[g]===v)?"":v;              // clicking the chosen slot again clears it
+  if(g==="inc"&&r.inc==="no"){r.an="";r.ca="";r.va="";}
+  save();render();
+}
+
+// --- typed drag: the by-phrase chip and the verb chip are not interchangeable
+var DRAG=null;
+function wireChips(){
+  [["chipPh","phrase"],["chipVb","verb"]].forEach(function(pair){
+    var el=document.getElementById(pair[0]);
+    el.addEventListener("dragstart",function(e){
+      DRAG=pair[1]; el.classList.add("dragging");
+      try{e.dataTransfer.setData("text/plain",pair[1]);e.dataTransfer.effectAllowed="copy";}catch(err){}
+      document.querySelectorAll(".slot").forEach(function(b){
+        b.classList.add(b.dataset.accepts===DRAG&&!b.disabled?"ok":"no");
+      });
+    });
+    el.addEventListener("dragend",function(){
+      DRAG=null; el.classList.remove("dragging");
+      document.querySelectorAll(".slot").forEach(function(b){b.classList.remove("ok","no","hot");});
+    });
+  });
+}
+document.querySelectorAll(".qm").forEach(function(b){
+  b.addEventListener("click",function(){document.getElementById(b.dataset.r).classList.toggle("on");});
+});
+
 function gloss(sv,ag){
   var p=sv.split("_"),v=p.pop(),s=p.join(" ");
   return "the "+s+" was "+v+" "+ag.replace(/_/g," ");
 }
+function verbOf(sv){var p=sv.split("_");return p[p.length-1];}
 function render(){
   var it=ITEMS[cur],r=peek(cur);
   document.getElementById("idx").textContent="Item "+(cur+1)+" of "+ITEMS.length;
   document.getElementById("pair").innerHTML=it.sv+' &nbsp;·&nbsp; <span class="ag">'+it.ag+'</span>';
   document.getElementById("gloss").textContent=gloss(it.sv,it.ag);
-  ["inc","an","va","ca"].forEach(function(g){
-    document.querySelectorAll('input[name="'+g+'"]').forEach(function(x){x.checked=(r[g]===x.value)});
+  document.getElementById("chipPh").textContent=it.ag;
+  document.getElementById("chipVb").textContent=verbOf(it.sv);
+  var off=(r.inc==="no");
+  ["gAn","gCa","gVa"].forEach(function(id){document.getElementById(id).classList.toggle("off",off);});
+  document.querySelectorAll(".slot").forEach(function(b){
+    b.classList.toggle("sel",r[b.dataset.g]===b.dataset.v);
+    b.disabled=off&&b.dataset.g!=="inc";
   });
   document.getElementById("tNote").value=r.note||"";
-  var ex=(r.inc==="no");
-  ["fAn","fCa","fVa"].forEach(function(f){document.getElementById(f).style.display=ex?"none":"block"});
   document.getElementById("bPrev").disabled=(cur===0);
-  document.getElementById("bNext").textContent=(cur===ITEMS.length-1)?"Finish":"Next →";
-  var n=ITEMS.filter(function(x){var d=data[x.id];return d&&(d.inc==="no"||(d.inc&&d.an&&d.va&&d.ca))}).length;
+  document.getElementById("bNext").textContent=(cur===ITEMS.length-1)?"Finish":"Next \u2192";
+  var n=ITEMS.filter(function(x){var d=data[x.id];
+    return d&&(d.inc==="no"||(d.inc&&d.an&&d.va&&d.ca));}).length;
   document.getElementById("pf").style.width=(n/ITEMS.length*100)+"%";
   document.getElementById("mCount").textContent=n+" of "+ITEMS.length+" coded";
   document.getElementById("mLeft").textContent=(ITEMS.length-n)+" left";
   if(!(DEMO&&document.getElementById("toReal")))document.getElementById("done").classList.toggle("on",n===ITEMS.length);
   try{if(!document.getElementById("toReal"))document.querySelector("#done h2").textContent=DEMO?"Practice complete":("All "+ITEMS.length+" coded");
-      document.querySelector("#done p").innerHTML=DEMO
-        ? 'That is the whole workflow. Click <b>Start for real</b> above when you are ready \u2014 the practice codings are not kept.'
-        : 'Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows \u2014 the id column is what aligns your codings with the comparison.';
-      if(DEMO&&!document.getElementById("toReal"))document.querySelector("#done p").innerHTML='Press <b>Finish</b> on the last item to see the model answers.';}catch(e){}
+      if(!document.getElementById("toReal"))document.querySelector("#done p").innerHTML=DEMO
+        ? 'Press <b>Finish</b> on the last item to see the model answers.'
+        : 'Click <b>Download CSV</b> above and send the file back unchanged. Do not reorder the rows \u2014 the id column is what aligns your codings with the comparison.';}catch(e){}
   if(document.getElementById("grid").classList.contains("on"))drawGrid();
 }
-document.querySelectorAll('.opts').forEach(function(box){
-  box.addEventListener("change",function(e){
-    var g=e.target.name;rec(cur)[g]=e.target.value;save();render();
-  });
-});
-document.getElementById("tNote").addEventListener("input",function(e){rec(cur).note=e.target.value;save()});
+document.getElementById("tNote").addEventListener("input",function(e){rec(cur).note=e.target.value;save();});
+
 function go(d){cur=Math.min(ITEMS.length-1,Math.max(0,cur+d));render();window.scrollTo({top:0,behavior:"smooth"})}
 document.getElementById("bPrev").onclick=function(){go(-1)};
 document.getElementById("bNext").onclick=function(){
@@ -560,11 +561,11 @@ document.addEventListener("keydown",function(e){
   if(e.key==="ArrowRight"||e.key==="Enter"){go(1);e.preventDefault();return}
   if(e.key==="ArrowLeft"){go(-1);e.preventDefault();return}
   if(!/^[0-9]$/.test(e.key))return;
-  var n=parseInt(e.key,10)||10,r=rec(cur),g;
+  var n=parseInt(e.key,10)||10,r=peek(cur),g;
   if(!r.inc)g="inc";else if(r.inc==="no")g=null;else if(!r.an)g="an";else if(!r.ca)g="ca";else g="va";
   if(!g)return;
-  var list=document.querySelectorAll('input[name="'+g+'"]');
-  if(n<=list.length){list[n-1].checked=true;r[g]=list[n-1].value;save();render()}
+  var list=[].slice.call(document.querySelectorAll('.slot[data-g="'+g+'"]'));
+  if(n<=list.length){setVal(g,list[n-1].dataset.v);e.preventDefault();}
 });
 var LBL={inc:"include",an:"animacy",ca:"category",va:"valence"};
 function showAnswers(){
