@@ -5,11 +5,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
 :root{--paper:#FAFBFA;--card:#FFFFFF;--sunk:#F0F2F0;--ink:#191C1A;--ink-2:#4C534E;--ink-3:#7C837E;
---rule:#DFE3E0;--rule-2:#C4CAC6;--accent:#2B5A4C;--accent-soft:#E6EFEB;--flag:#8A5A2B;--flag-soft:#F6EDE3}
+--rule:#DFE3E0;--rule-2:#C4CAC6;--accent:#2B5A4C;--accent-soft:#E6EFEB;--flag:#A9551F;--flag-soft:#F6EDE3}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141715;--card:#1B1F1D;--sunk:#232825;
---ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;--rule:#2C322F;--rule-2:#3C433F;--accent:#7FB9A4;--accent-soft:#1A2622;--flag:#D2A468;--flag-soft:#2A2118}}
+--ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;--rule:#2C322F;--rule-2:#3C433F;--accent:#7FB9A4;--accent-soft:#1A2622;--flag:#E3A667;--flag-soft:#2A2118}}
 :root[data-theme="dark"]{--paper:#141715;--card:#1B1F1D;--sunk:#232825;--ink:#E6EAE7;--ink-2:#A6AEA9;--ink-3:#79817C;
---rule:#2C322F;--rule-2:#3C433F;--accent:#7FB9A4;--accent-soft:#1A2622;--flag:#D2A468;--flag-soft:#2A2118}
+--rule:#2C322F;--rule-2:#3C433F;--accent:#7FB9A4;--accent-soft:#1A2622;--flag:#E3A667;--flag-soft:#2A2118}
 *{box-sizing:border-box;margin:0;padding:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 body{background:var(--paper);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -240,6 +240,58 @@ font-family:'Source Serif 4',Georgia,serif;font-size:.85rem;line-height:1.5;colo
 background:var(--card);border:1px solid var(--rule-2);border-radius:7px;padding:.6rem .75rem;
 box-shadow:0 6px 22px -8px rgba(0,0,0,.35);text-transform:none;letter-spacing:0}
 .qwrap:hover .rule,.qwrap:focus-within .rule{display:block}
+:root{--wroot:96px;--wgate:132px;--wan:104px}
+.hdr{display:flex;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.11em;
+text-transform:uppercase;color:var(--ink-3);margin:.2rem 0 .35rem;padding-left:var(--wroot)}
+.hdr .h1c{width:var(--wgate);flex:none}
+.hdr .h2c{width:var(--wan);flex:none}
+.hdr .h3c{flex:1}
+.hdr.verbhdr{margin-top:1.1rem;padding-left:var(--wroot);color:var(--flag)}
+.t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
+border-radius:9px;padding:.8rem .9rem}
+.t3.verbtui{border-left-color:var(--flag)}
+.croot{width:var(--wroot);flex:none;display:flex;align-items:center;position:relative;padding-right:12px}
+.croot::after{content:"";position:absolute;right:0;top:50%;width:12px;border-top:1px solid var(--rule-2)}
+.rootlab{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;white-space:nowrap}
+.rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
+.cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:center;
+gap:.3rem;position:relative;padding-right:12px}
+.cgate::after{content:"";position:absolute;right:0;top:calc(50% - 1.55rem);width:12px;border-top:1px solid var(--rule-2)}
+.termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.68rem;color:var(--ink-3);line-height:1.25}
+.ctree{flex:1;min-width:0;position:relative;padding-left:14px}
+.ctree::before{content:"";position:absolute;left:0;top:1rem;bottom:1rem;border-left:1px solid var(--rule-2)}
+.ctree.single{padding-left:0}
+.ctree.single::before{display:none}
+.br{display:flex;gap:.6rem;align-items:flex-start;position:relative;padding:.3rem 0}
+.br::before{content:"";position:absolute;left:-14px;top:.95rem;width:14px;border-top:1px solid var(--rule-2)}
+.ctree.single .br::before{display:none}
+.derived{width:var(--wan);flex:none;font-family:'JetBrains Mono',monospace;font-size:.7rem;
+padding:.28rem .45rem;border-radius:6px;border:1px solid transparent;color:var(--ink-3);
+background:none;white-space:nowrap}
+.derived.big{width:auto;font-size:.74rem}
+.derived.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}
+.leaves{flex:1;min-width:0;display:flex;flex-direction:column;gap:.18rem;align-items:flex-start}
+.slot{font-family:'JetBrains Mono',monospace;font-size:.76rem;padding:.26rem .5rem;border-radius:5px;
+border:1px dashed var(--rule-2);background:var(--card);color:var(--ink-2);cursor:pointer;
+transition:.12s;text-align:left;width:100%;max-width:230px}
+.slot:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
+.slot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.slot.term{width:auto;max-width:none;border-style:solid}
+.t3:not(.verbtui) .slot.sel{background:var(--accent);border-color:var(--accent);color:var(--paper);
+border-style:solid;font-weight:500}
+.t3.verbtui .slot.sel{background:var(--flag);border-color:var(--flag);color:var(--paper);
+border-style:solid;font-weight:500}
+.t3:not(.verbtui) .slot.hot{background:var(--accent-soft);border-color:var(--accent);border-style:solid}
+.t3.verbtui .slot.hot{background:var(--flag-soft);border-color:var(--flag);border-style:solid}
+.slot:disabled{opacity:.3;cursor:not-allowed}
+.slot.ok{border-color:var(--ink-3)}
+.slot.no{opacity:.2}
+@media(max-width:700px){
+  :root{--wroot:0px;--wgate:110px;--wan:88px}
+  .hdr{padding-left:0}
+  .croot{display:none}
+  .slot{font-size:.72rem}
+}
 .gate{position:fixed;inset:0;background:var(--paper);display:grid;place-items:center;padding:1.5rem;z-index:50}
 .gate.off{display:none}
 .gate .in{max-width:420px;width:100%}
@@ -303,53 +355,37 @@ text-decoration:underline;cursor:pointer;padding:0}
     <div class="sentence" id="gloss"></div>
   </div>
 
-  <div class="tui">
-    <div class="rootcol"><span class="rootlab ph">by-phrase</span></div>
-    <div class="gatecol">
-      <div class="slots stack" id="sInc"></div>
-      <div class="glab">1 · include
-        <span class="qwrap"><button type="button" class="qm" aria-label="rules for include">?</button>
-        <span class="rule">Does the by-phrase name something that <b>brought the action about</b>, or only a condition, setting, measure or reason? <i>by geography</i> did not do anything.</span></span>
-      </div>
+  <div class="hdr">
+    <span class="h1c">1 · include</span><span class="h2c">2 · animacy</span><span class="h3c">3 · category</span>
+  </div>
+
+  <div class="t3">
+    <div class="croot"><span class="rootlab ph">by-phrase</span></div>
+    <div class="cgate">
+      <span class="derived big" id="dActor">actor</span>
+      <button type="button" class="slot term" data-g="inc" data-v="circumstance" data-accepts="phrase">circumstance</button>
+      <span class="termnote">stop — nothing further</span>
     </div>
-    <div class="branches" id="branches">
-      <div class="br" data-an="human">
-        <button type="button" class="anode" data-g="an" data-v="human" data-accepts="phrase">human</button>
-        <div class="slots" id="sCaH"></div>
+    <div class="ctree" id="branches">
+      <div class="br">
+        <span class="derived" data-an="human">human</span>
+        <div class="leaves" id="sCaH"></div>
       </div>
-      <div class="br" data-an="nonhuman">
-        <button type="button" class="anode" data-g="an" data-v="nonhuman" data-accepts="phrase">nonhuman</button>
-        <div class="slots" id="sCaN"></div>
+      <div class="br">
+        <span class="derived" data-an="nonhuman">nonhuman</span>
+        <div class="leaves" id="sCaN"></div>
       </div>
-      <div class="br" data-an="either">
-        <span class="anode flat">either side</span>
-        <div class="slots" id="sCaE"></div>
-      </div>
-      <div class="brlabs">
-        <span class="glab">2 · animacy
-          <span class="qwrap"><button type="button" class="qm" aria-label="rules for animacy">?</button>
-          <span class="rule">Go by the <b>head noun</b>. A country is human. <i>by_Russian_shells</i> &rarr; <b>shells</b>, nonhuman. Parser output often runs long — ignore trailing description. Picking a category below sets this for you.</span></span>
-        </span>
-        <span class="glab">3 · category
-          <span class="qwrap"><button type="button" class="qm" aria-label="rules for category">?</button>
-          <span class="rule">Prefer the <b>more specific</b> code: <i>by_Russian_forces</i> is military_authority, not country_city.</span></span>
-        </span>
+      <div class="br">
+        <span class="derived" data-an="unclear">either</span>
+        <div class="leaves" id="sCaE"></div>
       </div>
     </div>
   </div>
 
-  <div class="tui verbtui">
-    <div class="rootcol"><span class="rootlab vb">verb</span></div>
-    <div class="branches single">
-      <div class="br">
-        <span class="anode flat vb">valence</span>
-        <div class="slots" id="sVa"></div>
-      </div>
-      <div class="brlabs"><span class="glab">4 · valence
-        <span class="qwrap"><button type="button" class="qm" aria-label="rules for valence">?</button>
-        <span class="rule">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</span></span>
-      </span></div>
-    </div>
+  <div class="hdr verbhdr"><span class="h1c">4 · valence <span class="qwrap"><button type="button" class="qm" aria-label="rules for valence">?</button><span class="rule">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</span></span></span></div>
+  <div class="t3 verbtui">
+    <div class="croot"><span class="rootlab vb">verb</span></div>
+    <div class="ctree single"><div class="br"><div class="leaves" id="sVa"></div></div></div>
   </div>
 
   <div class="notewrap"><label for="tNote">notes — optional, valuable when a row was hard</label>
@@ -534,16 +570,16 @@ var CAT_H=["military_authority","nonmilitary_party","country_city","law_governan
            "important_figure","civilian","money_business"];
 var CAT_N=["weapon","death_danger","location","commute","nominalisation"];
 var CAT_E=["media_tech","neutral_entity","unclear"];
-var ACCEPT={inc:"phrase",an:"phrase",ca:"phrase",va:"verb"};
-// which animacy a category implies; CAT_E implies nothing
+// animacy is derived from the branch a category sits in — never chosen directly
 function animacyOf(cat){
   if(CAT_H.indexOf(cat)>-1)return "human";
   if(CAT_N.indexOf(cat)>-1)return "nonhuman";
+  if(CAT_E.indexOf(cat)>-1)return "unclear";
   return "";
 }
 function slots(host,g,vals){
   document.getElementById(host).innerHTML=vals.map(function(v){
-    return '<button type="button" class="slot" data-g="'+g+'" data-v="'+v+'" data-accepts="'+ACCEPT[g]+'">'+v+'</button>';
+    return '<button type="button" class="slot" data-g="'+g+'" data-v="'+v+'" data-accepts="phrase">'+v+'</button>';
   }).join("");
 }
 function wireTarget(b){
@@ -558,23 +594,25 @@ function wireTarget(b){
   });
 }
 function buildSlots(){
-  slots("sInc","inc",["actor","circumstance"]);
   slots("sCaH","ca",CAT_H); slots("sCaN","ca",CAT_N); slots("sCaE","ca",CAT_E);
-  slots("sVa","va",["violent","restrictive","negative","neutral","positive","unclear"]);
+  document.getElementById("sVa").innerHTML=
+    ["violent","restrictive","negative","neutral","positive","unclear"].map(function(v){
+      return '<button type="button" class="slot" data-g="va" data-v="'+v+'" data-accepts="verb">'+v+'</button>';
+    }).join("");
   document.querySelectorAll(".slot").forEach(wireTarget);
-  document.querySelectorAll(".anode[data-g]").forEach(wireTarget);
 }
 function setVal(g,v){
   var r=rec(cur);
-  if(g==="inc"){
-    var want=(v==="circumstance")?"no":"yes";
-    r.inc=(r.inc===want)?"":want;
-    if(r.inc!=="yes"){r.an="";r.ca="";r.va="";}
+  if(g==="inc"){                       // the only include target is "circumstance"
+    r.inc=(r.inc==="no")?"":"no";
+    if(r.inc==="no"){r.an="";r.ca="";r.va="";}
+  } else if(g==="ca"){
+    r.ca=(r.ca===v)?"":v;
+    r.an=animacyOf(r.ca);              // derived, always
+    r.inc=r.ca?"yes":(r.va?"yes":"");
   } else {
-    if(!r.inc)r.inc="yes";                       // picking anything implies it is an actor
     r[g]=(r[g]===v)?"":v;
-    // choosing a branch-specific category sets animacy; "either side" leaves it to you
-    if(g==="ca"){var a=animacyOf(r.ca); if(a)r.an=a; else if(animacyOf(v)==="")r.an=r.an||"";}
+    if(r.va&&r.inc!=="no")r.inc="yes";
   }
   save();render();
 }
@@ -587,13 +625,10 @@ function wireChips(){
       try{e.dataTransfer.setData("text/plain",pair[1]);e.dataTransfer.effectAllowed="copy";}catch(err){}
       document.querySelectorAll(".slot").forEach(function(b){
         b.classList.add(b.dataset.accepts===DRAG&&!b.disabled?"ok":"no");});
-      document.querySelectorAll(".anode[data-g]").forEach(function(b){
-        b.classList.add(b.dataset.accepts===DRAG&&!b.disabled?"ok":"no");});
     });
     el.addEventListener("dragend",function(){
       DRAG=null; el.classList.remove("dragging");
       document.querySelectorAll(".slot").forEach(function(b){b.classList.remove("ok","no","hot");});
-      document.querySelectorAll(".anode[data-g]").forEach(function(b){b.classList.remove("ok","no","hot");});
     });
   });
 }
@@ -610,20 +645,16 @@ function render(){
   document.getElementById("chipVb").querySelector("b").textContent=verbOf(it.sv);
   var off=(r.inc==="no");
   document.querySelectorAll(".slot").forEach(function(b){
-    var on = b.dataset.g==="inc"
-      ? ((b.dataset.v==="circumstance")?(r.inc==="no"):(r.inc==="yes"))
-      : (r[b.dataset.g]===b.dataset.v);
-    b.classList.toggle("sel",on);
-    b.disabled=off&&b.dataset.g!=="inc";
+    b.classList.toggle("sel", b.dataset.g==="inc" ? off : (r[b.dataset.g]===b.dataset.v));
+    b.disabled = off && b.dataset.g!=="inc";
   });
-  document.querySelectorAll(".anode[data-g]").forEach(function(b){
-    var chosen=(r.an===b.dataset.v);
-    b.classList.toggle("auto",chosen&&!!animacyOf(r.ca));
-    b.classList.toggle("sel",chosen&&!animacyOf(r.ca));
-    b.disabled=off;
+  // derived labels: actor, and the animacy branch the chosen category sits in
+  document.getElementById("dActor").classList.toggle("on", r.inc==="yes");
+  document.querySelectorAll(".derived[data-an]").forEach(function(el){
+    el.classList.toggle("on", !!r.an && r.an===el.dataset.an);
   });
-  document.getElementById("branches").style.opacity=off?".38":"1";
-  document.querySelector(".verbtui").style.opacity=off?".38":"1";
+  document.getElementById("branches").style.opacity=off?".35":"1";
+  document.querySelector(".verbtui").style.opacity=off?".35":"1";
   document.getElementById("tNote").value=r.note||"";
   document.getElementById("bPrev").disabled=(cur===0);
   document.getElementById("bNext").textContent=(cur===ITEMS.length-1)?"Finish":"Next \u2192";
@@ -654,7 +685,7 @@ document.addEventListener("keydown",function(e){
   if(e.key==="ArrowLeft"){go(-1);e.preventDefault();return}
   if(!/^[0-9]$/.test(e.key))return;
   var n=parseInt(e.key,10)||10,r=peek(cur),g;
-  if(!r.inc)g="inc";else if(r.inc==="no")g=null;else if(!r.an)g="an";else if(!r.ca)g="ca";else g="va";
+  if(r.inc==="no")g=null;else if(!r.ca)g="ca";else g="va";
   if(!g)return;
   var list=[].slice.call(document.querySelectorAll('.slot[data-g="'+g+'"]'));
   if(n<=list.length){setVal(g,list[n-1].dataset.v);e.preventDefault();}
