@@ -293,17 +293,25 @@ var ANSWERS={
  "one_welcomed":{inc:"yes",an:"human",ca:"civilian",va:"positive",why:"Ordinary people, so civilian. Welcoming is favourable."},
  "move_denounced":{inc:"yes",an:"human",ca:"important_figure",va:"negative",why:"Leaders are office-holders. Denouncing is adverse but neither violent nor restrictive."}
 };
+var LAST_DEMO=[];
 function demoItems(){
   // 5 drawn at random from the answer-keyed pool, always including one
-  // circumstance so the exclude judgement gets practised
+  // circumstance so the exclude judgement gets practised, and preferring
+  // items that were not in the previous round
   var pool=ALL.filter(function(x){return ANSWERS[x.sv]});
-  var no=pool.filter(function(x){return ANSWERS[x.sv].inc==="no"});
-  var yes=pool.filter(function(x){return ANSWERS[x.sv].inc!=="no"});
+  function fresh(a){
+    var f=a.filter(function(x){return LAST_DEMO.indexOf(x.sv)<0});
+    return f.length>=1?f:a;                    // fall back if the pool is too small
+  }
+  var no=fresh(pool.filter(function(x){return ANSWERS[x.sv].inc==="no"}));
+  var yes=fresh(pool.filter(function(x){return ANSWERS[x.sv].inc!=="no"}));
   function draw(a,n){a=a.slice();var out=[];
     while(out.length<n&&a.length)out.push(a.splice(Math.floor(Math.random()*a.length),1)[0]);
     return out;}
   var pick=draw(no,1).concat(draw(yes,4));
-  return draw(pick,pick.length);
+  pick=draw(pick,pick.length);
+  LAST_DEMO=pick.map(function(x){return x.sv});
+  return pick;
 }
 var PREFIX="byagent-coding-v1-";
 var WHO="",KEY="",data={},cur=0;
@@ -423,13 +431,20 @@ function showAnswers(){
   d.innerHTML='<h2>Practice complete \u2014 '+n+' of '+ITEMS.length+' fully matched</h2>'+
     '<p>Model answers below. Disagreeing is not failure \u2014 several of these are genuinely arguable, and noticing where you differ is the point.</p>'+
     '<div class="ans">'+out+'</div>'+
-    '<button class="t go" id="toReal" style="margin-top:1rem">Start the real 167 &rarr;</button>';
+    '<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem">'+
+    '<button class="t go" id="toReal">Start the real 167 &rarr;</button>'+
+    '<button class="t" id="moreDemo">Practise five more</button></div>';
   d.classList.add("on");
   document.getElementById("toReal").onclick=function(){
     document.getElementById("gate").classList.remove("off");
     document.getElementById("demoBar").classList.remove("on");
     var ni=document.getElementById("gateName");ni.value="";
     document.getElementById("gateGo").disabled=true;ni.focus();
+  };
+  document.getElementById("moreDemo").onclick=function(){
+    d.classList.remove("on");d.innerHTML="";
+    boot("demo",true);
+    window.scrollTo({top:0,behavior:"smooth"});
   };
   d.scrollIntoView({behavior:"smooth"});
 }
