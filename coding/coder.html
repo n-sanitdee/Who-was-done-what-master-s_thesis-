@@ -250,11 +250,6 @@ text-transform:uppercase;color:var(--ink-3);margin:.2rem 0 .35rem;padding-left:v
 .hdr .h2c{width:var(--wan);flex:none}
 .hdr .h3c{flex:1}
 .hdr.verbhdr{margin-top:1.1rem;padding-left:var(--wroot);color:var(--flag)}
-.t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
-border-radius:9px;padding:.8rem .9rem}
-.t3.verbtui{border-left-color:var(--flag)}
-.croot{width:var(--wroot);flex:none;display:flex;align-items:center;position:relative;padding-right:12px}
-.croot::after{content:"";position:absolute;right:0;top:50%;width:12px;border-top:1px solid var(--rule-2)}
 .rootlab{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;white-space:nowrap}
 .rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
 .cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:center;
@@ -295,7 +290,7 @@ border-style:solid;font-weight:500}
   .croot{display:none}
   .slot{font-size:.72rem}
 }
-:root{--wgate:126px;--wan:100px;--stub:16px}
+:root{--wgate:126px;--wan:100px;--stub:16px;--wroot:78px}
 .stage{padding:.95rem .8rem 1rem;background:var(--sunk);border:1px solid var(--rule);
 border-radius:9px;margin:.6rem 0 1rem}
 .line{display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap}
@@ -314,8 +309,6 @@ margin-top:.7rem;text-align:center;line-height:1.5;max-width:74ch;margin-left:au
 .sentence b{color:var(--ink-2);font-weight:400;background:var(--accent-soft);border-radius:3px;padding:0 .15em}
 .sentence i{font-style:normal;background:var(--flag-soft);border-radius:3px;padding:0 .15em;color:var(--ink-2)}
 
-.tracks{display:grid;gap:.9rem;align-items:start}
-@media(min-width:900px){.tracks{grid-template-columns:minmax(0,1fr) 190px}}
 .tcol{min-width:0}
 .hdr{display:flex;font-family:'JetBrains Mono',monospace;font-size:.59rem;letter-spacing:.11em;
 text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem}
@@ -323,9 +316,6 @@ text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem}
 .hdr .h2c{width:calc(var(--wan) + var(--stub));flex:none}
 .hdr .h3c{flex:1}
 .hdr.verbhdr{color:var(--flag)}
-.t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
-border-radius:9px;padding:.8rem .9rem;position:relative}
-.t3.verbtui{border-left-color:var(--flag)}
 .cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:space-between;
 gap:1.6rem;position:relative;padding-right:12px}
 .gtop{position:relative;padding-top:.15rem}
@@ -369,14 +359,6 @@ width:var(--stub);border-top:1px solid var(--rule-2)}
 .slot:disabled{opacity:.32;cursor:not-allowed}
 .slot.ok{border-color:var(--ink-3)} .slot.no{opacity:.2}
 /* stopped state */
-.stopveil{display:none;position:absolute;inset:0;background:var(--paper);opacity:.82;
-border-radius:9px;place-items:center;z-index:3}
-.t3.stopped .stopveil{display:grid}
-.t3.stopped .ctree{filter:grayscale(1)}
-.stopveil span{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);
-background:var(--card);border:1px dashed var(--rule-2);border-radius:7px;padding:.5rem .8rem}
-.stopveil b{color:var(--accent)}
-.vcol .t3{padding:.8rem .7rem}
 @media(max-width:700px){:root{--wgate:104px;--wan:82px;--stub:12px}.slot{font-size:.71rem}}
 .gate{position:fixed;inset:0;background:var(--paper);display:grid;place-items:center;padding:1.5rem;z-index:50}
 .gate.off{display:none}
@@ -397,6 +379,27 @@ text-decoration:underline;cursor:pointer;padding:0}
 #whoLine .ch{background:none;border:none;color:var(--ink-3);font-family:inherit;font-size:inherit;
 text-decoration:underline;cursor:pointer;padding:0}
 .tip{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink-3);margin-top:1rem;line-height:1.7}
+
+.tracks{display:grid;gap:.9rem;align-items:start}
+@media(min-width:900px){.tracks{grid-template-columns:210px minmax(0,1fr)}}
+.t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
+border-radius:9px;padding:.8rem .9rem;position:relative}
+.t3.verbtui{border-left-color:var(--flag)}
+.vcol .t3{padding:.8rem .7rem}
+.croot{flex:none;display:flex;align-items:center;position:relative;padding-right:12px;margin-right:2px}
+.croot::after{content:"";position:absolute;right:0;top:50%;width:12px;border-top:1px solid var(--rule-2)}
+.rootlab{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;white-space:nowrap}
+.rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
+.hdr .h0c{width:var(--wroot);flex:none}
+/* halted state: the branches are replaced outright, not veiled */
+.halt{display:none;flex:1;align-items:center;font-family:'Source Serif 4',Georgia,serif;
+font-size:.88rem;line-height:1.5;color:var(--ink-2);background:var(--flag-soft);
+border:1px dashed var(--flag);border-radius:8px;padding:.7rem .9rem}
+.halt b{color:var(--flag)} .halt i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.82em}
+.t3.stopped .halt{display:flex}
+.t3.stopped .ctree,.t3.stopped .cgate .gtop{display:none}
+.t3.stopped .croot{opacity:.45}
+.vcol .halt{justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--flag)}
 </style></head><body><div class="gate" id="gate"><div class="in">
   <h2>Before you start</h2>
   <p>Enter your name so your codings are kept separate from anyone else's and saved under your own file. Come back with the same name and your progress will be waiting.</p>
@@ -444,9 +447,18 @@ text-decoration:underline;cursor:pointer;padding:0}
   </div>
 
   <div class="tracks">
+    <div class="tcol vcol">
+      <div class="hdr verbhdr"><span>4 · valence <span class="qwrap"><button type="button" class="qm" aria-label="rules for valence">?</button><span class="rule">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</span></span></span></div>
+      <div class="t3 verbtui" id="vbTrack">
+        <div class="croot"><span class="rootlab vb">verb</span></div>
+        <div class="ctree single"><div class="br"><div class="leaves" id="sVa"></div></div></div>
+        <div class="halt" id="haltVb">not coded</div>
+      </div>
+    </div>
     <div class="tcol">
-      <div class="hdr"><span class="h1c">1 · include</span><span class="h2c">2 · animacy</span><span class="h3c">3 · category</span></div>
+      <div class="hdr"><span class="h0c"></span><span class="h1c">1 · include</span><span class="h2c">2 · animacy</span><span class="h3c">3 · category</span></div>
       <div class="t3" id="phTrack">
+        <div class="croot"><span class="rootlab ph">by-phrase</span></div>
         <div class="cgate">
           <div class="gtop"><span class="derived big" id="dActor">actor</span></div>
           <div class="gbot">
@@ -459,13 +471,7 @@ text-decoration:underline;cursor:pointer;padding:0}
           <div class="br"><span class="derived" data-an="nonhuman">nonhuman</span><div class="leaves" id="sCaN"></div></div>
           <div class="br"><span class="derived" data-an="unclear">either</span><div class="leaves" id="sCaE"></div></div>
         </div>
-        <div class="stopveil" id="stopveil"><span>row stopped at <b>circumstance</b></span></div>
-      </div>
-    </div>
-    <div class="tcol vcol">
-      <div class="hdr verbhdr"><span>4 · valence <span class="qwrap"><button type="button" class="qm" aria-label="rules for valence">?</button><span class="rule">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</span></span></span></div>
-      <div class="t3 verbtui" id="vbTrack">
-        <div class="ctree single"><div class="br"><div class="leaves" id="sVa"></div></div></div>
+        <div class="halt" id="haltPh"><b>Row stopped.</b> This by-phrase names a circumstance, so animacy, category and valence are not coded. Click <i>circumstance</i> again to undo.</div>
       </div>
     </div>
   </div>
@@ -709,7 +715,9 @@ document.getElementById("bNext").onclick=function(){
 };
 document.addEventListener("keydown",function(e){
   if(e.target.tagName==="TEXTAREA")return;
-  if(e.key==="ArrowRight"||e.key==="Enter"){go(1);e.preventDefault();return}
+  if(e.key==="ArrowRight"||e.key==="Enter"){
+    if(cur===ITEMS.length-1){ if(DEMO)showAnswers(); e.preventDefault(); return; }
+    go(1);e.preventDefault();return}
   if(e.key==="ArrowLeft"){go(-1);e.preventDefault();return}
   if(!/^[0-9]$/.test(e.key))return;
   var n=parseInt(e.key,10)||10,r=peek(cur),g;
@@ -758,7 +766,8 @@ function showAnswers(){
     boot("demo",true);
     window.scrollTo({top:0,behavior:"smooth"});
   };
-  d.scrollIntoView({behavior:"smooth"});
+  if(d.scrollIntoView)d.scrollIntoView({behavior:"smooth",block:"start"});
+  else window.scrollTo({top:9999,behavior:"smooth"});
 }
 function drawGrid(){
   document.getElementById("grid").innerHTML=ITEMS.map(function(x,i){
