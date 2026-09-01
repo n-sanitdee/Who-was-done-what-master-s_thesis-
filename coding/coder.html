@@ -385,24 +385,21 @@ text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem;padding-left:calc(1
 .botrow{display:flex;align-items:center;gap:.7rem;margin-top:1.4rem;position:relative;flex-wrap:wrap}
 .botrow::before{content:"";position:absolute;left:-13px;top:.85rem;width:13px;border-top:1px solid var(--rule-2)}
 .slot.term{width:auto;max-width:none;text-align:center;flex:none}
-.termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.78rem;color:var(--ink-3);
+.termnote{transition:color .15s;font-family:'Source Serif 4',Georgia,serif;font-size:.78rem;color:var(--ink-3);
 line-height:1.4;max-width:30ch}
 .croot::after{content:"";position:absolute;right:0;top:50%;width:13px;border-top:1px solid var(--rule-2)}
-.halt{display:none;max-width:560px;font-family:'Source Serif 4',Georgia,serif;
-font-size:.9rem;line-height:1.55;color:var(--ink-2);background:var(--stopc-soft);
-border:1px solid var(--stopc);border-radius:8px;padding:.75rem .9rem;margin-top:.1rem}
-.halt b{color:var(--stopc);font-weight:700;white-space:nowrap}
-.halt i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.85em;
-background:var(--card);border:1px solid var(--rule-2);border-radius:4px;padding:.08em .4em;margin:0 .18em}
-.t3.stopped .halt{display:block}
-.t3.stopped .toprow,.t3.stopped .botrow{display:none}
-.hdroff .hdr{visibility:hidden}
+
+/* halted: everything downstream freezes in place — solid, grey, inert */
 .t3.stopped{border-left-color:var(--stopc)}
-.t3.stopped .rows::before{display:none}
-.t3.stopped .croot{opacity:.5}
-.vcol .halt{max-width:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.74rem;
-color:var(--stopc);border-color:var(--stopc);background:var(--stopc-soft)}
-.t3.verbtui.stopped .ctree{display:none}
+.t3.stopped .slot:disabled{opacity:1;border-style:solid;border-color:var(--rule);
+background:var(--sunk);color:var(--ink-3);cursor:not-allowed}
+.t3.stopped .derived{opacity:.42}
+.t3.stopped .rows::before,.t3.stopped .toprow::before,.t3.stopped .cgate::after,
+.t3.stopped .br::before,.t3.stopped .br::after,.t3.stopped .leaves::before,
+.t3.stopped .leaves .slot::before,.t3.stopped .derived::after{border-color:var(--rule)}
+.slot.term.sel{background:var(--stopc);border-color:var(--stopc);color:var(--paper)}
+.t3.stopped .termnote{color:var(--stopc)}
+.vcol .t3.stopped .leaves::before{border-color:var(--rule)}
 </style></head><body><div class="gate" id="gate"><div class="in">
   <h2>Before you start</h2>
   <p>Enter your name so your codings are kept separate from anyone else's and saved under your own file. Come back with the same name and your progress will be waiting.</p>
@@ -455,11 +452,10 @@ color:var(--stopc);border-color:var(--stopc);background:var(--stopc-soft)}
       <div class="t3 verbtui" id="vbTrack">
         <div class="croot"><span class="rootlab vb">verb</span></div>
         <div class="ctree single"><div class="br"><div class="leaves" id="sVa"></div></div></div>
-        <div class="halt" id="haltVb">not coded</div>
       </div>
     </div>
     <div class="tcol">
-      <div class="hdr"><span class="h0c"></span><span class="h1c">include</span><span class="h2c">animacy</span><span class="h3c">category</span></div>
+      <div class="hdr"><span class="h0c"></span><span class="h1c">include <span class="qwrap"><button type="button" class="qm" aria-label="rules for include">?</button><span class="rule">Does the by-phrase name something that <b>brought the action about</b>, or only a condition, setting, measure or reason? <i>by geography</i> did not do anything. If it is a circumstance, use the <b>circumstance</b> slot at the foot of the tree.</span></span></span><span class="h2c">animacy <span class="qwrap"><button type="button" class="qm" aria-label="rules for animacy">?</button><span class="rule">Set for you by the category you choose. Go by the <b>head noun</b>: a country is human, and <i>by_Russian_shells</i> is <b>shells</b>, so nonhuman. Parser output often runs long — ignore trailing description.</span></span></span><span class="h3c">category <span class="qwrap"><button type="button" class="qm" aria-label="rules for category">?</button><span class="rule">What kind of thing does the by-phrase name? Prefer the <b>more specific</b> code: <i>by_Russian_forces</i> is military_authority, not country_city.</span></span></span></div>
       <div class="t3" id="phTrack">
         <div class="croot"><span class="rootlab ph">by-phrase</span></div>
         <div class="rows">
@@ -475,7 +471,6 @@ color:var(--stopc);border-color:var(--stopc);background:var(--stopc-soft)}
             <button type="button" class="slot term" data-g="inc" data-v="circumstance" data-accepts="phrase">circumstance</button>
             <span class="termnote">not an actor — stop here, nothing further is coded for this row</span>
           </div>
-          <div class="halt" id="haltPh"><b>Row stopped.</b> This by-phrase names a circumstance, so animacy, category and valence are not coded. Click <i>circumstance</i> again to undo.</div>
         </div>
       </div>
     </div>
@@ -693,8 +688,6 @@ function render(){
     el.classList.toggle("on", !!r.an && r.an===el.dataset.an);
   });
   document.getElementById("phTrack").classList.toggle("stopped",off);
-  document.getElementById("phTrack").parentElement.classList.toggle("hdroff",off);
-  document.getElementById("vbTrack").parentElement.classList.toggle("hdroff",off);
   document.getElementById("vbTrack").classList.toggle("stopped",off);
   document.getElementById("tNote").value=r.note||"";
   document.getElementById("bPrev").disabled=(cur===0);
