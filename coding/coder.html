@@ -246,7 +246,6 @@ box-shadow:0 6px 22px -8px rgba(0,0,0,.35);text-transform:none;letter-spacing:0}
 .rootlab{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;white-space:nowrap}
 .rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
 .cgate::after{content:"";position:absolute;right:0;top:calc(50% - 1.55rem);width:12px;border-top:1px solid var(--rule-2)}
-.termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.68rem;color:var(--ink-3);line-height:1.25}
 .ctree::before{content:"";position:absolute;left:0;top:1rem;bottom:1rem;border-left:1px solid var(--rule-2)}
 .ctree.single{padding-left:0}
 .ctree.single::before{display:none}
@@ -260,7 +259,6 @@ background:none;white-space:nowrap}
 .derived.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}
 .slot:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
 .slot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.slot.term{width:auto;max-width:none;border-style:solid}
 .t3:not(.verbtui) .slot.sel{background:var(--accent);border-color:var(--accent);color:var(--paper);
 border-style:solid;font-weight:500}
 .t3.verbtui .slot.sel{background:var(--flag);border-color:var(--flag);color:var(--paper);
@@ -296,7 +294,6 @@ margin-top:.7rem;text-align:center;line-height:1.5;max-width:74ch;margin-left:au
 .sentence b{color:var(--ink-2);font-weight:400;background:var(--accent-soft);border-radius:3px;padding:0 .15em}
 .sentence i{font-style:normal;background:var(--flag-soft);border-radius:3px;padding:0 .15em;color:var(--ink-2)}
 
-.termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.68rem;color:var(--ink-3);line-height:1.3}
 .br{display:flex;gap:0;align-items:flex-start;position:relative;padding:.3rem 0}
 .br::before{content:"";position:absolute;left:-14px;top:.85rem;width:14px;border-top:1px solid var(--rule-2)}
 /* piecewise spine: each branch draws down to the next connector, so nothing overshoots */
@@ -320,7 +317,6 @@ width:var(--stub);border-top:1px solid var(--rule-2)}
 .ctree.single .leaves .slot::before{display:none}
 .slot:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
 .slot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.slot.term{width:auto;max-width:none;border-style:solid;text-align:center}
 .t3:not(.verbtui) .slot.sel{background:var(--accent);border-color:var(--accent);color:var(--paper);border-style:solid;font-weight:500}
 .t3.verbtui .slot.sel{background:var(--flag);border-color:var(--flag);color:var(--paper);border-style:solid;font-weight:500}
 .t3:not(.verbtui) .slot.hot{background:var(--accent-soft);border-color:var(--accent);border-style:solid}
@@ -350,35 +346,16 @@ text-decoration:underline;cursor:pointer;padding:0}
 .tip{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink-3);margin-top:1rem;line-height:1.7}
 
 .t3.verbtui{border-left-color:var(--flag)}
-.croot::after{content:"";position:absolute;right:0;top:50%;width:12px;border-top:1px solid var(--rule-2)}
 .rootlab{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;white-space:nowrap}
 .rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
-/* halted state: the branches are replaced outright, not veiled */
-.halt{display:none;flex:1;align-items:center;font-family:'Source Serif 4',Georgia,serif;
-font-size:.88rem;line-height:1.5;color:var(--ink-2);background:var(--flag-soft);
-border:1px dashed var(--flag);border-radius:8px;padding:.7rem .9rem}
-.halt b{color:var(--flag)} .halt i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.82em}
-.t3.stopped .halt{display:flex}
-.t3.stopped .ctree,.t3.stopped .cgate .gtop{display:none}
-.t3.stopped .croot{opacity:.45}
-.vcol .halt{justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--flag)}
+/* halted state: the branches are replaced outright, not veiled */ .halt i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.82em}
 
 .tracks{display:flex;gap:1rem;justify-content:center;align-items:flex-start;flex-wrap:wrap}
 .tcol{min-width:0;flex:0 0 auto}
 .t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
 border-radius:9px;padding:.85rem 1rem;position:relative;width:fit-content;max-width:100%}
 .vcol .t3{padding:.85rem .9rem}
-.croot::after{content:"";position:absolute;right:0;top:50%;width:13px;border-top:1px solid var(--rule-2)}
 /* gate spine: actor and circumstance hang off one vertical, which the root meets */
-.cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:space-between;
-gap:1.4rem;position:relative;padding:0 13px 0 13px}
-.cgate::before{content:"";position:absolute;left:0;top:.85rem;bottom:1.05rem;border-left:1px solid var(--rule-2)}
-.gtop,.gbot{position:relative}
-.gtop::before,.gbot::before{content:"";position:absolute;left:-13px;width:13px;border-top:1px solid var(--rule-2)}
-.gtop::before{top:.85rem}
-.gbot::before{top:.9rem}
-.gtop::after{content:"";position:absolute;right:-13px;top:.85rem;width:13px;border-top:1px solid var(--rule-2)}
-.gbot{display:flex;flex-direction:column;gap:.3rem}
 .ctree{flex:0 0 auto;position:relative;padding-left:14px}
 .leaves{flex:0 0 auto;display:flex;flex-direction:column;gap:.16rem;align-items:stretch;
 position:relative;padding-left:var(--stub);min-width:172px}
@@ -395,6 +372,36 @@ text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem;padding-left:calc(1
 .hdr .h3c{flex:1}
 .hdr.verbhdr{color:var(--flag);padding-left:calc(1rem + 3px + var(--wroot))}
 .vcol .leaves{min-width:220px}
+
+:root{--stopc:#8C3A34;--stopc-soft:#F6E9E7}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--stopc:#E0938C;--stopc-soft:#2C1D1C}}
+:root[data-theme="dark"]{--stopc:#E0938C;--stopc-soft:#2C1D1C}
+.rows{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;padding-left:13px}
+.rows::before{content:"";position:absolute;left:0;top:.9rem;bottom:1.5rem;border-left:1px solid var(--rule-2)}
+.toprow{display:flex;align-items:stretch;position:relative}
+.toprow::before{content:"";position:absolute;left:-13px;top:.9rem;width:13px;border-top:1px solid var(--rule-2)}
+.cgate{width:var(--wgate);flex:none;padding-top:.15rem;position:relative}
+.cgate::after{content:"";position:absolute;right:0;top:.9rem;width:13px;border-top:1px solid var(--rule-2)}
+.botrow{display:flex;align-items:center;gap:.7rem;margin-top:1.4rem;position:relative;flex-wrap:wrap}
+.botrow::before{content:"";position:absolute;left:-13px;top:.85rem;width:13px;border-top:1px solid var(--rule-2)}
+.slot.term{width:auto;max-width:none;text-align:center;flex:none}
+.termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.78rem;color:var(--ink-3);
+line-height:1.4;max-width:30ch}
+.croot::after{content:"";position:absolute;right:0;top:50%;width:13px;border-top:1px solid var(--rule-2)}
+.halt{display:none;align-items:flex-start;gap:.5rem;font-family:'Source Serif 4',Georgia,serif;
+font-size:.9rem;line-height:1.55;color:var(--ink-2);background:var(--stopc-soft);
+border:1px solid var(--stopc);border-radius:8px;padding:.75rem .9rem;margin-top:.1rem}
+.halt b{color:var(--stopc);font-weight:700}
+.halt i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.85em;
+background:var(--card);border:1px solid var(--rule-2);border-radius:4px;padding:.08em .4em;margin:0 .18em}
+.t3.stopped .halt{display:flex}
+.t3.stopped .toprow,.t3.stopped .botrow{display:none}
+.t3.stopped{border-left-color:var(--stopc)}
+.t3.stopped .rows::before{display:none}
+.t3.stopped .croot{opacity:.5}
+.vcol .halt{justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.74rem;
+color:var(--stopc);border-color:var(--stopc);background:var(--stopc-soft)}
+.t3.verbtui.stopped .ctree{display:none}
 </style></head><body><div class="gate" id="gate"><div class="in">
   <h2>Before you start</h2>
   <p>Enter your name so your codings are kept separate from anyone else's and saved under your own file. Come back with the same name and your progress will be waiting.</p>
@@ -443,7 +450,7 @@ text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem;padding-left:calc(1
 
   <div class="tracks">
     <div class="tcol vcol">
-      <div class="hdr verbhdr"><span>4 · valence <span class="qwrap"><button type="button" class="qm" aria-label="rules for valence">?</button><span class="rule">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</span></span></span></div>
+      <div class="hdr verbhdr"><span>valence <span class="qwrap"><button type="button" class="qm" aria-label="rules for valence">?</button><span class="rule">What does the verb do to the <b>subject</b>? The line between violent and restrictive is <b>physical harm</b>: <i>seize</i> constrains, <i>shell</i> injures.</span></span></span></div>
       <div class="t3 verbtui" id="vbTrack">
         <div class="croot"><span class="rootlab vb">verb</span></div>
         <div class="ctree single"><div class="br"><div class="leaves" id="sVa"></div></div></div>
@@ -451,22 +458,24 @@ text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem;padding-left:calc(1
       </div>
     </div>
     <div class="tcol">
-      <div class="hdr"><span class="h0c"></span><span class="h1c">1 · include</span><span class="h2c">2 · animacy</span><span class="h3c">3 · category</span></div>
+      <div class="hdr"><span class="h0c"></span><span class="h1c">include</span><span class="h2c">animacy</span><span class="h3c">category</span></div>
       <div class="t3" id="phTrack">
         <div class="croot"><span class="rootlab ph">by-phrase</span></div>
-        <div class="cgate">
-          <div class="gtop"><span class="derived big" id="dActor">actor</span></div>
-          <div class="gbot">
-            <button type="button" class="slot term" data-g="inc" data-v="circumstance" data-accepts="phrase">circumstance</button>
-            <span class="termnote">stop — nothing further<br>is coded for this row</span>
+        <div class="rows">
+          <div class="toprow">
+            <div class="cgate"><span class="derived big" id="dActor">actor</span></div>
+            <div class="ctree" id="branches">
+              <div class="br"><span class="derived" data-an="human">human</span><div class="leaves" id="sCaH"></div></div>
+              <div class="br"><span class="derived" data-an="nonhuman">nonhuman</span><div class="leaves" id="sCaN"></div></div>
+              <div class="br"><span class="derived" data-an="unclear">either</span><div class="leaves" id="sCaE"></div></div>
+            </div>
           </div>
+          <div class="botrow">
+            <button type="button" class="slot term" data-g="inc" data-v="circumstance" data-accepts="phrase">circumstance</button>
+            <span class="termnote">not an actor — stop here, nothing further is coded for this row</span>
+          </div>
+          <div class="halt" id="haltPh"><b>Row stopped.</b> This by-phrase names a circumstance, so animacy, category and valence are not coded. Click <i>circumstance</i> again to undo.</div>
         </div>
-        <div class="ctree" id="branches">
-          <div class="br"><span class="derived" data-an="human">human</span><div class="leaves" id="sCaH"></div></div>
-          <div class="br"><span class="derived" data-an="nonhuman">nonhuman</span><div class="leaves" id="sCaN"></div></div>
-          <div class="br"><span class="derived" data-an="unclear">either</span><div class="leaves" id="sCaE"></div></div>
-        </div>
-        <div class="halt" id="haltPh"><b>Row stopped.</b> This by-phrase names a circumstance, so animacy, category and valence are not coded. Click <i>circumstance</i> again to undo.</div>
       </div>
     </div>
   </div>
