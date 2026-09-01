@@ -32,7 +32,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.66;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:3rem 1.4rem 6rem}
+.wrap{max-width:880px;margin:0 auto;padding:3rem 1.4rem 6rem}
 h1,h2,h3,.ui{font-family:'Archivo',system-ui,sans-serif}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
 h1{font-size:clamp(2rem,5vw,2.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.08;text-wrap:balance}
@@ -103,6 +103,12 @@ border-radius:3px;padding:.08em .42em;margin-right:.45rem}
 figure{margin:0}
 figcaption{font-family:'Source Serif 4',Georgia,serif;font-size:.88rem;color:var(--ink-2);
 margin-top:.5rem;max-width:64ch}
+.egs{display:block;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-3);margin-top:.2rem}
+.anat .quote{font-family:'Source Serif 4',Georgia,serif;font-size:1.02rem;line-height:1.55;
+padding:.2rem 0 .9rem;border-bottom:1px dashed var(--rule-2);color:var(--ink)}
+.anat .quote i{font-style:normal;background:var(--flag-soft);color:var(--flag);border-radius:3px;padding:0 .2em}
+.anat .quote b{font-weight:400;background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:0 .2em}
+.flag .h{text-transform:none;letter-spacing:.02em;font-size:.7rem}
 @media print{.tree{min-width:0}
 .start,.topline{display:none}
 .anat{break-inside:avoid}
@@ -206,29 +212,29 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
   <p>Every row has three parts. Three of your four judgments are about the <strong>by-phrase</strong>; one is about the <strong>verb</strong>. Knowing which is which makes the rest of this manual straightforward.</p>
 
   <div class="anat">
-    <div class="raw"><i class="s">house</i>_<i class="v">struck</i> &nbsp;·&nbsp; <i class="a">by_Russian_shells</i></div>
+    <div class="quote">“…a two-storey house was <i>struck</i> <b>by Russian shells</b>, the governor said.”</div>
     <div class="parts">
-      <div class="part"><span class="lb">subject</span><span class="bd"><b>house</b> — the thing the action happened to. You never code this directly, but valence is judged by its effect on it.</span></div>
-      <div class="part"><span class="lb">verb</span><span class="bd"><b>struck</b> — the action. <em>Valence</em> is judged here, and only here.</span></div>
-      <div class="part"><span class="lb">by-phrase</span><span class="bd"><b>by Russian shells</b>, head noun <b>shells</b> — what the text names as bringing the action about. <em>Include</em>, <em>animacy</em> and <em>category</em> are all judged here.</span></div>
+      <div class="part"><span class="lb">subject</span><span class="bd"><b>house</b> — what the action happened to. Never coded directly, but valence is judged by its effect on it.</span></div>
+      <div class="part"><span class="lb">verb</span><span class="bd"><i>struck</i> — the action. <em>Valence</em> is judged here, and only here.</span></div>
+      <div class="part"><span class="lb">by-phrase</span><span class="bd"><b>by Russian shells</b>, head noun <b>shells</b>. <em>Include</em>, <em>animacy</em> and <em>category</em> are all judged here.</span></div>
     </div>
     <div class="codes">
-      <div class="code"><span class="k">include</span><span><span class="val">yes</span><em>shells are named as bringing it about, not as a circumstance</em></span></div>
+      <div class="code"><span class="k">include</span><span><span class="val">yes</span><em>shells brought it about; they are not a circumstance</em></span></div>
       <div class="code"><span class="k">animacy</span><span><span class="val">nonhuman</span><em>the head is <b>shells</b>; <b>Russian</b> only says whose</em></span></div>
       <div class="code"><span class="k">category</span><span><span class="val">weapon</span><em>shells are ordnance</em></span></div>
-      <div class="code"><span class="k">valence</span><span><span class="val">violent</span><em><b>struck</b> is physical harm to the house</em></span></div>
+      <div class="code"><span class="k">valence</span><span><span class="val">violent</span><em><i>struck</i> is physical harm to the house</em></span></div>
     </div>
   </div>
 
-  <p>A second one, where the by-phrase names people rather than a thing:</p>
+  <p>A second one, where the by-phrase names people:</p>
 
   <div class="anat">
-    <div class="raw"><i class="s">town</i>_<i class="v">occupied</i> &nbsp;·&nbsp; <i class="a">by_Russian_forces</i></div>
+    <div class="quote">“The town of Amvrosiivka was <i>occupied</i> <b>by Russian paratroopers</b>, supported by armoured vehicles.”</div>
     <div class="codes">
-      <div class="code"><span class="k">include</span><span><span class="val">yes</span><em>forces did the occupying</em></span></div>
+      <div class="code"><span class="k">include</span><span><span class="val">yes</span><em>paratroopers did the occupying</em></span></div>
       <div class="code"><span class="k">animacy</span><span><span class="val">human</span><em>an armed body is people</em></span></div>
       <div class="code"><span class="k">category</span><span><span class="val">military_authority</span><em>prefer this over country_city — it names the army, not the state</em></span></div>
-      <div class="code"><span class="k">valence</span><span><span class="val">restrictive</span><em><b>occupied</b> controls the town without damaging it</em></span></div>
+      <div class="code"><span class="k">valence</span><span><span class="val">restrictive</span><em><i>occupied</i> controls the town without damaging it</em></span></div>
     </div>
   </div>
 
@@ -291,21 +297,21 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
   <p>What kind of thing is named in the by-phrase? One code per row, from this list.</p>
   <div class="tbl"><table>
     <tr><th>Code</th><th>Covers</th></tr>
-    <tr><td><span class="tag">weapon</span></td><td>Arms, munitions, ordnance, and the acts of using them</td></tr>
-    <tr><td><span class="tag">military_authority</span></td><td>Armed forces, police, intelligence, official security bodies</td></tr>
-    <tr><td><span class="tag">nonmilitary_party</span></td><td>Irregular combatants, separatists, activists, hackers</td></tr>
-    <tr><td><span class="tag">country_city</span></td><td>States, cities, regions named as such</td></tr>
-    <tr><td><span class="tag">law_governance</span></td><td>Governments, parliaments, courts, committees, treaties</td></tr>
-    <tr><td><span class="tag">death_danger</span></td><td>Attacks, fighting, explosions, fire, loss</td></tr>
-    <tr><td><span class="tag">important_figure</span></td><td>Named individuals and office-holders</td></tr>
-    <tr><td><span class="tag">civilian</span></td><td>Ordinary people, the public, communities</td></tr>
-    <tr><td><span class="tag">location</span></td><td>Places and premises not covered by country_city</td></tr>
-    <tr><td><span class="tag">media_tech</span></td><td>News outlets, broadcasters, platforms, technology</td></tr>
-    <tr><td><span class="tag">money_business</span></td><td>Firms, funds, commercial bodies, financial instruments</td></tr>
-    <tr><td><span class="tag">commute</span></td><td>Transport and traffic</td></tr>
-    <tr><td><span class="tag">nominalisation</span></td><td>Abstract nouns built from verbs or adjectives</td></tr>
-    <tr><td><span class="tag">neutral_entity</span></td><td>Anything that fits nowhere above</td></tr>
-    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided</td></tr>
+    <tr><td><span class="tag">weapon</span></td><td>Arms, munitions, ordnance, and the acts of using them<span class="egs">by Russian shells, by a Baykar Bayraktar TB2 drone</span></td></tr>
+    <tr><td><span class="tag">military_authority</span></td><td>Armed forces, police, intelligence, official security bodies<span class="egs">by Russian forces, by police, by the Southern Military District</span></td></tr>
+    <tr><td><span class="tag">nonmilitary_party</span></td><td>Irregular combatants, separatists, activists, hackers<span class="egs">by pro-Russian separatists, by a hacker cooperative</span></td></tr>
+    <tr><td><span class="tag">country_city</span></td><td>States, cities, regions named as such<span class="egs">by Russia, by Ukraine, by Washington</span></td></tr>
+    <tr><td><span class="tag">law_governance</span></td><td>Governments, parliaments, courts, committees, treaties<span class="egs">by the German parliamentary budget committee, by Congress</span></td></tr>
+    <tr><td><span class="tag">death_danger</span></td><td>Attacks, fighting, explosions, fire, loss<span class="egs">by fighting, by weeks of Russian bombardment, by a strike</span></td></tr>
+    <tr><td><span class="tag">important_figure</span></td><td>Named individuals and office-holders<span class="egs">by Putin, by Shoigu, by the leaders of Ukraine</span></td></tr>
+    <tr><td><span class="tag">civilian</span></td><td>Ordinary people, the public, communities<span class="egs">by most Ukrainians, by friends, by the public</span></td></tr>
+    <tr><td><span class="tag">location</span></td><td>Places and premises not covered by country_city<span class="egs">by the centre, by the district</span></td></tr>
+    <tr><td><span class="tag">media_tech</span></td><td>News outlets, broadcasters, platforms, technology<span class="egs">by CNN, by Ukrainska Pravda, by the Wall Street Journal</span></td></tr>
+    <tr><td><span class="tag">money_business</span></td><td>Firms, funds, commercial bodies, financial instruments<span class="egs">by Gazprom, by private sector firms</span></td></tr>
+    <tr><td><span class="tag">commute</span></td><td>Transport and traffic<span class="egs">by civilian traffic</span></td></tr>
+    <tr><td><span class="tag">nominalisation</span></td><td>Abstract nouns built from verbs or adjectives<span class="egs">by resistance, by corruption, by an inconsistency</span></td></tr>
+    <tr><td><span class="tag">neutral_entity</span></td><td>Anything that fits nowhere above<span class="egs">by a factor, by a sound, by an object</span></td></tr>
+    <tr><td><span class="tag">unclear</span></td><td>Genuinely cannot be decided<span class="egs">genuinely undecidable</span></td></tr>
   </table></div>
   <p>Some rows sit between two categories — <code>by_Russian_forces</code> is both a state and an armed body. Prefer the <strong>more specific</strong> code: here, <span class="tag">military_authority</span>. Reserve <span class="tag">country_city</span> for phrases where the state itself is what is named, as in <code>by_Russia</code>.</p>
 </section>
@@ -325,6 +331,11 @@ body{background:#fff;font-size:11pt}.wrap{padding:0;max-width:none}.note,.flag,.
   <div class="flag">
     <div class="h">The line that matters most</div>
     <p><strong>Violent and restrictive are separated by physical harm.</strong> <em>Seize</em>, <em>detain</em> and <em>occupy</em> constrain something; <em>shell</em> and <em>kill</em> injure or destroy it. If a verb could go either way, code the reading it has in <em>this</em> row, not the sense the word carries most often elsewhere.</p>
+  </div>
+  <div class="flag">
+    <div class="h">a verb that looks restrictive but is not</div>
+    <p>“More than 70 percent of the country’s gas reserves are <i>held</i> <b>by Gazprom</b>.” <b>Held</b> reads like detention, and elsewhere on this sheet it <em>is</em> detention — <i>servicemen held by Russia</i> is restrictive. Here it means <b>owns</b>. Nothing is being constrained; the reserves are not worse off. Code it <b>neutral</b>.</p>
+    <p>This is what “code the reading in this row” means in practice. The same verb takes different codes in different rows, and that is correct, not an inconsistency.</p>
   </div>
   <div class="ex">
     <span class="pair">Petrova_escorted &nbsp;·&nbsp; by_police</span>
