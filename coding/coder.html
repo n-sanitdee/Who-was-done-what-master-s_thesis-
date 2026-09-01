@@ -622,7 +622,14 @@ function buildSlots(){
     ["violent","restrictive","negative","neutral","positive","unclear"].map(function(v){
       return '<button type="button" class="slot" data-g="va" data-v="'+v+'" data-accepts="verb">'+v+'</button>';
     }).join("");
-  document.querySelectorAll(".slot").forEach(wireTarget);
+  // generated slots are replaced on every rebuild, but the circumstance button is
+  // static markup — wiring it again on each boot would stack listeners and make a
+  // click toggle twice, cancelling itself
+  document.querySelectorAll(".slot").forEach(function(b){
+    if(b.dataset.wired)return;
+    b.dataset.wired="1";
+    wireTarget(b);
+  });
 }
 function setVal(g,v){
   var r=rec(cur);
@@ -643,6 +650,8 @@ var DRAG=null;
 function wireChips(){
   [["chipPh","phrase"],["chipVb","verb"]].forEach(function(pair){
     var el=document.getElementById(pair[0]);
+    if(el.dataset.wired)return;                 // same reason as the slots above
+    el.dataset.wired="1";
     el.addEventListener("dragstart",function(e){
       DRAG=pair[1]; el.classList.add("dragging");
       try{e.dataTransfer.setData("text/plain",pair[1]);e.dataTransfer.effectAllowed="copy";}catch(err){}
