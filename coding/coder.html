@@ -175,8 +175,6 @@ background:var(--sunk);border-radius:6px;padding:.5rem .65rem;margin-bottom:.5re
 .sub{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
 color:var(--ink-3);margin:.5rem 0 .25rem}
 .slots{display:flex;gap:.32rem;flex-wrap:wrap}
-.slot{font-family:'JetBrains Mono',monospace;font-size:.76rem;padding:.34rem .55rem;border-radius:6px;
-border:1px dashed var(--rule-2);background:var(--card);color:var(--ink-2);cursor:pointer;transition:.12s}
 .slot:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
 .slot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .slot.sel{border-style:solid;font-weight:500}
@@ -201,6 +199,7 @@ border-radius:9px;margin:.7rem 0 1.3rem}
 padding:.5rem .8rem;border-radius:8px;cursor:grab;user-select:none;border:1.5px solid;
 font-family:'JetBrains Mono',monospace;line-height:1.25;max-width:100%}
 .chip:active{cursor:grabbing}
+.chip{min-width:132px}
 .chip em{font-style:normal;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
 .chip b{font-size:.95rem;font-weight:500;word-break:break-word}
 .chip.ph{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
@@ -244,19 +243,10 @@ background:var(--card);border:1px solid var(--rule-2);border-radius:7px;padding:
 box-shadow:0 6px 22px -8px rgba(0,0,0,.35);text-transform:none;letter-spacing:0}
 .qwrap:hover .rule,.qwrap:focus-within .rule{display:block}
 :root{--wroot:96px;--wgate:132px;--wan:104px}
-.hdr{display:flex;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.11em;
-text-transform:uppercase;color:var(--ink-3);margin:.2rem 0 .35rem;padding-left:var(--wroot)}
-.hdr .h1c{width:var(--wgate);flex:none}
-.hdr .h2c{width:var(--wan);flex:none}
-.hdr .h3c{flex:1}
-.hdr.verbhdr{margin-top:1.1rem;padding-left:var(--wroot);color:var(--flag)}
 .rootlab{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:700;white-space:nowrap}
 .rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
-.cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:center;
-gap:.3rem;position:relative;padding-right:12px}
 .cgate::after{content:"";position:absolute;right:0;top:calc(50% - 1.55rem);width:12px;border-top:1px solid var(--rule-2)}
 .termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.68rem;color:var(--ink-3);line-height:1.25}
-.ctree{flex:1;min-width:0;position:relative;padding-left:14px}
 .ctree::before{content:"";position:absolute;left:0;top:1rem;bottom:1rem;border-left:1px solid var(--rule-2)}
 .ctree.single{padding-left:0}
 .ctree.single::before{display:none}
@@ -268,10 +258,6 @@ padding:.28rem .45rem;border-radius:6px;border:1px solid transparent;color:var(-
 background:none;white-space:nowrap}
 .derived.big{width:auto;font-size:.74rem}
 .derived.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}
-.leaves{flex:1;min-width:0;display:flex;flex-direction:column;gap:.18rem;align-items:flex-start}
-.slot{font-family:'JetBrains Mono',monospace;font-size:.76rem;padding:.26rem .5rem;border-radius:5px;
-border:1px dashed var(--rule-2);background:var(--card);color:var(--ink-2);cursor:pointer;
-transition:.12s;text-align:left;width:100%;max-width:230px}
 .slot:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
 .slot:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .slot.term{width:auto;max-width:none;border-style:solid}
@@ -299,6 +285,7 @@ border-radius:9px;margin:.6rem 0 1rem}
 border-radius:8px;cursor:grab;user-select:none;border:1.5px solid;font-family:'JetBrains Mono',monospace;
 line-height:1.2;max-width:100%}
 .chip:active{cursor:grabbing}
+.chip{min-width:132px}
 .chip em{font-style:normal;font-size:.53rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
 .chip b{font-size:.9rem;font-weight:500;word-break:break-word}
 .chip.ph{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
@@ -309,20 +296,7 @@ margin-top:.7rem;text-align:center;line-height:1.5;max-width:74ch;margin-left:au
 .sentence b{color:var(--ink-2);font-weight:400;background:var(--accent-soft);border-radius:3px;padding:0 .15em}
 .sentence i{font-style:normal;background:var(--flag-soft);border-radius:3px;padding:0 .15em;color:var(--ink-2)}
 
-.tcol{min-width:0}
-.hdr{display:flex;font-family:'JetBrains Mono',monospace;font-size:.59rem;letter-spacing:.11em;
-text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem}
-.hdr .h1c{width:var(--wgate);flex:none}
-.hdr .h2c{width:calc(var(--wan) + var(--stub));flex:none}
-.hdr .h3c{flex:1}
-.hdr.verbhdr{color:var(--flag)}
-.cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:space-between;
-gap:1.6rem;position:relative;padding-right:12px}
-.gtop{position:relative;padding-top:.15rem}
-.gtop::after{content:"";position:absolute;right:-12px;top:.8rem;width:12px;border-top:1px solid var(--rule-2)}
-.gbot{display:flex;flex-direction:column;gap:.25rem}
 .termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.68rem;color:var(--ink-3);line-height:1.3}
-.ctree{flex:1;min-width:0;position:relative;padding-left:14px}
 .br{display:flex;gap:0;align-items:flex-start;position:relative;padding:.3rem 0}
 .br::before{content:"";position:absolute;left:-14px;top:.85rem;width:14px;border-top:1px solid var(--rule-2)}
 /* piecewise spine: each branch draws down to the next connector, so nothing overshoots */
@@ -338,14 +312,9 @@ white-space:nowrap;position:relative}
 .derived.big::after{display:none}
 .derived.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}
 /* animacy -> category connectors */
-.leaves{flex:1;min-width:0;display:flex;flex-direction:column;gap:.16rem;align-items:flex-start;
-position:relative;padding-left:var(--stub)}
 .leaves::before{content:"";position:absolute;left:0;top:.85rem;bottom:.85rem;border-left:1px solid var(--rule-2)}
 .ctree.single .leaves{padding-left:0}
 .ctree.single .leaves::before{display:none}
-.slot{position:relative;font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.24rem .5rem;
-border-radius:5px;border:1px dashed var(--rule-2);background:var(--card);color:var(--ink-2);
-cursor:pointer;transition:.12s;text-align:left;width:100%;max-width:216px}
 .leaves .slot::before{content:"";position:absolute;left:calc(-1 * var(--stub));top:50%;
 width:var(--stub);border-top:1px solid var(--rule-2)}
 .ctree.single .leaves .slot::before{display:none}
@@ -380,17 +349,10 @@ text-decoration:underline;cursor:pointer;padding:0}
 text-decoration:underline;cursor:pointer;padding:0}
 .tip{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink-3);margin-top:1rem;line-height:1.7}
 
-.tracks{display:grid;gap:.9rem;align-items:start}
-@media(min-width:900px){.tracks{grid-template-columns:210px minmax(0,1fr)}}
-.t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
-border-radius:9px;padding:.8rem .9rem;position:relative}
 .t3.verbtui{border-left-color:var(--flag)}
-.vcol .t3{padding:.8rem .7rem}
-.croot{flex:none;display:flex;align-items:center;position:relative;padding-right:12px;margin-right:2px}
 .croot::after{content:"";position:absolute;right:0;top:50%;width:12px;border-top:1px solid var(--rule-2)}
 .rootlab{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;white-space:nowrap}
 .rootlab.ph{color:var(--accent)} .rootlab.vb{color:var(--flag)}
-.hdr .h0c{width:var(--wroot);flex:none}
 /* halted state: the branches are replaced outright, not veiled */
 .halt{display:none;flex:1;align-items:center;font-family:'Source Serif 4',Georgia,serif;
 font-size:.88rem;line-height:1.5;color:var(--ink-2);background:var(--flag-soft);
@@ -400,6 +362,39 @@ border:1px dashed var(--flag);border-radius:8px;padding:.7rem .9rem}
 .t3.stopped .ctree,.t3.stopped .cgate .gtop{display:none}
 .t3.stopped .croot{opacity:.45}
 .vcol .halt{justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--flag)}
+
+.tracks{display:flex;gap:1rem;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.tcol{min-width:0;flex:0 0 auto}
+.t3{display:flex;align-items:stretch;border:1px solid var(--rule);border-left:3px solid var(--accent);
+border-radius:9px;padding:.85rem 1rem;position:relative;width:fit-content;max-width:100%}
+.vcol .t3{padding:.85rem .9rem}
+.croot::after{content:"";position:absolute;right:0;top:50%;width:13px;border-top:1px solid var(--rule-2)}
+/* gate spine: actor and circumstance hang off one vertical, which the root meets */
+.cgate{width:var(--wgate);flex:none;display:flex;flex-direction:column;justify-content:space-between;
+gap:1.4rem;position:relative;padding:0 13px 0 13px}
+.cgate::before{content:"";position:absolute;left:0;top:.85rem;bottom:1.05rem;border-left:1px solid var(--rule-2)}
+.gtop,.gbot{position:relative}
+.gtop::before,.gbot::before{content:"";position:absolute;left:-13px;width:13px;border-top:1px solid var(--rule-2)}
+.gtop::before{top:.85rem}
+.gbot::before{top:.9rem}
+.gtop::after{content:"";position:absolute;right:-13px;top:.85rem;width:13px;border-top:1px solid var(--rule-2)}
+.gbot{display:flex;flex-direction:column;gap:.3rem}
+.ctree{flex:0 0 auto;position:relative;padding-left:14px}
+.leaves{flex:0 0 auto;display:flex;flex-direction:column;gap:.16rem;align-items:stretch;
+position:relative;padding-left:var(--stub);min-width:172px}
+.slot{position:relative;font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.25rem .55rem;
+border-radius:5px;border:1px dashed var(--rule-2);background:var(--card);color:var(--ink-2);
+cursor:pointer;transition:.12s;text-align:left;width:100%}
+
+.croot{width:var(--wroot);flex:none;display:flex;align-items:center;position:relative;padding-right:13px}
+.hdr{display:flex;font-family:'JetBrains Mono',monospace;font-size:.59rem;letter-spacing:.11em;
+text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem;padding-left:calc(1rem + 3px)}
+.hdr .h0c{width:var(--wroot);flex:none}
+.hdr .h1c{width:var(--wgate);flex:none}
+.hdr .h2c{width:calc(var(--wan) + 14px);flex:none}
+.hdr .h3c{flex:1}
+.hdr.verbhdr{color:var(--flag);padding-left:calc(1rem + 3px + var(--wroot))}
+.vcol .leaves{min-width:220px}
 </style></head><body><div class="gate" id="gate"><div class="in">
   <h2>Before you start</h2>
   <p>Enter your name so your codings are kept separate from anyone else's and saved under your own file. Come back with the same name and your progress will be waiting.</p>
