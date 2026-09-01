@@ -388,19 +388,19 @@ text-transform:uppercase;color:var(--ink-3);margin:0 0 .3rem;padding-left:calc(1
 .termnote{font-family:'Source Serif 4',Georgia,serif;font-size:.78rem;color:var(--ink-3);
 line-height:1.4;max-width:30ch}
 .croot::after{content:"";position:absolute;right:0;top:50%;width:13px;border-top:1px solid var(--rule-2)}
-.halt{display:none;max-width:560px;align-items:flex-start;gap:.5rem;font-family:'Source Serif 4',Georgia,serif;
+.halt{display:none;max-width:560px;font-family:'Source Serif 4',Georgia,serif;
 font-size:.9rem;line-height:1.55;color:var(--ink-2);background:var(--stopc-soft);
 border:1px solid var(--stopc);border-radius:8px;padding:.75rem .9rem;margin-top:.1rem}
-.halt b{color:var(--stopc);font-weight:700}
+.halt b{color:var(--stopc);font-weight:700;white-space:nowrap}
 .halt i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.85em;
 background:var(--card);border:1px solid var(--rule-2);border-radius:4px;padding:.08em .4em;margin:0 .18em}
-.t3.stopped .halt{display:flex}
+.t3.stopped .halt{display:block}
 .t3.stopped .toprow,.t3.stopped .botrow{display:none}
 .hdroff .hdr{visibility:hidden}
 .t3.stopped{border-left-color:var(--stopc)}
 .t3.stopped .rows::before{display:none}
 .t3.stopped .croot{opacity:.5}
-.vcol .halt{max-width:none;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.74rem;
+.vcol .halt{max-width:none;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.74rem;
 color:var(--stopc);border-color:var(--stopc);background:var(--stopc-soft)}
 .t3.verbtui.stopped .ctree{display:none}
 </style></head><body><div class="gate" id="gate"><div class="in">
