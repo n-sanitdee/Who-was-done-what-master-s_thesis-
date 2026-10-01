@@ -21,6 +21,10 @@ Constructions in Media Discourse on the Russo-Ukrainian War.* Master's thesis, U
 of Helsinki. https://doi.org/10.5281/zenodo.14031334 ·
 https://helda.helsinki.fi/items/c5c9840f-80da-4e21-937a-46fd4ac00797
 
+**Corrections to the thesis** (version 1.0, 1 October 2026): [CORRECTIONS.md](CORRECTIONS.md) ·
+[PDF](CORRECTIONS.pdf). One item withdraws a finding — the decline in passive verb use in
+§5.2.2.1 — and eight correct reported numbers, labels and links.
+
 ## Source corpora are not distributed here
 
 The four corpora used in the thesis — a keyword-seeded Ukraine War web corpus (170,834
