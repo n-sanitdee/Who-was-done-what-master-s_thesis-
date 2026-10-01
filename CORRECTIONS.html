@@ -404,9 +404,10 @@
   against which every figure was checked (the Helda and Zenodo copies are identical in text and pagination);
   recomputed values use the extraction scripts and derived data released in the thesis repository.</p>
 
-  <p class="summary"><strong>One item changes a stated finding (§1).</strong> The rest are reported numbers, labels and
-  arithmetic in summary rows. None of them changes a conclusion, and no coding or
-  categorisation error was found.</p>
+  <p class="summary"><strong>Two items withdraw findings:</strong> the decline in passive verb use (§1), and the choice of the
+  t-score together with the claim that the Leipzig pairs are more significant than the Ukraine War pairs (§10).
+  The rest correct reported numbers, labels, links and a worked example. The by-agent findings (§5.3) are
+  unaffected, and no coding or categorisation error was found.</p>
 
   <div class="glance" role="region" aria-label="Corrections at a glance">
     <p class="tcap">At a glance</p>
@@ -425,6 +426,8 @@
           <tr><td class="l">7</td><td class="l"><a href="#c7">Two Average rows are miscalculated</a></td><td class="l">Tables 2 and 33</td><td class="l"><span class="st na">No</span></td></tr>
           <tr><td class="l">8</td><td class="l"><a href="#c8">Abstract corpus size</a></td><td class="l">Abstract</td><td class="l"><span class="st na">No</span></td></tr>
           <tr><td class="l">9</td><td class="l"><a href="#c9">The links in Appendices 1 and 2 are dead</a></td><td class="l">Appendices 1 and 2</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr class="bad"><td class="l">10</td><td class="l"><a href="#c10">The “t-score” is the z-score, and its p-values are not valid</a></td><td class="l">§4.2.2, §5.1.1, §5.2.1, §5.2.2.1, §5.4.1</td><td class="l"><span class="st bad">✗ Yes, two claims withdrawn</span></td></tr>
+          <tr><td class="l">11</td><td class="l"><a href="#c11">Table 4’s expected frequencies belong to another pair</a></td><td class="l">§4.2.1–4.2.2, Table 4</td><td class="l"><span class="st na">No</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -764,6 +767,95 @@
     account name.</p>
   </section>
 
+  <!-- 10 -->
+  <section class="finding" id="c10">
+    <span class="tag">Withdraws a claim</span>
+    <h2><span class="num">10.</span><span>The “t-score” is the z-score, and its p-values are not valid (§4.2.2)</span></h2>
+
+    <p><strong>What the thesis says.</strong> §4.2.2 adopts the t-score as its association measure, defines it
+    as (O − E)/√E, and supports the choice with Dennis (1965, cited in Evert 2004), Lijffijt et
+    al. (2016) and Evert et al. (2008). Each score is converted to a p-value, and pairs with
+    p &lt; 0.05 and more than 2 occurrences (Ukraine War corpus) or 15 (Leipzig corpora) are
+    reported as significant.</p>
+
+    <p><strong>What is wrong.</strong> (O − E)/√E is the z-score (Evert 2004); the t-score is (O − E)/√O. The
+    two rank pairs differently, so the sources cited for the t-score do not support the measure
+    actually used. The p-values come from a Student’s t distribution with one degree of freedom
+    (<code>p_value_calculation_t-score.py</code>), which has no basis for either score, so they are not
+    valid p-values. Under that conversion p &lt; 0.05 is the same as a score above 12.706:
+    “significant” in the thesis means a z-score above 12.706.</p>
+
+    <p><strong>What it changes.</strong> In the Ukraine War corpus, 46 pairs occur more than twice:</p>
+
+    <p class="tcap">Pairs kept under each rule, Ukraine War corpus (46 pairs occurring more than twice)</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="l">Rule</th><th>Pairs kept</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">thesis: z-score &gt; 12.706 (Table 6)</td><td>28</td></tr>
+          <tr><td class="l">t-score &gt; 12.706</td><td>0</td></tr>
+          <tr><td class="l">t-score &gt; 2</td><td>9</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The two selections differ: four of the nine pairs kept by the t-score (<em>soldiers_killed</em>,
+    <em>civilians_killed</em>, <em>people_injured</em>, <em>person_killed</em>) are not among the 28. In the Leipzig
+    corpora the frequency floor already decides the result: all 127 pairs that occur more than
+    15 times in 2014 also pass under the t-score, so the choice of measure changes nothing there.</p>
+
+    <p class="tcap">Effect on each analysis that uses the association scores</p>
+    <div class="table-wrap">
+      <table class="wrap">
+        <thead>
+          <tr><th class="l">Where</th><th class="l">Analysis</th><th class="l">Effect</th></tr>
+        </thead>
+        <tbody>
+          <tr class="bad"><td class="l">§4.2.2; Table 5; Figures 2, 19</td><td class="l">the t-score as the most appropriate measure</td><td class="l"><span class="st bad">✗ withdrawn</span></td></tr>
+          <tr><td class="l">§5.1.1; Tables 6, 7</td><td class="l">the 28 significant Ukraine War pairs and their category proportions</td><td class="l">the selection depends on the measure. Under both, civilian subjects and harmful verbs dominate (in the t-score selection, 86% and 95% of occurrences), so that observation holds. Restrictive verbs (<em>operations_stopped</em>, <em>units_shut</em>, <em>urey_captured</em> and four others) appear only in the z-score selection, and the percentages in Table 7 hold only for it</td></tr>
+          <tr><td class="l">§5.1.1.2, §5.2.1.2; Tables 8–11, 15, 16</td><td class="l">the filtered Leipzig pairs and their categories</td><td class="l"><span class="st ok">✓ unchanged for 2014</span><span class="sub">2023 scores not preserved; same frequency floor</span></td></tr>
+          <tr><td class="l">§5.1.1.3; Figures 4, 5</td><td class="l">category proportions compared across corpora</td><td class="l">Leipzig side unchanged; Ukraine War side as for §5.1.1</td></tr>
+          <tr class="bad"><td class="l">§5.2.1.2, §5.2.1.3, §5.2.2.1; Tables 17, 18, 56</td><td class="l">the Leipzig pairs as “more significant” than the Ukraine War pairs</td><td class="l"><span class="st bad">✗ withdrawn</span><span class="sub">the p-values are not valid, and z-scores grow with corpus size, so averages from a 170,000-word corpus and corpora of 12 to 18 million words cannot be compared</span></td></tr>
+          <tr><td class="l">§5.4.1; Tables 33, 34</td><td class="l">filtered pairs in the Russian sources</td><td class="l">read as for Table 6 (z-score above 12.706); not recomputed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The by-agent analyses (§5.3, and §5.4.2, which by its own account drops the p-value filter),
+    the passive frequency series (§5.2.2) and the topic models do not use association scores and
+    are unaffected. Throughout, the tables’ “t-score” columns are z-scores.</p>
+  </section>
+
+  <!-- 11 -->
+  <section id="c11">
+    <h2><span class="num">11.</span><span>Table 4’s expected frequencies belong to another pair (§4.2.1, §4.2.2)</span></h2>
+
+    <p>Table 4, the contingency table for <em>sovereignty_threatened</em>, gives expected frequencies of
+    94.511 and 1,162.489 for the two cells where the subject is absent. Those are the values for
+    <em>people_killed</em>. From the table’s own margins they are 4.985 and 1,321.015; as printed, the
+    four expected frequencies sum to 1,261 rather than 1,330. The chi-squared worked example in
+    §4.2.2 uses 1,162.489 and so gives 1,211.03; with the correct value it is about 1,063. The
+    scores in Table 6 match a recomputation from the released counts, so only the printed
+    example is affected.</p>
+
+    <p class="tcap">Table 4, subject-absent row: printed and correct expected frequencies</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="l"></th><th>Printed</th><th>Correct</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">Verb present</td><td>94.511</td><td><strong>4.985</strong></td></tr>
+          <tr><td class="l">Verb absent</td><td>1,162.489</td><td><strong>1,321.015</strong></td></tr>
+          <tr><td class="l">Sum of all four expected frequencies</td><td>1,261</td><td><strong>1,330</strong></td></tr>
+          <tr><td class="l">Chi-squared, worked example in §4.2.2</td><td>1,211.03</td><td><strong>≈ 1,063</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <hr>
 
   <section id="not-affected">
@@ -781,9 +873,7 @@
           <tr><td class="l">Table 24: category frequencies, word lists, percentages, total 158</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
           <tr><td class="l">Table 23: semantic roles, 158 + 1 = 159</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
           <tr><td class="l">§5.1 and §5.4: subject and verb category percentages</td><td class="l"><span class="st ok">✓ correct</span><span class="sub">every column sums to 100</span></td></tr>
-          <tr><td class="l">The skewness table</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
           <tr><td class="l">The passive sub-corpora statistics</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
-          <tr><td class="l">§4.2: the association-measure method and worked example</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
           <tr><td class="l">§5.3.1: 81.25% (13/16) non-human-to-violent</td><td class="l"><span class="st ok">✓ correct</span><span class="sub">verified clause by clause</span></td></tr>
           <tr><td class="l">Table 20: be+get totals 995 to 1,955 below Table 19’s pair totals</td><td class="l"><span class="st ok">○ not an error</span><span class="sub">by design, see below</span></td></tr>
         </tbody>
@@ -794,6 +884,7 @@
     error: <code>passive_constructions_be_get.py</code> records a pair only when an <code>auxpass</code> dependent is
     present, so passives without an auxiliary are excluded by design.</p>
   </section>
+
 
 
   <footer>
