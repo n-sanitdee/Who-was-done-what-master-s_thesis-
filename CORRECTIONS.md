@@ -2,7 +2,7 @@
 
 Natchanun Sanitdee
 
-Version 1.1, issued 3 October 2026.\
+Version 1.0, issued 1 October 2026.\
 Helda: [http://hdl.handle.net/10138/585905](http://hdl.handle.net/10138/585905) · Zenodo: [10.5281/zenodo.14031334](https://doi.org/10.5281/zenodo.14031334)
 
 Before providing the details of the errors, I would like to add a personal note that my thesis
