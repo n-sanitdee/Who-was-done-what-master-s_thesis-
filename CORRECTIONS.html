@@ -83,8 +83,8 @@
 
   h1, h2, h3 { line-height: 1.25; font-weight: 600; }
   h1 {
-    font-size: 2.1rem;
-    margin: 0 0 1.25rem;
+    font-size: 1.6rem;
+    margin: 0 0 0.9rem;
     letter-spacing: -0.01em;
   }
   h2 {
@@ -129,6 +129,8 @@
   }
   .citation p { margin: 0; }
   .issued { color: var(--muted); }
+  .byline, .issued, .deposits { margin: 0; }
+  .deposits { color: var(--muted); margin-bottom: 1.75rem; overflow-wrap: anywhere; }
   .summary {
     margin: 1.25rem 0 0;
     padding-bottom: 1.75rem;
@@ -389,25 +391,15 @@
 <main>
 
   <p class="eyebrow">Author's note</p>
-  <h1>Corrections</h1>
+  <h1>Corrections to <em>Who was done what? A parser-based study of passive voice constructions in media discourse on the Russo-Ukrainian War</em></h1>
 
-  <p>Author's corrections to:</p>
+  <p class="byline">Natchanun Sanitdee</p>
+  <p class="issued">Version 1.1, issued 3 October 2026.</p>
+  <p class="deposits">Helda: <a href="http://hdl.handle.net/10138/585905">http://hdl.handle.net/10138/585905</a> · Zenodo: <a href="https://doi.org/10.5281/zenodo.14031334">10.5281/zenodo.14031334</a></p>
 
-  <div class="citation">
-    <p>Sanitdee, Natchanun (2024). <em>Who was done what? A parser-based study of passive voice
-    constructions in media discourse on the Russo-Ukrainian War.</em> MA thesis, University of
-    Helsinki. Helda: <a href="http://hdl.handle.net/10138/585905">http://hdl.handle.net/10138/585905</a> · Zenodo: <a href="https://doi.org/10.5281/zenodo.14031334">10.5281/zenodo.14031334</a></p>
-  </div>
-
-  <p class="issued">Version 1.0, issued 1 October 2026. The deposited thesis is unchanged; this note records errors
-  found afterwards and gives the corrected values. Section and table numbers refer to the deposited PDF,
-  against which every figure was checked (the Helda and Zenodo copies are identical in text and pagination);
-  recomputed values use the extraction scripts and derived data released in the thesis repository.</p>
-
-  <p class="summary"><strong>Two items withdraw findings:</strong> the decline in passive verb use (§1), and the choice of the
-  t-score together with the claim that the Leipzig pairs are more significant than the Ukraine War pairs (§10).
-  The rest correct reported numbers, labels, links and a worked example. The by-agent findings (§5.3) are
-  unaffected, and no coding or categorisation error was found.</p>
+  <p>Before providing the details of the errors, I would like to add a personal note that my thesis
+  was finished under time pressure during a serious illness in my family. Nothing has bothered me more than
+  these loose ends I overlooked before submission and got hung in my head since.</p>
 
   <div class="glance" role="region" aria-label="Corrections at a glance">
     <p class="tcap">At a glance</p>
@@ -417,17 +409,17 @@
           <tr><th class="l">#</th><th class="l">Correction</th><th class="l">Where in the thesis</th><th class="l">Changes a finding?</th></tr>
         </thead>
         <tbody>
-          <tr class="bad"><td class="l">1</td><td class="l"><a href="#c1">The decline in passive verb use does not hold</a></td><td class="l">§5.2.2.1, Table 18, Figure 8</td><td class="l"><span class="st bad">✗ Yes, claim withdrawn</span></td></tr>
-          <tr><td class="l">2</td><td class="l"><a href="#c2">“Leipzig 2014/2023” names two different preparations</a></td><td class="l">§3.1.2, Tables 2 and 14</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr><td class="l">3</td><td class="l"><a href="#c3">“Passive pair” is used for two different quantities</a></td><td class="l">Tables 14 and 19</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr><td class="l">4</td><td class="l"><a href="#c4">Table 18’s <code>%Pass. V.</code> column uses two denominators</a></td><td class="l">§5.2.2.1, Table 18</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr class="bad"><td class="l">1</td><td class="l"><a href="#c1">The “t-score” is the z-score, and its p-values are not valid</a></td><td class="l">§4.2.2, §5.1.1, §5.2.1, §5.2.2.1, §5.4.1</td><td class="l"><span class="st bad">✗ Yes, two claims withdrawn</span></td></tr>
+          <tr class="bad"><td class="l">2</td><td class="l"><a href="#c2">The decline in passive verb use does not hold</a></td><td class="l">§5.2.2.1, Table 18, Figure 8</td><td class="l"><span class="st bad">✗ Yes, claim withdrawn</span></td></tr>
+          <tr><td class="l">3</td><td class="l"><a href="#c3">Table 18’s <code>%Pass. V.</code> column uses two denominators</a></td><td class="l">§5.2.2.1, Table 18</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">4</td><td class="l"><a href="#c4">Table 25 contains a duplicated row</a></td><td class="l">§5.3.1, Table 25</td><td class="l"><span class="st na">No</span></td></tr>
           <tr><td class="l">5</td><td class="l"><a href="#c5">Russia/Russian as agent: the schema is computed on 35 of 37 clauses</a></td><td class="l">§5.3.2, Table 29</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr><td class="l">6</td><td class="l"><a href="#c6">Table 25 contains a duplicated row</a></td><td class="l">§5.3.1, Table 25</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr><td class="l">7</td><td class="l"><a href="#c7">Two Average rows are miscalculated</a></td><td class="l">Tables 2 and 33</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr><td class="l">8</td><td class="l"><a href="#c8">Abstract corpus size</a></td><td class="l">Abstract</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr><td class="l">9</td><td class="l"><a href="#c9">The links in Appendices 1 and 2 are dead</a></td><td class="l">Appendices 1 and 2</td><td class="l"><span class="st na">No</span></td></tr>
-          <tr class="bad"><td class="l">10</td><td class="l"><a href="#c10">The “t-score” is the z-score, and its p-values are not valid</a></td><td class="l">§4.2.2, §5.1.1, §5.2.1, §5.2.2.1, §5.4.1</td><td class="l"><span class="st bad">✗ Yes, two claims withdrawn</span></td></tr>
-          <tr><td class="l">11</td><td class="l"><a href="#c11">Table 4’s expected frequencies belong to another pair</a></td><td class="l">§4.2.1–4.2.2, Table 4</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">6</td><td class="l"><a href="#c6">“Leipzig 2014/2023” names two different preparations</a></td><td class="l">§3.1.2, Tables 2 and 14</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">7</td><td class="l"><a href="#c7">“Passive pair” is used for two different quantities</a></td><td class="l">Tables 14 and 19</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">8</td><td class="l"><a href="#c8">Table 4’s expected frequencies belong to another pair</a></td><td class="l">§4.2.1–4.2.2, Table 4</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">9</td><td class="l"><a href="#c9">Two Average rows are miscalculated</a></td><td class="l">Tables 2 and 33</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">10</td><td class="l"><a href="#c10">Abstract corpus size</a></td><td class="l">Abstract</td><td class="l"><span class="st na">No</span></td></tr>
+          <tr><td class="l">11</td><td class="l"><a href="#c11">The links in Appendices 1 and 2 are dead</a></td><td class="l">Appendices 1 and 2</td><td class="l"><span class="st na">No</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -435,8 +427,69 @@
 
   <!-- 1 -->
   <section class="finding" id="c1">
+    <span class="tag">Withdraws a claim</span>
+    <h2><span class="num">1.</span><span>The “t-score” is the z-score, and its p-values are not valid (§4.2.2)</span></h2>
+
+    <p><strong>What the thesis says.</strong> §4.2.2 adopts the t-score as its association measure, defines it
+    as (O − E)/√E, and supports the choice with Dennis (1965, cited in Evert 2004), Lijffijt et
+    al. (2016) and Evert et al. (2008). Each score is converted to a p-value, and pairs with
+    p &lt; 0.05 and more than 2 occurrences (Ukraine War corpus) or 15 (Leipzig corpora) are
+    reported as significant.</p>
+
+    <p><strong>What is wrong.</strong> (O − E)/√E is the z-score (Evert 2004); the t-score is (O − E)/√O. The
+    two rank pairs differently, so the sources cited for the t-score do not support the measure
+    actually used. The p-values come from a Student’s t distribution with one degree of freedom
+    (<code>p_value_calculation_t-score.py</code>), which has no basis for either score, so they are not
+    valid p-values. Under that conversion p &lt; 0.05 is the same as a score above 12.706:
+    “significant” in the thesis means a z-score above 12.706.</p>
+
+    <p><strong>What it changes.</strong> In the Ukraine War corpus, 46 pairs occur more than twice:</p>
+
+    <p class="tcap">Pairs kept under each rule, Ukraine War corpus (46 pairs occurring more than twice)</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="l">Rule</th><th>Pairs kept</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">thesis: z-score &gt; 12.706 (Table 6)</td><td>28</td></tr>
+          <tr><td class="l">t-score &gt; 12.706</td><td>0</td></tr>
+          <tr><td class="l">t-score &gt; 2</td><td>9</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The two selections differ: four of the nine pairs kept by the t-score (<em>soldiers_killed</em>,
+    <em>civilians_killed</em>, <em>people_injured</em>, <em>person_killed</em>) are not among the 28. In the Leipzig
+    corpora the frequency floor already decides the result: all 127 pairs that occur more than
+    15 times in 2014 also pass under the t-score, so the choice of measure changes nothing there.</p>
+
+    <p class="tcap">Effect on each analysis that uses the association scores</p>
+    <div class="table-wrap">
+      <table class="wrap">
+        <thead>
+          <tr><th class="l">Where</th><th class="l">Analysis</th><th class="l">Effect</th></tr>
+        </thead>
+        <tbody>
+          <tr class="bad"><td class="l">§4.2.2; Table 5; Figures 2, 19</td><td class="l">the t-score as the most appropriate measure</td><td class="l"><span class="st bad">✗ withdrawn</span></td></tr>
+          <tr><td class="l">§5.1.1; Tables 6, 7</td><td class="l">the 28 significant Ukraine War pairs and their category proportions</td><td class="l">the selection depends on the measure. Under both, civilian subjects and harmful verbs dominate (in the t-score selection, 86% and 95% of occurrences), so that observation holds. Restrictive verbs (<em>operations_stopped</em>, <em>units_shut</em>, <em>urey_captured</em> and four others) appear only in the z-score selection, and the percentages in Table 7 hold only for it</td></tr>
+          <tr><td class="l">§5.1.1.2, §5.2.1.2; Tables 8–11, 15, 16</td><td class="l">the filtered Leipzig pairs and their categories</td><td class="l"><span class="st ok">✓ unchanged for 2014</span><span class="sub">2023 scores not preserved; same frequency floor</span></td></tr>
+          <tr><td class="l">§5.1.1.3; Figures 4, 5</td><td class="l">category proportions compared across corpora</td><td class="l">Leipzig side unchanged; Ukraine War side as for §5.1.1</td></tr>
+          <tr class="bad"><td class="l">§5.2.1.2, §5.2.1.3, §5.2.2.1; Tables 17, 18, 56</td><td class="l">the Leipzig pairs as “more significant” than the Ukraine War pairs</td><td class="l"><span class="st bad">✗ withdrawn</span><span class="sub">the p-values are not valid, and z-scores grow with corpus size, so averages from a 170,000-word corpus and corpora of 12 to 18 million words cannot be compared</span></td></tr>
+          <tr><td class="l">§5.4.1; Tables 33, 34</td><td class="l">filtered pairs in the Russian sources</td><td class="l">read as for Table 6 (z-score above 12.706); not recomputed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The by-agent analyses (§5.3, and §5.4.2, which by its own account drops the p-value filter),
+    the passive frequency series (§5.2.2) and the topic models do not use association scores and
+    are unaffected. Throughout, the tables’ “t-score” columns are z-scores.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="finding" id="c2">
     <span class="tag">Changes a stated finding</span>
-    <h2><span class="num">1.</span><span>The decline in passive verb use (§5.2.2.1, Figure 8) does not hold</span></h2>
+    <h2><span class="num">2.</span><span>The decline in passive verb use (§5.2.2.1, Figure 8) does not hold</span></h2>
 
     <p><strong>What the thesis says.</strong> Figure 8 and the surrounding text report that both passive
     sentences and passive verbs declined across 2014–2023, and read this as agreeing with
@@ -524,9 +577,110 @@
 
   <hr>
 
-  <!-- 2 -->
-  <section id="c2">
-    <h2><span class="num">2.</span><span>“Leipzig 2014/2023” names two different preparations</span></h2>
+  <!-- 3 -->
+  <section id="c3">
+    <h2><span class="num">3.</span><span>Table 18’s <code>%Pass. V.</code> column uses two denominators</span></h2>
+
+    <p>§5.2.2.1 states that passive verbs are expressed as a percentage of total <strong>words</strong>. That
+    holds for the Leipzig rows (0.51 to 0.91, average 0.69), but the Ukraine War row divides by
+    total <strong>verbs</strong>, active plus passive: 1,473 / (8,909 + 1,473) = 14.19%. The column therefore
+    sets 0.69 beside 14.19. On the stated basis the Ukraine War figure is 0.86% of words.</p>
+
+    <p>The text compares a Leipzig average of 12.90% with the Ukraine War’s 14.19%. Both are on
+    the verb denominator, so that comparison is like with like, but 12.90% does not appear in
+    Table 18, whose Leipzig average is 0.69%. The comparison with Di Ferrante (2023) that
+    follows uses the word denominator and is unaffected.</p>
+
+    <p class="tcap">Passive verbs on each denominator</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="l"></th><th>÷ total words<br>(% of words)</th><th>÷ total verbs<br>(% of verbs)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">Ukraine War</td><td>0.86</td><td class="hl">14.19</td></tr>
+          <tr><td class="l">Leipzig average</td><td class="hl">0.69</td><td>12.90</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Table 18 prints the two outlined figures in one column, although they sit on different denominators. Reading down a column here compares like with like. 0.86 is recomputed; 12.90 is printed in the text only.</p>
+  </section>
+
+  <!-- 4 -->
+  <section id="c4">
+    <h2><span class="num">4.</span><span>Table 25 contains a duplicated row</span></h2>
+
+    <p><code>citizen_detained · by_pro_-_Russian_separatists_forces</code> is printed twice — 21 rows, 20
+    distinct. Table 26 is clean at 16. The §5.3.1 percentages use 21, so on distinct rows:
+    restrictive 10/20 = 50.00% (published 52.38%) and violent 3/20 = 15.00% (published
+    14.29%). The subset total is 36, not 37. The finding — violent predicates concentrating on
+    non-human agents, restrictive on human agents — is unaffected.</p>
+
+    <p class="tcap">§5.3.1 figures with the duplicated row removed</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="l"></th><th>Published<br>(21 rows)</th><th>Distinct rows<br>(20)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">Human agents, restrictive</td><td>11 · 52.38%</td><td><strong>10 · 50.00%</strong></td></tr>
+          <tr><td class="l">Human agents, violent</td><td>3 · 14.29%</td><td><strong>3 · 15.00%</strong></td></tr>
+          <tr><td class="l">Subset total, Tables 25 + 26</td><td>37</td><td><strong>36</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="c5">
+    <h2><span class="num">5.</span><span>Russia/Russian as agent: the schema is computed on 35 of 37 clauses (§5.3.2)</span></h2>
+
+    <p>Table 29 prints 37 clauses. The schema beneath it counts 35 (14 restrictive + 12 violent +
+    4 negative + 3 neutral + 2 positive), and all five percentages — and the 85.72% in the
+    interpretation — are computed on 35. Two clauses are uncategorised.</p>
+
+    <p>The corresponding Ukraine figures are correct: 10+9+8+3+2 = 32 matches Table 32, and
+    56.25% / 43.75% follow. Russia-as-modifier is also correct at 11 clauses and 72.72%.</p>
+
+    <p class="tcap">Clauses printed against clauses counted in the schema</p>
+    <div class="units" role="img" aria-label="Russia or Russian as agent: 37 clauses printed, 35 counted, 2 uncategorised. Ukraine or Ukrainian as agent: 32 printed, 32 counted. Russia or Russian as modifier: 11 printed, 11 counted.">
+      <div class="unit-row">
+        <div class="lab"><span>Russia/Russian as agent (Table 29)</span><span class="n bad">35 of 37 counted</span></div>
+        <div class="cells" aria-hidden="true"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell miss"></i><i class="cell miss"></i></div>
+      </div>
+      <div class="unit-row">
+        <div class="lab"><span>Ukraine/Ukrainian as agent (Table 32)</span><span class="n">32 of 32</span></div>
+        <div class="cells" aria-hidden="true"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div>
+      </div>
+      <div class="unit-row">
+        <div class="lab"><span>Russia/Russian as modifier (Table 27)</span><span class="n">11 of 11</span></div>
+        <div class="cells" aria-hidden="true"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div>
+      </div>
+      <div class="ukey"><span><i></i>one clause, counted in the schema</span><span><i class="miss"></i>printed but uncategorised</span></div>
+    </div>
+
+    <p class="tcap">Russia/Russian as agent: the schema’s percentages and their denominator</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th class="l">Verb class</th><th>Clauses</th><th>Published %<br>(of 35)</th><th>Share of all 37<br>printed clauses</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">Restrictive</td><td>14</td><td>40.00</td><td>37.84</td></tr>
+          <tr><td class="l">Violent</td><td>12</td><td>34.29</td><td>32.43</td></tr>
+          <tr><td class="l">Negative</td><td>4</td><td>11.43</td><td>10.81</td></tr>
+          <tr><td class="l">Neutral</td><td>3</td><td>8.57</td><td>8.11</td></tr>
+          <tr><td class="l">Positive</td><td>2</td><td>5.71</td><td>5.41</td></tr>
+          <tr class="bad"><td class="l">Uncategorised</td><td>2</td><td>—</td><td>5.41</td></tr>
+          <tr class="total"><td class="l">Restrictive + violent + negative</td><td>30</td><td>85.72</td><td>81.08</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="c6">
+    <h2><span class="num">6.</span><span>“Leipzig 2014/2023” names two different preparations</span></h2>
 
     <p>§3.1.2 describes three cleaning steps and reports that they leave “12 and 13 million
     words” — but points to Table 2, which shows 16.9 and 18.5 million.</p>
@@ -584,14 +738,14 @@
     </div>
   </section>
 
-  <!-- 3 -->
-  <section id="c3">
-    <h2><span class="num">3.</span><span>“Passive pair” is used for two different quantities</span></h2>
+  <!-- 7 -->
+  <section id="c7">
+    <h2><span class="num">7.</span><span>“Passive pair” is used for two different quantities</span></h2>
 
     <p>Table 14’s pair counts (Ukraine War 1,061; Leipzig 2014 60,973; Leipzig 2023 64,688) are
     <strong>distinct pairs</strong>. Table 19’s (Leipzig 2014 120,683; Leipzig 2023 125,547) are
     <strong>occurrences</strong>. The text calls both “passive pairs”. The two tables also count different
-    preparations of the Leipzig corpora (<a href="#c2">correction 2</a>), so they cannot be compared row by row.</p>
+    preparations of the Leipzig corpora (<a href="#c6">correction 6</a>), so they cannot be compared row by row.</p>
 
     <p>For the Ukraine War corpus, the pair-frequency table has 1,061 rows whose frequencies sum
     to 1,330; it is available from the author on request.</p>
@@ -610,227 +764,9 @@
     </div>
   </section>
 
-  <!-- 4 -->
-  <section id="c4">
-    <h2><span class="num">4.</span><span>Table 18’s <code>%Pass. V.</code> column uses two denominators</span></h2>
-
-    <p>§5.2.2.1 states that passive verbs are expressed as a percentage of total <strong>words</strong>. That
-    holds for the Leipzig rows (0.51 to 0.91, average 0.69), but the Ukraine War row divides by
-    total <strong>verbs</strong>, active plus passive: 1,473 / (8,909 + 1,473) = 14.19%. The column therefore
-    sets 0.69 beside 14.19. On the stated basis the Ukraine War figure is 0.86% of words.</p>
-
-    <p>The text compares a Leipzig average of 12.90% with the Ukraine War’s 14.19%. Both are on
-    the verb denominator, so that comparison is like with like, but 12.90% does not appear in
-    Table 18, whose Leipzig average is 0.69%. The comparison with Di Ferrante (2023) that
-    follows uses the word denominator and is unaffected.</p>
-
-    <p class="tcap">Passive verbs on each denominator</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th class="l"></th><th>÷ total words<br>(% of words)</th><th>÷ total verbs<br>(% of verbs)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="l">Ukraine War</td><td>0.86</td><td class="hl">14.19</td></tr>
-          <tr><td class="l">Leipzig average</td><td class="hl">0.69</td><td>12.90</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="tnote">Table 18 prints the two outlined figures in one column, although they sit on different denominators. Reading down a column here compares like with like. 0.86 is recomputed; 12.90 is printed in the text only.</p>
-  </section>
-
-  <!-- 5 -->
-  <section id="c5">
-    <h2><span class="num">5.</span><span>Russia/Russian as agent: the schema is computed on 35 of 37 clauses (§5.3.2)</span></h2>
-
-    <p>Table 29 prints 37 clauses. The schema beneath it counts 35 (14 restrictive + 12 violent +
-    4 negative + 3 neutral + 2 positive), and all five percentages — and the 85.72% in the
-    interpretation — are computed on 35. Two clauses are uncategorised.</p>
-
-    <p>The corresponding Ukraine figures are correct: 10+9+8+3+2 = 32 matches Table 32, and
-    56.25% / 43.75% follow. Russia-as-modifier is also correct at 11 clauses and 72.72%.</p>
-
-    <p class="tcap">Clauses printed against clauses counted in the schema</p>
-    <div class="units" role="img" aria-label="Russia or Russian as agent: 37 clauses printed, 35 counted, 2 uncategorised. Ukraine or Ukrainian as agent: 32 printed, 32 counted. Russia or Russian as modifier: 11 printed, 11 counted.">
-      <div class="unit-row">
-        <div class="lab"><span>Russia/Russian as agent (Table 29)</span><span class="n bad">35 of 37 counted</span></div>
-        <div class="cells" aria-hidden="true"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell miss"></i><i class="cell miss"></i></div>
-      </div>
-      <div class="unit-row">
-        <div class="lab"><span>Ukraine/Ukrainian as agent (Table 32)</span><span class="n">32 of 32</span></div>
-        <div class="cells" aria-hidden="true"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div>
-      </div>
-      <div class="unit-row">
-        <div class="lab"><span>Russia/Russian as modifier (Table 27)</span><span class="n">11 of 11</span></div>
-        <div class="cells" aria-hidden="true"><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i><i class="cell"></i></div>
-      </div>
-      <div class="ukey"><span><i></i>one clause, counted in the schema</span><span><i class="miss"></i>printed but uncategorised</span></div>
-    </div>
-
-    <p class="tcap">Russia/Russian as agent: the schema’s percentages and their denominator</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th class="l">Verb class</th><th>Clauses</th><th>Published %<br>(of 35)</th><th>Share of all 37<br>printed clauses</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="l">Restrictive</td><td>14</td><td>40.00</td><td>37.84</td></tr>
-          <tr><td class="l">Violent</td><td>12</td><td>34.29</td><td>32.43</td></tr>
-          <tr><td class="l">Negative</td><td>4</td><td>11.43</td><td>10.81</td></tr>
-          <tr><td class="l">Neutral</td><td>3</td><td>8.57</td><td>8.11</td></tr>
-          <tr><td class="l">Positive</td><td>2</td><td>5.71</td><td>5.41</td></tr>
-          <tr class="bad"><td class="l">Uncategorised</td><td>2</td><td>—</td><td>5.41</td></tr>
-          <tr class="total"><td class="l">Restrictive + violent + negative</td><td>30</td><td>85.72</td><td>81.08</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 6 -->
-  <section id="c6">
-    <h2><span class="num">6.</span><span>Table 25 contains a duplicated row</span></h2>
-
-    <p><code>citizen_detained · by_pro_-_Russian_separatists_forces</code> is printed twice — 21 rows, 20
-    distinct. Table 26 is clean at 16. The §5.3.1 percentages use 21, so on distinct rows:
-    restrictive 10/20 = 50.00% (published 52.38%) and violent 3/20 = 15.00% (published
-    14.29%). The subset total is 36, not 37. The finding — violent predicates concentrating on
-    non-human agents, restrictive on human agents — is unaffected.</p>
-
-    <p class="tcap">§5.3.1 figures with the duplicated row removed</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th class="l"></th><th>Published<br>(21 rows)</th><th>Distinct rows<br>(20)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="l">Human agents, restrictive</td><td>11 · 52.38%</td><td><strong>10 · 50.00%</strong></td></tr>
-          <tr><td class="l">Human agents, violent</td><td>3 · 14.29%</td><td><strong>3 · 15.00%</strong></td></tr>
-          <tr><td class="l">Subset total, Tables 25 + 26</td><td>37</td><td><strong>36</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 7 -->
-  <section id="c7">
-    <h2><span class="num">7.</span><span>Two Average rows are miscalculated</span></h2>
-
-    <p class="tcap">Average rows in Tables 2 and 33, published and correct</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th></th><th>published</th><th>correct</th><th>difference</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Table 2, mean sentences</td><td>826,347</td><td><strong>823,249</strong></td><td>−3,098</td></tr>
-          <tr><td>Table 2, mean words</td><td>17,829,303</td><td><strong>17,914,504</strong></td><td>+85,201</td></tr>
-          <tr><td>Table 2, mean words/sentence</td><td>21.82</td><td><strong>21.78</strong></td><td>−0.04</td></tr>
-          <tr><td>Table 33, mean words</td><td>210,737</td><td><strong>210,070</strong></td><td>−667</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p>Each correct value is the mean of the column above it, as in the thesis’s other Average
-    rows; for words per sentence, total words over total sentences gives 21.76. Tables 18–20
-    print the correct Leipzig averages; only the two dataset tables are wrong.</p>
-  </section>
-
   <!-- 8 -->
   <section id="c8">
-    <h2><span class="num">8.</span><span>Abstract corpus size</span></h2>
-
-    <p>The abstract gives the Leipzig corpora as “17M”. This is the eight-year average on Table
-    2’s basis and reads against §3.1.2’s “12 and 13 million” — see <a href="#c2">correction 2</a>.</p>
-
-    <p class="tcap">Two corpus sizes, two bases</p>
-    <div class="table-wrap">
-      <table class="wrap">
-        <thead>
-          <tr><th class="l">Where</th><th class="l">Printed</th><th class="l">Basis</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="l">Abstract</td><td class="l">“Leipzig news corpora (17M)”</td><td class="l">Table 2 preparation (steps ① ②), eight-year average</td></tr>
-          <tr><td class="l">§3.1.2</td><td class="l">“12 and 13 million words”</td><td class="l">Table 14 preparation (steps ① ② ③), 2014 and 2023</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 9 -->
-  <section id="c9">
-    <h2><span class="num">9.</span><span>The links in Appendices 1 and 2 are dead</span></h2>
-
-    <p>Appendix 1 (corpora) and Appendix 2 (source code) link to files at
-    <code>github.com/aminomewza/Who-was-done-what-master-s_thesis-</code>, each pinned to a specific
-    commit. The repository is now at <strong><a href="https://github.com/n-sanitdee/Who-was-done-what-master-s_thesis-">https://github.com/n-sanitdee/Who-was-done-what-master-s_thesis-</a></strong>,
-    and the pinned commits are no longer in it, so the old links return 404 even with the new
-    account name.</p>
-  </section>
-
-  <!-- 10 -->
-  <section class="finding" id="c10">
-    <span class="tag">Withdraws a claim</span>
-    <h2><span class="num">10.</span><span>The “t-score” is the z-score, and its p-values are not valid (§4.2.2)</span></h2>
-
-    <p><strong>What the thesis says.</strong> §4.2.2 adopts the t-score as its association measure, defines it
-    as (O − E)/√E, and supports the choice with Dennis (1965, cited in Evert 2004), Lijffijt et
-    al. (2016) and Evert et al. (2008). Each score is converted to a p-value, and pairs with
-    p &lt; 0.05 and more than 2 occurrences (Ukraine War corpus) or 15 (Leipzig corpora) are
-    reported as significant.</p>
-
-    <p><strong>What is wrong.</strong> (O − E)/√E is the z-score (Evert 2004); the t-score is (O − E)/√O. The
-    two rank pairs differently, so the sources cited for the t-score do not support the measure
-    actually used. The p-values come from a Student’s t distribution with one degree of freedom
-    (<code>p_value_calculation_t-score.py</code>), which has no basis for either score, so they are not
-    valid p-values. Under that conversion p &lt; 0.05 is the same as a score above 12.706:
-    “significant” in the thesis means a z-score above 12.706.</p>
-
-    <p><strong>What it changes.</strong> In the Ukraine War corpus, 46 pairs occur more than twice:</p>
-
-    <p class="tcap">Pairs kept under each rule, Ukraine War corpus (46 pairs occurring more than twice)</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th class="l">Rule</th><th>Pairs kept</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="l">thesis: z-score &gt; 12.706 (Table 6)</td><td>28</td></tr>
-          <tr><td class="l">t-score &gt; 12.706</td><td>0</td></tr>
-          <tr><td class="l">t-score &gt; 2</td><td>9</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p>The two selections differ: four of the nine pairs kept by the t-score (<em>soldiers_killed</em>,
-    <em>civilians_killed</em>, <em>people_injured</em>, <em>person_killed</em>) are not among the 28. In the Leipzig
-    corpora the frequency floor already decides the result: all 127 pairs that occur more than
-    15 times in 2014 also pass under the t-score, so the choice of measure changes nothing there.</p>
-
-    <p class="tcap">Effect on each analysis that uses the association scores</p>
-    <div class="table-wrap">
-      <table class="wrap">
-        <thead>
-          <tr><th class="l">Where</th><th class="l">Analysis</th><th class="l">Effect</th></tr>
-        </thead>
-        <tbody>
-          <tr class="bad"><td class="l">§4.2.2; Table 5; Figures 2, 19</td><td class="l">the t-score as the most appropriate measure</td><td class="l"><span class="st bad">✗ withdrawn</span></td></tr>
-          <tr><td class="l">§5.1.1; Tables 6, 7</td><td class="l">the 28 significant Ukraine War pairs and their category proportions</td><td class="l">the selection depends on the measure. Under both, civilian subjects and harmful verbs dominate (in the t-score selection, 86% and 95% of occurrences), so that observation holds. Restrictive verbs (<em>operations_stopped</em>, <em>units_shut</em>, <em>urey_captured</em> and four others) appear only in the z-score selection, and the percentages in Table 7 hold only for it</td></tr>
-          <tr><td class="l">§5.1.1.2, §5.2.1.2; Tables 8–11, 15, 16</td><td class="l">the filtered Leipzig pairs and their categories</td><td class="l"><span class="st ok">✓ unchanged for 2014</span><span class="sub">2023 scores not preserved; same frequency floor</span></td></tr>
-          <tr><td class="l">§5.1.1.3; Figures 4, 5</td><td class="l">category proportions compared across corpora</td><td class="l">Leipzig side unchanged; Ukraine War side as for §5.1.1</td></tr>
-          <tr class="bad"><td class="l">§5.2.1.2, §5.2.1.3, §5.2.2.1; Tables 17, 18, 56</td><td class="l">the Leipzig pairs as “more significant” than the Ukraine War pairs</td><td class="l"><span class="st bad">✗ withdrawn</span><span class="sub">the p-values are not valid, and z-scores grow with corpus size, so averages from a 170,000-word corpus and corpora of 12 to 18 million words cannot be compared</span></td></tr>
-          <tr><td class="l">§5.4.1; Tables 33, 34</td><td class="l">filtered pairs in the Russian sources</td><td class="l">read as for Table 6 (z-score above 12.706); not recomputed</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p>The by-agent analyses (§5.3, and §5.4.2, which by its own account drops the p-value filter),
-    the passive frequency series (§5.2.2) and the topic models do not use association scores and
-    are unaffected. Throughout, the tables’ “t-score” columns are z-scores.</p>
-  </section>
-
-  <!-- 11 -->
-  <section id="c11">
-    <h2><span class="num">11.</span><span>Table 4’s expected frequencies belong to another pair (§4.2.1, §4.2.2)</span></h2>
+    <h2><span class="num">8.</span><span>Table 4’s expected frequencies belong to another pair (§4.2.1, §4.2.2)</span></h2>
 
     <p>Table 4, the contingency table for <em>sovereignty_threatened</em>, gives expected frequencies of
     94.511 and 1,162.489 for the two cells where the subject is absent. Those are the values for
@@ -856,39 +792,64 @@
     </div>
   </section>
 
-  <hr>
+  <!-- 9 -->
+  <section id="c9">
+    <h2><span class="num">9.</span><span>Two Average rows are miscalculated</span></h2>
 
-  <section id="not-affected">
-    <h2 class="plain">Not affected</h2>
-
-    <p>Checked and found correct:</p>
-
-    <p class="tcap">Figures checked and found correct</p>
+    <p class="tcap">Average rows in Tables 2 and 33, published and correct</p>
     <div class="table-wrap">
-      <table class="wrap">
+      <table>
         <thead>
-          <tr><th class="l">Checked</th><th class="l">Result</th></tr>
+          <tr><th></th><th>published</th><th>correct</th><th>difference</th></tr>
         </thead>
         <tbody>
-          <tr><td class="l">Table 24: category frequencies, word lists, percentages, total 158</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
-          <tr><td class="l">Table 23: semantic roles, 158 + 1 = 159</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
-          <tr><td class="l">§5.1 and §5.4: subject and verb category percentages</td><td class="l"><span class="st ok">✓ correct</span><span class="sub">every column sums to 100</span></td></tr>
-          <tr><td class="l">The passive sub-corpora statistics</td><td class="l"><span class="st ok">✓ correct</span></td></tr>
-          <tr><td class="l">§5.3.1: 81.25% (13/16) non-human-to-violent</td><td class="l"><span class="st ok">✓ correct</span><span class="sub">verified clause by clause</span></td></tr>
-          <tr><td class="l">Table 20: be+get totals 995 to 1,955 below Table 19’s pair totals</td><td class="l"><span class="st ok">○ not an error</span><span class="sub">by design, see below</span></td></tr>
+          <tr><td>Table 2, mean sentences</td><td>826,347</td><td><strong>823,249</strong></td><td>−3,098</td></tr>
+          <tr><td>Table 2, mean words</td><td>17,829,303</td><td><strong>17,914,504</strong></td><td>+85,201</td></tr>
+          <tr><td>Table 2, mean words/sentence</td><td>21.82</td><td><strong>21.78</strong></td><td>−0.04</td></tr>
+          <tr><td>Table 33, mean words</td><td>210,737</td><td><strong>210,070</strong></td><td>−667</td></tr>
         </tbody>
       </table>
     </div>
 
-    <p>Table 20’s be+get totals running 995 to 1,955 below Table 19’s pair totals is <strong>not</strong> an
-    error: <code>passive_constructions_be_get.py</code> records a pair only when an <code>auxpass</code> dependent is
-    present, so passives without an auxiliary are excluded by design.</p>
+    <p>Each correct value is the mean of the column above it, as in the thesis’s other Average
+    rows; for words per sentence, total words over total sentences gives 21.76. Tables 18–20
+    print the correct Leipzig averages; only the two dataset tables are wrong.</p>
   </section>
 
+  <!-- 10 -->
+  <section id="c10">
+    <h2><span class="num">10.</span><span>Abstract corpus size</span></h2>
 
+    <p>The abstract gives the Leipzig corpora as “17M”. This is the eight-year average on Table
+    2’s basis and reads against §3.1.2’s “12 and 13 million” — see <a href="#c6">correction 6</a>.</p>
+
+    <p class="tcap">Two corpus sizes, two bases</p>
+    <div class="table-wrap">
+      <table class="wrap">
+        <thead>
+          <tr><th class="l">Where</th><th class="l">Printed</th><th class="l">Basis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="l">Abstract</td><td class="l">“Leipzig news corpora (17M)”</td><td class="l">Table 2 preparation (steps ① ②), eight-year average</td></tr>
+          <tr><td class="l">§3.1.2</td><td class="l">“12 and 13 million words”</td><td class="l">Table 14 preparation (steps ① ② ③), 2014 and 2023</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="c11">
+    <h2><span class="num">11.</span><span>The links in Appendices 1 and 2 are dead</span></h2>
+
+    <p>Appendix 1 (corpora) and Appendix 2 (source code) link to files at
+    <code>github.com/aminomewza/Who-was-done-what-master-s_thesis-</code>, each pinned to a specific
+    commit. The repository is now at <strong><a href="https://github.com/n-sanitdee/Who-was-done-what-master-s_thesis-">https://github.com/n-sanitdee/Who-was-done-what-master-s_thesis-</a></strong>,
+    and the pinned commits are no longer in it, so the old links return 404 even with the new
+    account name.</p>
+  </section>
 
   <footer>
-    Natchanun Sanitdee · Corrections to the MA thesis (University of Helsinki, 2024) · version 1.0, issued 1 October 2026
+    Natchanun Sanitdee · Corrections to the MA thesis (University of Helsinki, 2024) · version 1.1, issued 3 October 2026
   </footer>
 
 </main>
