@@ -21,7 +21,7 @@ Constructions in Media Discourse on the Russo-Ukrainian War.* Master's thesis, U
 of Helsinki. https://doi.org/10.5281/zenodo.14031334 ·
 https://helda.helsinki.fi/items/c5c9840f-80da-4e21-937a-46fd4ac00797
 
-**Corrections to the thesis** (version 1.1, 3 October 2026): [CORRECTIONS.md](CORRECTIONS.md) ·
+**Corrections to the thesis** (version 1.0, 1 October 2026): [CORRECTIONS.md](CORRECTIONS.md) ·
 [PDF](CORRECTIONS.pdf). Two items withdraw findings — the choice of the t-score together with the
 cross-corpus significance comparison (§4.2.2, §5.2), and the decline in passive verb use
 (§5.2.2.1) — and nine correct reported numbers, labels, links and a worked example. Archived
